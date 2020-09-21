@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap');
+
+* {
+
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    font-family: 'Noto Sans TC', sans-serif;
+
+}
+
+body {
+
+    position: relative;
+
+}
+
+/*----NavigationBar----*/
+#nav-bar {
+
+    position: staticky;
+    top: 0;
+    z-index: 10;
+
+}
+
+.navbar-brand b {
+
+    padding-left: 20px;
+
+}
+
+.navbar-nav li {
+
+    padding: 0 10px;
+
+}
+
+.navbar-nav li a {
+
+    float: right;
+    text-align: left;
+
+}
+
+#nav-bar ul li a:hover {
+
+    color: #007bff!important;
+
+}
+
+.navbar-toggler {
+
+    border: none!important;
+
+}
+
+.nav-link {
+
+    color: white!important;
+    font-weight: 600;
+    font-size: 16px;
+
+}
+
+/*----MainContent----*/
+.right {
+
+    background: linear-gradient(135deg, transparent 20px, white 20px);
+
+}
+
+.right:hover {
+    background: linear-gradient(135deg, transparent 20px, whitesmoke 20px);
+}
+
+.left {
+
+    background: linear-gradient(-45deg, transparent 20px, white 20px);
+
+}
+
+.left:hover {
+    background: linear-gradient(-45deg, transparent 20px, whitesmoke 20px);
+}
+
+.social {
+
+    border: 1px solid black;
+    background: white;
+    position: fixed;
+    width: auto;
+    height: auto;
+    top: 50%;
+    right: 0;
+    margin-top: -auto; /* Negative half of height. */
+    padding: 10px;
+    z-index: 16;
+
+}
