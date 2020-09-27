@@ -52,8 +52,8 @@
 
     <!----Title---->
     <div align="center" valign="middle" style="margin-top:15em;margin-bottom:5em;height:150px;">
-        <h1 style="position:relative;color:white;width:100%;padding-bottom:1em;">CAD, CAM, Plants, +Prusas</h1>
-        <p style="position:relative;color:white;width:100%;padding-left:5px;padding-right:5px;">In this assignment, I will be creating a flower pot using Fusion 360 to design and Prusas vase mode to turn my design in to a vase.</p>
+        <h1 style="position:relative;color:white;width:100%;padding-bottom:1em;">LASER CUTTING</h1>
+        <p style="position:relative;color:white;width:100%;padding-left:5px;padding-right:5px;">In this assignment, I will be creating a storage box with elastic parts that allows me to open and close the lid without classical hinges.</p>
     </div>
 
     <!----PageControl---->
@@ -66,42 +66,17 @@
     <!----MainContent---->
     <section id="mainContent">
         <div style="margin-left:auto;margin-right:auto;background-color:white;width:75%;padding-bottom:1em;margin-bottom:3em;">
-            <h2 style="color:rgb(80, 80, 80);padding:1em;text-decoration:underline;">4.1 Designing the Flower Pot</h2>
+            <h2 style="color:rgb(80, 80, 80);padding:1em;text-decoration:underline;">4.1 Designing for Laser Cutting</h2>
             <div style="background-color:lightgray;width:95%;margin-left:auto;margin-right:auto;margin-bottom:1em;">
                 <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
-                    I used Fusion 360 to design my flower pot. Initialy I created a new file and started sketching a circle on the x and y axises. 
-                    I sketched a circle centered on the origin and with a 8 cm or 0.8 meters long diameter. This circle will be the base of the pot.
+                    For creating this box, instead of designing it myself I used "boxes.py" webpage that  has set elements that I can play with to create a box design with "living" hinges.
                 </p>
-                <img src="img/potBase.png" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
+                <img src="img/boxesPY.png" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
                 <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
-                    However, I didn't want my pot to be a simple cylinder. Hence, I decided to make litlle circular cuts around its circumference. 
-                    For this I drew a line on the y-axis that is 1 mm longer than the radius of the circle. This allowed me to draw a small circle centered on the end of the line with a radius of only 6 mm.
-                    <br>
-                    At the end it looked like this:
+                    I used the initial settings given by the website and I clicked "generate" for the website to generate an SVG file that has the exploded drawing of my box in 2D surface. This enables me to cut a 2D piece and combine those 2D pieces to make a 3D box.
+                    Moreover, using a 2D drawing enables me to use "Adobe Illustrator" for editing the file. Hence I edited so that it will have my name.
                 </p>
-                <img src="img/baseWithCircle.png" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
-                <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
-                    Then I used the "Trim" tool to get rid of the extra part of the small circle that I am not using, namely the part that stays outside of the big circle. 
-                    This allowed me to better visualize the final shape of the Flower Pot.
-                </p>
-                <img src="img/trimSmall.png" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
-                <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
-                    However, this is only one small cut from the cylindrical pot. Hence I needed to repeat this around the circle's circumference. 
-                    For this I used the "Circular Pattern" tool. This allowed me to select an object and a center pivot point to rotate around. 
-                    By using this tool I was able to decide on how many cuts I can do.
-                </p>
-                <img src="img/circularPaternButton.png" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
-                <img src="img/circularPatern.png" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
-                <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
-                    After doing the circular pattern, I ended up with a shape that resembles a shuriken or a cogwheel. After this, I used the  "Extrude" tool to make an object out of my sketches. 
-                    I selected the inner area of the big circle which has a cogwheel shape due to the cuts by the small circles, and at the end I got this as a result:
-                </p>
-                <img src="img/extrusionBody.png" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
-                <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
-                    Now my flower pot has a specific shape. Now I have to 3D print it but it seems odd that I didn't make it so that it will have a hole inside to put the plant in. 
-                    However, the CAM application I use (+Prusas) has a "Vase" mode which turns your shape in to shell. You can use that as a flower pot.
-                    For 3D printing my design I need to save it as a file that I can import it to my CAM application. Hence, I need to save my object as an ".stl" file. For this I right clicked on my object on the Fusion 360 object legend and clicked "save as STL." Now I can upload it to Prusas.
-                </p>
+                <i class="fas fa-image fa-10x" style="margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;"></i>
                 <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
                     <a href="assignmentFour_1.html">For uploading to the Prusas go to the next page --></a>
                 </p>
