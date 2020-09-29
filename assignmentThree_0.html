@@ -53,48 +53,50 @@
 
     <!----Title---->
     <div align="center" valign="middle" style="margin-top:15em;margin-bottom:5em;height:150px;">
-        <h1 style="position:relative;color:white;width:100%;padding-bottom:1em;">LASER CUTTING</h1>
-        <p style="position:relative;color:white;width:100%;padding-left:5px;padding-right:5px;">In this assignment, I will be creating a storage box with elastic parts that allows me to open and close the lid without classical hinges.</p>
+        <h1 style="position:relative;color:white;width:100%;padding-bottom:1em;">ADDITIVE MANUFACTURING</h1>
+        <p style="position:relative;color:white;width:100%;padding-left:5px;padding-right:5px;">In this assignment, I will be creating a Biohazard symbol and 3D print it.</p>
     </div>
 
     <!----PageControl---->
     <div>
         <div>
-        <button style="float:right;margin-bottom:5em;margin-right:1em;"><a href="assignmentTwo_1.html">Next Page</a></button>
+        <button style="float:right;margin-bottom:5em;margin-right:1em;"><a href="assignmentThree_1.html">Next Page</a></button>
         </div>
     </div>
 
     <!----MainContent---->
     <section id="mainContent">
         <div style="margin-left:auto;margin-right:auto;background-color:white;width:75%;padding-bottom:1em;margin-bottom:3em;">
-            <h2 style="color:rgb(80, 80, 80);padding:1em;text-decoration:underline;">2.1 Preparing for Laser Cutting</h2>
+            <h2 style="color:rgb(80, 80, 80);padding:1em;text-decoration:underline;">3.1 Computer Aided Designing using Fusion 360</h2>
             <div style="background-color:lightgray;width:95%;margin-left:auto;margin-right:auto;margin-bottom:1em;">
                 <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
-                    For creating this box, instead of designing it myself, I used "boxes.py" webpage that has set elements that I can play with to create a box design with "living" hinges.
+                    I used Fusion 360 to design my object. I started my design by making a sketch of it on the x/y axises. Initially I drew a circle with a diameter of 5 cm.
                 </p>
-                <img src="img/boxesPY.png" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
+                <img src="img/intCircle.png" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
                 <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
-                    I used the initial settings given by the website and I clicked "generate" for the website to generate an SVG file that has the exploded drawing of my box in 2D surface. This enables me to cut a 2D piece and combine those 2D pieces to make a 3D box.
-                    Moreover, the website generated it as a SVG file and this allowed me to use "Adobe Illustrator" for editing the file. Hence I edited so that it will have my name on the front face and so that all the pieces are aligned to the top left corner.
+                    Then I created an inner circle which has 0.5 cm diameter, and then drew 3 straight lines going up, going to the right, going to the left from that inner circle to the outer circle. This allowed me to use the "circular pattern" tool to find the 3 areas where the 3 branches of the biohazard symbol will be located.
                 </p>
-                <img src="img/FlexBox2.png" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
+                <img src="img/lines.png" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
                 <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
-                    Then I divided that file to two different files. The first one has all the sides except the front part (the side with thee name on) and the bottom part (the perfect square part). The second file only has the front and the bottomp parts.
-                    I seperated this to two different files because I wanted to laser cut first two parts of the box to see if the hinges are fitting together or not.
+                    Then this gave me topless triangle areas with a rounded bottom:
                 </p>
-                <img src="img/FlexBox2(seperated).jpg" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
+                <img src="img/triangularAreas.png" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
                 <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
-                    After preparing my file, I was still unsure about which material to use and which settings to use for that material. Since our laser cutter is really old the output power isn't the same as a brand new one.
-                    Because of this I decided on cutting squares out of 4 different materials and engraving the settings that worked for them.
-                    <br>
-                    For this I used Acrylic, 1/4th maple wood, 1/8th ply wood, Cardboard:
+                    However I didn't want the triangles to be directly touching the rim and the inner circle of the object hence I made anouther 2 circle with a diameter of 4.8 cm and 0.7 cm. This allowed me to "Trim" the excess parts and make a gap betweeen the triangulare areas and the rim and the center circle.
                 </p>
-                <img src="img/testTrials.jpg" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
+                <img src="img/gaping.png" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
                 <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
-                    Now that I know the settings for these 4 materials, I can chose one to use for my living hinge box. I chose 1/8th ply wood due to its strength to thickness ratio. 
+                    After that, I had to add a rim to the object, so I made another circle with a diameter of 5.3 cm:
                 </p>
+                <img src="img/outershell.png" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
                 <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
-                    <a href="assignmentTwo_1.html">For uploading to the Epilog Laser Cutter Software go to the next page --></a>
+                    Now that I finished drawing, I have to extrude my drawing to turn my 2D sketch in to 3D object. For this I use the "Extrude" tool which allows me to select specific areas and extrude them at a specific height. I extruded the rim, the inner circle and the triangulare areas to 0.5 cm and for the rest I extruded to 0.3 cm.
+                    After extruding my sketch, I want my object to look as similar to the real one so I added colors.
+                    At the end it looked like this:
+                </p>
+                <img src="img/radiationSign.png" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
+                <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
+                    <a href="assignmentThree_1.html">For creating a Biohazard symbol go to the next page --></a>
                 </p>
             </div>
         </div>
@@ -103,7 +105,7 @@
     <!----PageControl---->
     <div>
         <div>
-        <button style="float:right;margin-bottom:5em;margin-right:1em;"><a href="assignmentTwo_1.html">Next Page</a></button>
+        <button style="float:right;margin-bottom:5em;margin-right:1em;"><a href="assignmentThree_1.html">Next Page</a></button>
         </div>
     </div>
 
