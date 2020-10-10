@@ -56,52 +56,54 @@
         </nav>
     </section>
 
-    <!----Title---->
-    <div align="center" valign="middle" style="margin-top:15em;margin-bottom:5em;height:150px;">
-        <h1 style="position:relative;color:white;width:100%;padding-bottom:1em;">ADDITIVE MANUFACTURING</h1>
-        <p style="position:relative;color:white;width:100%;padding-left:5px;padding-right:5px;">In this assignment, I will be creating a Biohazard symbol and 3D print it.</p>
-    </div>
-
     <!----PageControl---->
-    <div>
+    <div style="margin-top:10em;">
         <div>
-        <button style="float:right;margin-bottom:5em;margin-right:1em;"><a href="assignmentThree_1.html">Next Page</a></button>
+            <button style="float:left;margin-bottom:5em;margin-right:1em;"><a href="assignmentSix_0.html">Previous Page</a></button>
         </div>
     </div>
 
     <!----MainContent---->
-    <section id="mainContent">
+    <section id="mainContent" style="margin-top:10em;">
         <div style="margin-left:auto;margin-right:auto;background-color:white;width:75%;padding-bottom:1em;margin-bottom:3em;">
-            <h2 style="color:rgb(80, 80, 80);padding:1em;text-decoration:underline;">3.1 Computer Aided Designing using Fusion 360</h2>
+            <h2 style="color:rgb(80, 80, 80);padding:1em;text-decoration:underline;">6.2 Laser Cutting and Assembling</h2>
             <div style="background-color:lightgray;width:95%;margin-left:auto;margin-right:auto;margin-bottom:1em;">
                 <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
-                    I used Fusion 360 to design my object. I started my design by making a sketch of it on the x/y axises. Initially I drew a circle with a diameter of 5 cm.
+                    Using Adobe Illustrator, I opened the ESP file exported from the Slicer Software.
                 </p>
-                <img src="img/intCircle.png" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
+                <img src="img/axiomCNC.jpg" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
                 <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
-                    Then I created an inner circle which has 0.5 cm diameter, and then drew 3 straight lines going up, going to the right, going to the left from that inner circle to the outer circle. This allowed me to use the "circular pattern" tool to find the 3 areas where the 3 branches of the biohazard symbol will be located.
+                    After importing the file I had to prepare the file for Laser Cutting. For this I first adjusted the artboard size to the material size I am using for lazer cut.
+                </p>  
+                <img src="img/axiomCNC.jpg" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
+                <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
+                    After adjusting the size of the Artboard I seperated the texts and the lines for cutting the pieces into seperate layers. I did this becausee Epilogue Laser Cutter Software does not differenciate between the lines that should be cut or engraved for this occasion.
                 </p>
-                <img src="img/lines.png" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
+                <img src="img/axiomCNC.jpg" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
                 <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
-                    Then this gave me topless triangle areas with a rounded bottom:
+                    After seperating them, I was now able to select each layer and print them seperately. This allowed me to go to Epilogue and select different Laser Cutting settings.
+                    These are the settings I chose:
                 </p>
-                <img src="img/triangularAreas.png" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
+                <img src="img/axiomCNC.jpg" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
                 <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
-                    However I didn't want the triangles to be directly touching the rim and the inner circle of the object hence I made anouther 2 circle with a diameter of 4.8 cm and 0.7 cm. This allowed me to "Trim" the excess parts and make a gap betweeen the triangulare areas and the rim and the center circle.
+                    These are the images during the Laser Cut:
                 </p>
-                <img src="img/gaping.png" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
+                <img src="img/axiomCNC.jpg" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
                 <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
-                    After that, I had to add a rim to the object, so I made another circle with a diameter of 5.3 cm:
+                    These are the images during the Laser Cut:
                 </p>
-                <img src="img/outershell.png" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
+                <img src="img/axiomCNC.jpg" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
                 <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
-                    Now that I finished drawing, I have to extrude my drawing to turn my 2D sketch in to 3D object. For this I use the "Extrude" tool which allows me to select specific areas and extrude them at a specific height. I extruded the rim, the inner circle and the triangulare areas to 0.5 cm and for the rest I extruded to 0.3 cm.
-                    After extruding my sketch, I want my object to look as similar to the real one so I added colors.
+                    After cutting the pieces this is what it looked like:
+                </p>
+                <img src="img/axiomCNC.jpg" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
+                <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
+                    I put the pieces together by starting from Z-1, I could have used the manual in the Slicer Software but I accidentally closed the app without saving the file. Using the numbers on the Z-1 part, I put the Y parts.
                     At the end it looked like this:
                 </p>
-                <img src="img/radiationSign.png" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
+                <img src="img/axiomCNC.jpg" style="width:50%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
                 <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
-                    <a href="assignmentThree_1.html">For creating a Biohazard symbol go to the next page --></a>
+                    <a href="https://drive.google.com/drive/folders/1eYKFThwRb3EMk6Z3mLvJnWg4THFi6CWz?usp=sharing">You can Access the files from this link --></a>
                 </p>
             </div>
         </div>
@@ -110,7 +112,7 @@
     <!----PageControl---->
     <div>
         <div>
-        <button style="float:right;margin-bottom:5em;margin-right:1em;"><a href="assignmentThree_1.html">Next Page</a></button>
+            <button style="float:left;margin-bottom:5em;margin-right:1em;"><a href="assignmentSix_0.html">Previous Page</a></button>
         </div>
     </div>
 
