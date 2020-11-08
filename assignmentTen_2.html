@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tuna's DigiFab</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="img/fish-solid.ico" />
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/fb42aa3520.js" crossorigin="anonymous"></script>
+
+</head>
+<body style="background-color:darkslategray">
+    <!----NavigationBar---->
+    <section id="nav-bar">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.html"><b>Tuna's DigiFab</b></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">HOME<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="aboutMe.html">ABOUT ME</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        PROJECTS
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width:500%;">
+                            <div style="float:left;width:50%;">
+                            <a class="dropdown-item" href="assignmentOne_0.html">01: PROJECT ASSIGNMENT</a>
+                            <a class="dropdown-item" href="assignmentTwo_0.html">02: LASER CUTTING</a>
+                            <a class="dropdown-item" href="assignmentThree_0.html">03: ADDITIVE MANUFACTURING</a>
+                            <a class="dropdown-item" href="assignmentFour_0.html">04: CAD, CAM, PLANTS, +PRUSAS</a>
+                            <a class="dropdown-item" href="assignmentFive_0.html">05: SUBTRACTIVE  MANUFACTURING</a>
+                            </div>
+                            <div style="float:left;width:45%;padding-left:0.25em;border-left:1px solid black;">
+                                <a class="dropdown-item" href="assignmentSix_0.html">06: SLICER: INTERLOCKING SLICES</a>
+                                <a class="dropdown-item" href="assignmentSeven_0.html">07: SLICER: INTERLOCKING SLICES (BIG)</a>
+                                <a class="dropdown-item" href="assignmentEight_0.html">08: VINYL CUTTING</a>
+                                <a class="dropdown-item" href="assignmentNine_0.html">09: ELECTRONICS #1</a>
+                                <a class="dropdown-item" href="assignmentTen_0.html">10: ELECTRONICS #2</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+
+    <!----PageControl---->
+    <div style="margin-top:20em;">
+        <div>
+            <button style="float:left;margin-bottom:5em;margin-right:1em;"><a href="assignmentTen_1.html">Previous Page</a></button>
+        </div>
+        <div>
+        <button style="float:right;margin-bottom:5em;margin-right:1em;"><a href="assignmentTen_3.html">Next Page</a></button>
+        </div>
+    </div>
+
+    <!----MainContent---->
+    <section id="mainContent" style="margin-top:20em;">
+        <div style="margin-left:auto;margin-right:auto;background-color:white;width:75%;padding-bottom:1em;margin-bottom:3em;">
+            <h2 style="color:rgb(80, 80, 80);padding:1em;text-decoration:underline;">10.3 Learning Coding in Arduino</h2>
+            <div style="background-color:lightgray;width:95%;margin-left:auto;margin-right:auto;margin-bottom:1em;">
+                <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
+                    In this assignment, I have created circuits that are controlled by the code written in the ardunio. a simple example to this is a flickering LED made by coding in ardunio.
+                </p>
+                <img src="img/flickerLED.gif" style="width:75%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
+                <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
+                    At here you can see that there is one grounf connection and one another connetion from pin no 7. Connecting the positive sign as pin 7 allows me to emulate the current going through the circuit. By writing an arduino code I can emulate it to flicker like I do in the GIF above.
+                    In the GIF below, I take this to a more complex and this time instead of outputting a current, I also read the current on that pin to effect other pins.
+                </p>
+                <img src="img/pushButtonFlicker.gif" style="width:75%;margin:1em;margin-top:0%;display:block;margin-left:auto;margin-right:auto;">
+                <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
+                    In the GIF above, by using the principle of short curcuit, we can make a mechanism that when pressed on the button allows the electricity to pass through a less ressistant path which makes a short circuit and shows as LOW on our arduino. Using this we can code a mechanism that turns on the LED and Voila, you have a "Push Button Flickering LED." In other words this can be named as using pull-up or pull down resistors to correctly bias the inputs of digital gates.
+                    The reason we use the "Digital Pins" and not "Analogu Pins" is because digital pins gives a value either 1 or 0 however analog ones can give a varient values. Because in the usage above we don't need any type of OUTPUT or INPUT different than 1 or 0 (on/off or True/False) we only use digital pins.
+                    Moreover Digital PWM means Digiral Pulse Width Modulation or in other words, it is a technique used for getting analog results using digital pins.
+                </p>
+                <p style="margin-left:2em;margin-right:2em;color:black;padding:5px;white-space:pre-wrap;">
+                    <a href="assignmentTen_3.html">For the final assignment #1 go to the next page --></a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!----PageControl---->
+    <div>
+        <div>
+            <button style="float:left;margin-bottom:5em;margin-right:1em;"><a href="assignmentTen_1.html">Previous Page</a></button>
+        </div>
+        <div>
+        <button style="float:right;margin-bottom:5em;margin-right:1em;"><a href="assignmentTen_3.html">Next Page</a></button>
+        </div>
+    </div>
+
+    <!--Footer-->
+    <section id="footer" style="position:fixed;bottom:0;width:100%;text-decoration:none;color:black;">
+        <div class="float-right social">
+        <a href="https://www.instagram.com/ozgurtunaozturkk/"><i class="fab fa-instagram fa-2x" style="color:darkslategray;"></i></a>
+        <hr>
+        <a href="mailto: ozturk_ozgur@wheatoncollege.edu"><i class="fas fa-envelope fa-2x" style="color:darkslategray;"></i></a>
+        <hr>
+        <a href="https://github.com/Tozturk18"><i class="fab fa-github fa-2x" style="color:darkslategray"></i></a>
+        </div>
+    </section>
+
+</body>
+</html>
