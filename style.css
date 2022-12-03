@@ -1,0 +1,113 @@
+@font-face {
+    font-family: 'orbitronregular';
+    src: url('./font/orbitron-variablefont_wght-webfont.woff2') format('woff2'),
+         url('./font/orbitron-variablefont_wght-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body { 
+    margin: 0; 
+    font-family: 'orbitronregular';
+    overflow: hidden;
+}
+
+#nav {
+    position: absolute;
+    top: 0%;
+    width: 100%;
+    height: 60px;
+    z-index: 1;
+}
+
+.canvasChange1 {
+    margin-left: -45%;
+    margin-top: -14.5%;
+    transition: 0.5s;
+}
+
+.canvasChange2 {
+    margin-left: 0%;
+    margin-top: 0%;
+    transition: 0.5s;
+}
+
+#menuIcon {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    margin: 10px;
+}
+
+.menuChange {
+    transform: translate(-321px, 0);
+}
+
+#menu {
+    position: absolute;
+    top: 0%;
+    right: -321px;
+    color: white;
+    height: 100vh;
+    background-color: rgba(75,75,75,0.5);
+    width: 321px;
+    transition: 0.5s;
+}
+
+.menuSpacer {
+    height: 69px;
+    width: 100%;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#menuContent {
+    display: grid;
+    padding: 20px;
+    height: calc(100vh - 140px);
+}
+
+.row {
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid white;
+    cursor: pointer;
+}
+
+.row:hover {
+    color: gray;
+}
+
+.row h1 {
+    text-decoration: underline;
+}
+
+.container {
+    display: inline-block;
+    cursor: pointer;
+}
+  
+.bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #ffffff;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+  
+.change .bar1 {
+    transform: translate(0, 11px) rotate(-45deg);
+}
+  
+.change .bar2 {
+    opacity: 0;
+}
+  
+.change .bar3 {
+    transform: translate(0, -11px) rotate(45deg);
+}

@@ -2,100 +2,71 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuna Index</title>
 
-    <title>Tuna's DigiFab</title>
-
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="shortcut icon" href="img/fish-solid.ico" />
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-    <script src="https://kit.fontawesome.com/fb42aa3520.js" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="style.css">
+    <!--<script src="three.js"></script>-->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.138.0/build/three.module.js",
+                "OrbitControls": "https://unpkg.com/three@0.138.0/examples/jsm/controls/OrbitControls.js",
+                "Lensflare": "https://unpkg.com/three@0.138.0/examples/jsm/objects/Lensflare.js"
+            }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="app.js" type="module"></script>
 </head>
-<body style="background-color:darkslategray">
-  <!----NavigationBar---->
-  <section id="nav-bar">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="index.html"><b>Tuna's DigiFab</b></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="index.html">HOME<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="aboutMe.html">ABOUT ME</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              PROJECTS
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width:500%;">
-              <div style="float:left;width:50%;">
-              <a class="dropdown-item" href="assignmentOne_0.html">01: PROJECT ASSIGNMENT</a>
-              <a class="dropdown-item" href="assignmentTwo_0.html">02: LASER CUTTING</a>
-              <a class="dropdown-item" href="assignmentThree_0.html">03: ADDITIVE MANUFACTURING</a>
-              <a class="dropdown-item" href="assignmentFour_0.html">04: CAD, CAM, PLANTS, +PRUSAS</a>
-              <a class="dropdown-item" href="assignmentFive_0.html">05: SUBTRACTIVE  MANUFACTURING</a>
-              </div>
-              <div style="float:left;width:45%;padding-left:0.25em;border-left:1px solid black;">
-                  <a class="dropdown-item" href="assignmentSix_0.html">06: SLICER: INTERLOCKING SLICES</a>
-                  <a class="dropdown-item" href="assignmentSeven_0.html">07: SLICER: INTERLOCKING SLICES (BIG)</a>
-                  <a class="dropdown-item" href="assignmentEight_0.html">08: VINYL CUTTING</a>
-                  <a class="dropdown-item" href="assignmentNine_0.html">09: ELECTRONICS #1</a>
-                  <a class="dropdown-item" href="assignmentTen_0.html">10: ELECTRONICS #2</a>
-              </div>
-          </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </section>
+<body>
 
-  <!----Title---->
-  <div align="center" valign="middle" style="margin-top:15em;margin-bottom:10em;height:150px;">
-    <h1 style="position:relative;color:white;width:100%;padding-bottom:1em;">Welcome to Tuna's DigiFab</h1>
-    <p style="position:relative;color:white;width:100%;padding-left:5px;padding-right:5px;">You can learn about the projects we have done throughout the DigiFab journey</p>
-  </div>
 
-  <!--MainContent-->
-  <section id="mainContent">
-    <div class="container">
-      <div class="row" style="margin-bottom:25px;">
-        <div class="col-md-6 right" style="width:100%;margin: 0 auto;padding:10px;text-align:center;text-decoration:none;border:1px solid darkslategray;">
-          <a href="aboutMe.html" style="color:black;">
-            <i class="fas fa-address-card fa-10x" style="color:darkslategray;opacity:75%;"></i>
-            <p style="padding:5px;background-color:darkslategray;border-radius:10%;margin:0 auto;width:25%;color:white;opacity:75%;">ABOUT ME</p>
-          </a>
+    <div id="nav">
+        <div id="menuIcon" class="container">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
         </div>
-        <div class="col-md-6 left" style="width:100%;margin: 0 auto;padding:10px;text-align:center;text-decoration:none;border:1px solid darkslategray;">
-          <a href="projects.html" style="color:black;">
-            <i class="fas fa-project-diagram fa-9x" style="color:darkslategray;opacity:75%;"></i>
-            <p style="padding:5px;background-color:darkslategray;border-radius:10%;margin:0 auto;margin-top:10px;width:25%;color:white;opacity:75%;">PROJECTS</p>
-          </a>
+    </div>
+    <div id="menu">
+        <div class="menuSpacer"><h1>Pages</h1></div>
+        <div id="menuContent">
+            <div class="row">
+                <h1>About Me</h1>
+                <div class="cityInfo">
+                    Istanbul, Turkey
+                    <br>
+                    41.0082° N 28.9784° E
+                </div>
+            </div>
+            <div class="row">
+                <h1>Github</h1>
+                <div class="cityInfo">
+                    Changshu, China
+                    <br>
+                    31.6538° N 120.7522° E
+                </div>
+            </div>
+            <div class="row">
+                <h1>Super Fab Lab</h1>
+                <div class="cityInfo">
+                    Thimphu, Bhutan
+                    <br>
+                    27.4716° N 89.6386° E
+                </div>
+            </div>
+            <div class="row">
+                <h1>Fab Academy</h1>
+                <div class="cityInfo">
+                    Norton, USA
+                    <br>
+                    41.9672° N 71.1840° W
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="menuSpacer"></div>
     </div>
-  </section>
-
-  <!--Footer-->
-  <section id="footer" style="position:fixed;bottom:0;width:100%;text-decoration:none;color:black;">
-    <div class="float-right social">
-      <a href="https://www.instagram.com/ozgurtunaozturkk/"><i class="fab fa-instagram fa-2x" style="color:darkslategray;"></i></a>
-      <hr>
-      <a href="mailto: ozturk_ozgur@wheatoncollege.edu"><i class="fas fa-envelope fa-2x" style="color:darkslategray;"></i></a>
-      <hr>
-      <a href="https://github.com/Tozturk18"><i class="fab fa-github fa-2x" style="color:darkslategray"></i></a>
-    </div>
-  </section>
-
 </body>
 </html>
