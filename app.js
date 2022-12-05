@@ -74,10 +74,30 @@ void main( void ) {
 
 /* --- End of Shaders --- */
 
+var manager = new THREE.LoadingManager();
+
+manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
+
+	console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+};
+
+manager.onLoad = function ( ) {
+
+	console.log( 'Loading complete!');
+	const loadingScreen = document.getElementById( 'loading-screen' );
+	loadingScreen.classList.add( 'fade-out' );
+};
+
+
+manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+
+	console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+};
+
 /* --- ShortCuts --- */
 
 // Create a shortcut to load textures
-const textureLoader = new THREE.TextureLoader();
+const textureLoader = new THREE.TextureLoader(manager);
 // Create a shortcut to create dates
 const dt = new Date();
 
