@@ -78,12 +78,12 @@ var manager = new THREE.LoadingManager();
 
 manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
 
-	console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+	//console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
 };
 
 manager.onLoad = function ( ) {
 
-	console.log( 'Loading complete!');
+	//console.log( 'Loading complete!');
 	const loadingScreen = document.getElementById( 'loading-screen' );
 	loadingScreen.classList.add( 'fade-out' );
 };
@@ -91,7 +91,7 @@ manager.onLoad = function ( ) {
 
 manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
 
-	console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+	//console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
 };
 
 /* --- ShortCuts --- */
@@ -114,10 +114,10 @@ var aspectRatio = 1;
 // Create a THREE JS WebGL Renderer
 const renderer = new THREE.WebGLRenderer({ antialias: true } );
 // Renderer Settings
-renderer.setSize( window.innerWidth*aspectRatio, window.innerHeight*aspectRatio ); // Renderer Aspect Ratio
+renderer.setSize( document.body.clientWidth*aspectRatio, document.body.clientHeight*aspectRatio ); // Renderer Aspect Ratio
 renderer.shadowMap.enabled = true; // Renderer Shadow options
 renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
-document.body.appendChild( renderer.domElement ); // Instantiate the Renderer on the Webpage
+document.getElementById("main").appendChild( renderer.domElement ); // Instantiate the Renderer on the Webpage
 
 /* --- End of Renderer --- */
 
@@ -126,7 +126,7 @@ document.body.appendChild( renderer.domElement ); // Instantiate the Renderer on
 // Create a THREE JS Scene
 const scene = new THREE.Scene();
 // Create a THREE JS Perspective Camera with 75 FOV
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+const camera = new THREE.PerspectiveCamera( 75, document.body.clientWidth / document.body.clientHeight, 0.1, 1000 );
 // Instantiate the Camera in the scene
 scene.add( camera );
 // Set the initial Camera Position so the Northern Hemisphere is in focus
@@ -474,9 +474,9 @@ window.addEventListener('resize', onWindowResize, false);
  *  - none but it rerenders the canvas and resets the camera according to the new page size.
  */
 function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight
+  camera.aspect = document.body.clientWidth / document.body.clientHeight
   camera.updateProjectionMatrix()
-  renderer.setSize(window.innerWidth*aspectRatio, window.innerHeight*aspectRatio)
+  renderer.setSize(document.body.clientWidth*aspectRatio, document.body.clientHeight*aspectRatio)
   renderer.render(scene, camera);
 }
 
@@ -543,7 +543,7 @@ document.getElementById("menuIcon").addEventListener("click", () => {
 	if (document.getElementsByClassName("change")[0]) {
 		aspectRatio = 1.5 // Change the Aspect Ratio
 		// rerender the canvas using the new aspect ratio
-		renderer.setSize(window.innerWidth*aspectRatio, window.innerHeight*aspectRatio);
+		renderer.setSize(document.body.clientWidth*aspectRatio, document.body.clientHeight*aspectRatio);
 		// Activate the .canvasChange1 and deactivate the .canvasChange2 Elements
 		document.querySelector("canvas").classList.toggle("canvasChange1");
 		document.querySelector("canvas").classList.toggle("canvasChange2");
@@ -556,7 +556,7 @@ document.getElementById("menuIcon").addEventListener("click", () => {
 	} else {
 		aspectRatio = 1; // Change the Aspect Ratio
 		// rerender the canvas using the new aspect ratio
-		renderer.setSize(window.innerWidth*aspectRatio, window.innerHeight*aspectRatio);
+		renderer.setSize(document.body.clientWidth*aspectRatio, document.body.clientHeight*aspectRatio);
 		// Activate the .canvasChange2 and deactivate the .canvasChange1 Elements
 		document.querySelector("canvas").classList.toggle("canvasChange1");
 		document.querySelector("canvas").classList.toggle("canvasChange2");
