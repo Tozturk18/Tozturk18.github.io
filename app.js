@@ -191,7 +191,7 @@ scene.add(skySphere);
 // Create Uniforms for Earth's Shader Material
 const uniforms = {
   sunDirection: {value: sunLight.position }, // The current position of the Sun with respect to Earth
-  dayTexture: { value: textureLoader.load( "./textures/earth2.jpeg" ) }, // The day time texture of Earth
+  dayTexture: { value: textureLoader.load( "./textures/earth.jpeg" ) }, // The day time texture of Earth
   nightTexture: { value: textureLoader.load( "./textures/earth_night.jpeg" ) } // The night time texture of Earth
 };
 // Create a THREE.ShaderMaterial for Earth
