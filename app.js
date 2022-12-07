@@ -107,7 +107,7 @@ const dt = new Date();
 
 const lensflareTexture = textureLoader.load( "./textures/lensflare.png" );		// LensFlare Texture
 const skySphereTexture = textureLoader.load( "./textures/starfield.jpeg" );		// Sky Sphere Texture
-const earthDayTexture = textureLoader.load( "./textures/earth.jpeg" );			// Earth Day Texture
+const earthDayTexture = textureLoader.load( "http://shadedrelief.com/natural3/ne3_data/16200/textures/2_no_clouds_16k.jpg" );			// Earth Day Texture
 const earthNightTexture = textureLoader.load( "./textures/earth_night.jpeg" );	// Earth Night Texture
 const atmosphereTexture = textureLoader.load( "./textures/glow.png" );			// Atmosphere Texture
 const cloudTexture = textureLoader.load( "./textures/earth_clouds.jpeg" );		// Clouds Texture
