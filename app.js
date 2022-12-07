@@ -285,10 +285,9 @@ scene.add(moon);
 /* --- Nodes --- */
 
 const nodeGeometry = new THREE.SphereGeometry(0.05);
-const nodeMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, } );
 
 // --- Istanbul Node ---
-const node1 = new DomMesh(nodeGeometry, nodeMaterial, camera );
+const node1 = new DomMesh(nodeGeometry, new THREE.MeshBasicMaterial( { color: 0xffffff, } ), camera );
 // Istanbul, Turkey Coordinates: 41.0082° N 28.9784° E
 var node1Latitude = -41.0082;
 var node1Longitude = 28.9784;
@@ -298,7 +297,7 @@ SphereToEuclodCord(node1, node1Latitude, node1Longitude);
 scene.add(node1);
 
 // --- Changshu Node ---
-const node2 = new DomMesh( nodeGeometry, nodeMaterial, camera );
+const node2 = new DomMesh( nodeGeometry, new THREE.MeshBasicMaterial( { color: 0xffffff, } ), camera );
 // Changshu, China Coordinates: 31.6538° N 120.7522° E
 var node2Latitude = -31.6538;
 var node2Longitude = 120.7522;
@@ -308,7 +307,7 @@ SphereToEuclodCord(node2, node2Latitude, node2Longitude);
 scene.add(node2);
 
 // --- Thimphu Node ---
-const node3 = new DomMesh( nodeGeometry, nodeMaterial, camera );
+const node3 = new DomMesh( nodeGeometry, new THREE.MeshBasicMaterial( { color: 0xffffff, } ), camera );
 // Thimphu, Bhutan Coordinates: 27.4716° N 89.6386° E
 var node3Latitude = -27.4716;
 var node3Longitude = 89.6386;
@@ -318,7 +317,7 @@ SphereToEuclodCord(node3, node3Latitude, node3Longitude);
 scene.add(node3);
 
 // --- Wheaton Node ---
-const node4 = new DomMesh( nodeGeometry, nodeMaterial, camera );
+const node4 = new DomMesh( nodeGeometry, new THREE.MeshBasicMaterial( { color: 0xffffff, } ), camera );
 // Wheaton College, Norton, USA Coordinates: 41.9672° N 71.1840° W
 var node4Latitude = -41.9672;
 var node4Longitude = -71.1840;
