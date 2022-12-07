@@ -103,6 +103,22 @@ const dt = new Date();
 
 /* --- End of ShortCuts --- */
 
+/* --- Textures --- */
+
+const lensflareTexture = textureLoader.load( "./textures/lensflare.png" );
+const skySphereTexture = textureLoader.load( "./textures/starfield.jpeg" );
+const earthDayTexture = textureLoader.load( "./textures/earth.jpeg" );
+const earthNightTexture = textureLoader.load( "./textures/earth_night.jpeg" );
+const atmosphereTexture = textureLoader.load( "./textures/glow.png" );
+const cloudTexture = textureLoader.load( "./textures/earth_clouds.jpeg" );
+const moonTexture = textureLoader.load( "./textures/moon.jpeg" );
+const node1Texture = textureLoader.load( "./signs/IstanbulSign.svg" );
+const node2Texture = textureLoader.load( "./signs/ChangshuSign.svg" );
+const node3Texture = textureLoader.load( "./signs/ThimphuSign.svg" );
+const node4Texture = textureLoader.load( "./signs/WheatonSign.svg" );
+
+/* --- End of Textures --- */
+
 /* --- Global Variables --- */
 
 var aspectRatio = 1;
@@ -159,7 +175,7 @@ scene.add(sunLight);
 // Create a THREE JS LensFlare Object to create a lensflare effect when looked at the sun
 const sunFlare = new Lensflare();
 // Add the LensFlare Texture and Settings
-sunFlare.addElement( new LensflareElement( textureLoader.load( "./textures/lensflare.png" ), 700, 0 ) );
+sunFlare.addElement( new LensflareElement( lensflareTexture, 700, 0 ) );
 // Instantiate the LensFlare
 sunLight.add(sunFlare);
 
@@ -177,7 +193,7 @@ scene.add( atmoLight );
 /* --- SkySphere --- */
 
 // Create a new THREE.Mesh Sphere object and render a 360 image of the night sky
-const skySphere = new THREE.Mesh( new THREE.SphereGeometry(1000), new THREE.MeshBasicMaterial({ color: 0xffffff, map: textureLoader.load( "./textures/starfield.jpeg" ), }) );
+const skySphere = new THREE.Mesh( new THREE.SphereGeometry(1000), new THREE.MeshBasicMaterial({ color: 0xffffff, map: skySphereTexture, }) );
 // Only render the texture in the inside of the Sphere
 skySphere.material.side = THREE.BackSide;
 // Instantiate the skySphere
@@ -191,8 +207,8 @@ scene.add(skySphere);
 // Create Uniforms for Earth's Shader Material
 const uniforms = {
   sunDirection: {value: sunLight.position }, // The current position of the Sun with respect to Earth
-  dayTexture: { value: textureLoader.load( "./textures/earth.jpeg" ) }, // The day time texture of Earth
-  nightTexture: { value: textureLoader.load( "./textures/earth_night.jpeg" ) } // The night time texture of Earth
+  dayTexture: { value: earthDayTexture }, // The day time texture of Earth
+  nightTexture: { value: earthNightTexture } // The night time texture of Earth
 };
 // Create a THREE.ShaderMaterial for Earth
 const earthMaterial = new THREE.ShaderMaterial({
@@ -206,7 +222,7 @@ const Earth = new THREE.Mesh( new THREE.SphereGeometry( 3, 50, 50 ), earthMateri
 // --- Atmosphere ---
 // Create a THREE.SpriteMaterial to represent the Atmosphere around the Earth
 var atmosphereMaterial = new THREE.SpriteMaterial({ 
-	map: textureLoader.load( "./textures/glow.png" ),  // Load the Atmospheric Glow Texture
+	map: atmosphereTexture,  // Load the Atmospheric Glow Texture
 	color: 0xddddff,                                   // The glow color is light blue
   transparent: true,                                 // Does show behind
   blending: THREE.AdditiveBlending,                  // Blends with the environment behind using THREE.AdditiveBlending
@@ -224,7 +240,7 @@ Earth.add(atmosphere); // this centers the glow at the mesh
 // The reason we use an advance material properties for clouds is 
 // so that there is shadow casting on the clouds due to Earth
 var cloudMaterial = new THREE.MeshPhysicalMaterial({
-  map: textureLoader.load( "./textures/earth_clouds.jpeg" ), // Load the Cloud Texture
+  map: cloudTexture, // Load the Cloud Texture
   color: 0xffffff,                                           // White Clouds
   transparent: true,                                         // Must show the Earth Underneath
   blending: THREE.AdditiveBlending,                          // Blends with the environment behind using THREE.AdditiveBlending
@@ -250,7 +266,7 @@ scene.add( Earth );
 // Create a THREE.MeshPhysicalMaterial for moon to have moon cycles due to Shadow Casting
 const moonMaterial = new THREE.MeshPhysicalMaterial({
   color: 0xffffff,                                   // Set Moon's Base Color White
-  map: textureLoader.load( "./textures/moon.jpeg" ), // Load the Moon texture
+  map: moonTexture, // Load the Moon texture
   metalness: 0.0,                                    // 0.0% Metalness
   roughness: 1.0,                                    // 100% Roughness
   clearcoat: 1.0,                                    // 100% Clearcoat
@@ -313,7 +329,7 @@ scene.add(node4);
 /* --- Node Tags --- */
 
 var node1TextMaterial = new THREE.SpriteMaterial({ 
-	map: textureLoader.load( "./signs/IstanbulSign.svg" ),  // Load the Page-City Texture
+	map: node1Texture,  // Load the Page-City Texture
 	color: 0xffffff,                                   // The default color is white
   	transparent: true,                                 // Does show behind
   	blending: THREE.AdditiveBlending,                  // Blends with the environment behind using THREE.AdditiveBlending
@@ -329,7 +345,7 @@ node1Text.center.set(0,0);
 node1.add(node1Text); // this centers the glow at the mesh
 
 var node2TextMaterial = new THREE.SpriteMaterial({ 
-	map: textureLoader.load( "./signs/ChangshuSign.svg" ),  // Load the Page-City Texture
+	map: node2Texture,  // Load the Page-City Texture
 	color: 0xffffff,                                   // The default color is white
   	transparent: true,                                 // Does show behind
   	blending: THREE.AdditiveBlending,                  // Blends with the environment behind using THREE.AdditiveBlending
@@ -345,7 +361,7 @@ node2Text.center.set(0,0);
 node2.add(node2Text); // this centers the glow at the mesh
 
 var node3TextMaterial = new THREE.SpriteMaterial({ 
-	map: textureLoader.load( "./signs/ThimphuSign.svg" ),  // Load the Page-City Texture
+	map: node3Texture,  // Load the Page-City Texture
 	color: 0xffffff,                                   // The default color is white
   	transparent: true,                                 // Does show behind
   	blending: THREE.AdditiveBlending,                  // Blends with the environment behind using THREE.AdditiveBlending
@@ -361,7 +377,7 @@ node3Text.center.set(0,0);
 node3.add(node3Text); // this centers the glow at the mesh
 
 var node4TextMaterial = new THREE.SpriteMaterial({ 
-	map: textureLoader.load( "./signs/WheatonSign.svg" ),  // Load the Page-City Texture
+	map: node4Texture,  // Load the Page-City Texture
 	color: 0xffffff,                                   // The default color is white
   	transparent: true,                                 // Does show behind
   	blending: THREE.AdditiveBlending,                  // Blends with the environment behind using THREE.AdditiveBlending
