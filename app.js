@@ -105,17 +105,17 @@ const dt = new Date();
 
 /* --- Textures --- */
 
-const lensflareTexture = textureLoader.load( "./textures/lensflare.png" );
-const skySphereTexture = textureLoader.load( "./textures/starfield.jpeg" );
-const earthDayTexture = textureLoader.load( "./textures/earth.jpeg" );
-const earthNightTexture = textureLoader.load( "./textures/earth_night.jpeg" );
-const atmosphereTexture = textureLoader.load( "./textures/glow.png" );
-const cloudTexture = textureLoader.load( "./textures/earth_clouds.jpeg" );
-const moonTexture = textureLoader.load( "./textures/moon.jpeg" );
-const node1Texture = textureLoader.load( "./signs/IstanbulSign.svg" );
-const node2Texture = textureLoader.load( "./signs/ChangshuSign.svg" );
-const node3Texture = textureLoader.load( "./signs/ThimphuSign.svg" );
-const node4Texture = textureLoader.load( "./signs/WheatonSign.svg" );
+const lensflareTexture = textureLoader.load( "./textures/lensflare.png" );		// LensFlare Texture
+const skySphereTexture = textureLoader.load( "./textures/starfield.jpeg" );		// Sky Sphere Texture
+const earthDayTexture = textureLoader.load( "./textures/earth.jpeg" );			// Earth Day Texture
+const earthNightTexture = textureLoader.load( "./textures/earth_night.jpeg" );	// Earth Night Texture
+const atmosphereTexture = textureLoader.load( "./textures/glow.png" );			// Atmosphere Texture
+const cloudTexture = textureLoader.load( "./textures/earth_clouds.jpeg" );		// Clouds Texture
+const moonTexture = textureLoader.load( "./textures/moon.jpeg" );				// Moon Texture
+const node1Texture = textureLoader.load( "./signs/IstanbulSign.svg" );			// About Me Page Sign
+const node2Texture = textureLoader.load( "./signs/ChangshuSign.svg" );			// Github Page Sign
+const node3Texture = textureLoader.load( "./signs/ThimphuSign.svg" );			// Super Fablab Page Sign
+const node4Texture = textureLoader.load( "./signs/WheatonSign.svg" );			// Fab Academy Page Sign
 
 /* --- End of Textures --- */
 
@@ -284,8 +284,11 @@ scene.add(moon);
 
 /* --- Nodes --- */
 
+const nodeGeometry = new THREE.SphereGeometry(0.05);
+const nodeMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, } );
+
 // --- Istanbul Node ---
-const node1 = new DomMesh(new THREE.SphereGeometry(0.05), new THREE.MeshBasicMaterial( { color: 0xffffff, } ), camera );
+const node1 = new DomMesh(nodeGeometry, nodeMaterial, camera );
 // Istanbul, Turkey Coordinates: 41.0082° N 28.9784° E
 var node1Latitude = -41.0082;
 var node1Longitude = 28.9784;
@@ -295,7 +298,7 @@ SphereToEuclodCord(node1, node1Latitude, node1Longitude);
 scene.add(node1);
 
 // --- Changshu Node ---
-const node2 = new DomMesh( new THREE.SphereGeometry(0.05), new THREE.MeshBasicMaterial( { color: 0xffffff, } ), camera );
+const node2 = new DomMesh( nodeGeometry, nodeMaterial, camera );
 // Changshu, China Coordinates: 31.6538° N 120.7522° E
 var node2Latitude = -31.6538;
 var node2Longitude = 120.7522;
@@ -305,7 +308,7 @@ SphereToEuclodCord(node2, node2Latitude, node2Longitude);
 scene.add(node2);
 
 // --- Thimphu Node ---
-const node3 = new DomMesh( new THREE.SphereGeometry(0.05), new THREE.MeshBasicMaterial( { color: 0xffffff, } ), camera );
+const node3 = new DomMesh( nodeGeometry, nodeMaterial, camera );
 // Thimphu, Bhutan Coordinates: 27.4716° N 89.6386° E
 var node3Latitude = -27.4716;
 var node3Longitude = 89.6386;
@@ -315,7 +318,7 @@ SphereToEuclodCord(node3, node3Latitude, node3Longitude);
 scene.add(node3);
 
 // --- Wheaton Node ---
-const node4 = new DomMesh( new THREE.SphereGeometry(0.05), new THREE.MeshBasicMaterial( { color: 0xffffff, } ), camera );
+const node4 = new DomMesh( nodeGeometry, nodeMaterial, camera );
 // Wheaton College, Norton, USA Coordinates: 41.9672° N 71.1840° W
 var node4Latitude = -41.9672;
 var node4Longitude = -71.1840;
