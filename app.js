@@ -142,7 +142,7 @@ document.getElementById("main").appendChild( renderer.domElement ); // Instantia
 // Create a THREE JS Scene
 const scene = new THREE.Scene();
 // Create a THREE JS Perspective Camera with 75 FOV
-const camera = new THREE.PerspectiveCamera( 75, document.body.clientWidth / document.body.clientHeight, 0.1, 1000 );
+const camera = new THREE.PerspectiveCamera( 75, document.body.clientWidth*aspectRatio / document.body.clientHeight*aspectRatio, 0.1, 1000 );
 // Instantiate the Camera in the scene
 scene.add( camera );
 // Set the initial Camera Position so the Northern Hemisphere is in focus
@@ -207,7 +207,7 @@ scene.add(skySphere);
 // Create Uniforms for Earth's Shader Material
 const uniforms = {
   sunDirection: {value: sunLight.position }, // The current position of the Sun with respect to Earth
-  dayTexture: { value: earthDayTexture }, // The day time texture of Earth
+  dayTexture: { value: earthNightTexture }, // The day time texture of Earth
   nightTexture: { value: earthNightTexture } // The night time texture of Earth
 };
 // Create a THREE.ShaderMaterial for Earth
