@@ -8,9 +8,9 @@
 
 /* --- Imports --- */
 
-import * as THREE from 'three';
-import { OrbitControls } from 'OrbitControls';
-import { Lensflare, LensflareElement } from 'Lensflare';
+import * as THREE from 'https://unpkg.com/three@0.138.0/build/three.module.js';
+import { OrbitControls } from "./orbitControls.js";
+import { Lensflare, LensflareElement } from './lensflare.js';
 import { DomMesh, DomSprite } from './DomMesh.js';
 
 /* --- End of Imports --- */

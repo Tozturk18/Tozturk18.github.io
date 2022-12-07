@@ -19,7 +19,7 @@ import {
     Sprite,     // Sprite Object
     Raycaster,  // Raycaster
     Vector2     // Vector2
-} from 'three';
+} from 'https://unpkg.com/three@0.138.0/build/three.module.js';
 
 /* --- End of Imports --- */
 
