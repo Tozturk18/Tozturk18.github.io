@@ -406,6 +406,9 @@ node4.add(node4Text); // this centers the glow at the mesh
 
 /* --- DOM Events --- */
 
+// Check if the current browser is Safari
+var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 && navigator.userAgent && navigator.userAgent.indexOf('CriOS') == -1 && navigator.userAgent.indexOf('FxiOS') == -1;
+
 // Link node1 with a url with white as default color and gray as highligh color
 node1.MouseEnter(() => {
 	node1.material.color.set( 0x555555 );
@@ -418,8 +421,11 @@ node1.MouseLeave(() => {
 	document.body.style.cursor	= 'default';
 });
 node1.MouseDown(() => {
-	window.open("https://www.linkedin.com/in/ozgur-tuna-ozturk/", "_blank");
-	alert("node1");
+	if (!isSafari) {
+		window.open("https://www.linkedin.com/in/ozgur-tuna-ozturk/", "_blank");
+	} else if (window.confirm('If you click "ok" you would be redirected.')) {
+		window.open("https://www.linkedin.com/in/ozgur-tuna-ozturk/", "_blank");
+	};
 });
 
 // Link node2 with a url white as default color and gray as highligh color
@@ -434,8 +440,11 @@ node2.MouseLeave(() => {
 	document.body.style.cursor	= 'default';
 });
 node2.MouseDown(() => {
-	window.open("https://github.com/Tozturk18", "_blank");
-	alert("node2");
+	if (!isSafari) {
+		window.open("https://github.com/Tozturk18", "_blank");
+	} else if (window.confirm('If you click "ok" you would be redirected.')) {
+		window.open("https://github.com/Tozturk18", "_blank");
+	};
 });
 
 // Link node3 with a url white as default color and gray as highligh color
@@ -450,8 +459,11 @@ node3.MouseLeave(() => {
 	document.body.style.cursor	= 'default';
 });
 node3.MouseDown(() => {
-	window.open("https://www.fablabs.io/labs/BhutanSFL", "_blank");
-	alert("node3");
+	if (!isSafari) {
+		window.open("https://www.fablabs.io/labs/BhutanSFL", "_blank");
+	} else if (window.confirm('If you click "ok" you would be redirected.')) {
+		window.open("https://www.fablabs.io/labs/BhutanSFL", "_blank");
+	};
 });
 
 // Link node4 with a url white as default color and gray as highligh color
@@ -466,24 +478,12 @@ node4.MouseLeave(() => {
 	document.body.style.cursor	= 'default';
 });
 node4.MouseDown(() => {
-	window.open("http://fabacademy.org/2021/labs/wheaton/students/ozgur-tunaozturk/", "_blank");
-	alert("node4");
-});
-
-/*if (canvasWidth < canvasHeight) {
-	node1Text.MouseDown( () => {
-		window.open("https://www.linkedin.com/in/ozgur-tuna-ozturk/", "_blank");
-	} );
-	node2Text.MouseDown( () => {
-		window.open("https://github.com/Tozturk18", "_blank");
-	} );
-	node3Text.MouseDown( () => {
-		window.open("https://www.fablabs.io/labs/BhutanSFL", "_blank");
-	} );
-	node4Text.MouseDown( () => {
+	if (!isSafari) {
 		window.open("http://fabacademy.org/2021/labs/wheaton/students/ozgur-tunaozturk/", "_blank");
-	} );
-}*/
+	} else if (window.confirm('If you click "ok" you would be redirected.')) {
+		window.open("http://fabacademy.org/2021/labs/wheaton/students/ozgur-tunaozturk/", "_blank");
+	};
+});
 
 /* --- End of DOM Events --- */
 
