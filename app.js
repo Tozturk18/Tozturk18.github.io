@@ -481,7 +481,7 @@ node4.MouseDown(() => {
 	window.open("http://fabacademy.org/2021/labs/wheaton/students/ozgur-tunaozturk/", "_blank");
 });
 
-if (canvasWidth < canvasHeight) {
+/*if (canvasWidth < canvasHeight) {
 	node1Text.MouseDown( () => {
 		window.open("https://www.linkedin.com/in/ozgur-tuna-ozturk/", "_blank");
 	} );
@@ -494,7 +494,7 @@ if (canvasWidth < canvasHeight) {
 	node4Text.MouseDown( () => {
 		window.open("http://fabacademy.org/2021/labs/wheaton/students/ozgur-tunaozturk/", "_blank");
 	} );
-}
+}*/
 
 /* --- End of DOM Events --- */
 
