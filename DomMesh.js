@@ -184,7 +184,7 @@ class DomMesh extends Mesh {
         const raycaster = this._raycaster;
         var target = this;
 
-        window.addEventListener( 'mousedown', (event) => {
+        window.addEventListener( 'click', (event) => {
 
             // calculate pointer position in normalized device coordinates
             // (-1 to +1) for both components
@@ -387,7 +387,7 @@ class DomSprite extends Sprite {
         const raycaster = this._raycaster;
         var target = this;
 
-        window.addEventListener( 'mousedown', (event) => {
+        window.addEventListener( 'click', (event) => {
 
             // calculate pointer position in normalized device coordinates
             // (-1 to +1) for both components
