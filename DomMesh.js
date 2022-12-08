@@ -184,7 +184,7 @@ class DomMesh extends Mesh {
         const raycaster = this._raycaster;
         var target = this;
 
-        addEventListener( 'mousedown', (event) => {
+        window.addEventListener( 'mousedown', (event) => {
 
             // calculate pointer position in normalized device coordinates
             // (-1 to +1) for both components
@@ -193,7 +193,8 @@ class DomMesh extends Mesh {
             // update the picking ray with the camera and pointer position
             raycaster.setFromCamera( pointer, camera );
             
-            console.log(pointer);
+            document.body.querySelector("#menuIcon").style.color = "white";
+            document.body.querySelector("#menuIcon").innerHTML = "X: " + pointer.x + "\nY: " + pointer.y;
     
             // calculate objects intersecting the picking ray
             var selected = raycaster.intersectObject( target )[0] || [];
@@ -386,17 +387,14 @@ class DomSprite extends Sprite {
         const raycaster = this._raycaster;
         var target = this;
 
-        addEventListener( 'mousedown', (event) => {
+        window.addEventListener( 'mousedown', (event) => {
 
             // calculate pointer position in normalized device coordinates
             // (-1 to +1) for both components
             const pointer = new Vector2( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1 );
     
             // update the picking ray with the camera and pointer position
-            raycaster.setFromCamera( pointer, camera );
-
-            console.log(pointer);
-            
+            raycaster.setFromCamera( pointer, camera );            
     
             // calculate objects intersecting the picking ray
             var selected = raycaster.intersectObject( target )[0] || [];
