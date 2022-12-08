@@ -121,7 +121,10 @@ const node4Texture = textureLoader.load( "./signs/WheatonSign.svg" );			// Fab A
 
 /* --- Global Variables --- */
 
+//var aspectRatio =  () / ( document.body.clientWidth / document.body.clientHeight );
+alert( "clientWidth = " + document.body.clientWidth + "\nclientHeight = " + document.body.clientHeight );
 var aspectRatio = 1;
+var cameraRadius = 5 * aspectRatio;
 
 /* --- End of Global Variables --- */
 
@@ -146,13 +149,13 @@ const camera = new THREE.PerspectiveCamera( 75, document.body.clientWidth*aspect
 // Instantiate the Camera in the scene
 scene.add( camera );
 // Set the initial Camera Position so the Northern Hemisphere is in focus
-camera.position.z = 5*Math.cos(Math.PI/6);
-camera.position.y = 5*Math.sin(Math.PI/6);
+camera.position.z = cameraRadius * Math.cos(Math.PI/6);
+camera.position.y = cameraRadius * Math.sin(Math.PI/6);
 // Create an Orbital Camera Controls
 const controls = new OrbitControls(camera, renderer.domElement);
 // Lock the Camera scroll at 5 units away from the center
-controls.maxDistance = 5; 
-controls.minDistance = 5;
+controls.maxDistance = cameraRadius; 
+controls.minDistance = cameraRadius;
 // Enable Automatic Rotation feature
 controls.autoRotate = true;
 // Set the Automatic Rotation Speed to 0.25 CounterClockWise
@@ -474,6 +477,7 @@ node4.MouseDown(() => {
  */
 function SphereToEuclodCord( node , latitude, longitude ) {
 
+  // Uses + (Math.PI/2) to change the phase by 90 deg
   node.position.set( 
     3 * Math.sin( longitude * (Math.PI/180) + (Math.PI/2) ) * Math.sin( latitude * (Math.PI/180) + (Math.PI/2) ), 
     3 * Math.cos( latitude  * (Math.PI/180) + (Math.PI/2) ), 
