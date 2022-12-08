@@ -148,8 +148,6 @@ class DomMesh extends Mesh {
 
         window.addEventListener( 'touchstart', (event) => {
 
-            //event.preventDefault();
-
             // calculate pointer position in normalized device coordinates
             // (-1 to +1) for both components
             const pointer = new Vector2( Math.round( ( ( event.touches[0].clientX / document.querySelector("canvas").width ) * 2 - 1 )*1000 )/1000, Math.round(( - ( event.touches[0].clientY / document.querySelector("canvas").height ) * 2 + 1 )*1000)/1000 );
@@ -168,8 +166,6 @@ class DomMesh extends Mesh {
         } );
 
         window.addEventListener( 'click', (event) => {
-
-            //event.preventDefault();
 
             // calculate pointer position in normalized device coordinates
             // (-1 to +1) for both components
@@ -329,6 +325,25 @@ class DomSprite extends Sprite {
         const camera = this._camera;
         const raycaster = this._raycaster;
         var target = this;
+
+        window.addEventListener( 'touchstart', (event) => {
+
+            // calculate pointer position in normalized device coordinates
+            // (-1 to +1) for both components
+            const pointer = new Vector2( Math.round( ( ( event.touches[0].clientX / document.querySelector("canvas").width ) * 2 - 1 )*1000 )/1000, Math.round(( - ( event.touches[0].clientY / document.querySelector("canvas").height ) * 2 + 1 )*1000)/1000 );
+    
+            // update the picking ray with the camera and pointer position
+            raycaster.setFromCamera( pointer, camera );
+    
+            // calculate objects intersecting the picking ray
+            var selected = raycaster.intersectObject( target )[0] || [];
+
+            // Check if the object under the mouse is this DomMesh object
+            if (selected.object == target) {
+                func();
+            }
+
+        } );
 
         window.addEventListener( 'click', (event) => {
 
