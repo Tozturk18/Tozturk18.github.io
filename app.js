@@ -155,12 +155,15 @@ document.getElementById("main").appendChild( renderer.domElement ); // Instantia
 
 // Create a THREE JS Scene
 const scene = new THREE.Scene();
+// Create a THREE JS Perspective Camera
+const camera = new THREE.PerspectiveCamera( 75, document.body.clientWidth / document.body.clientHeight, 0.1, 1000 );
+// Adjust the camera FOV according to the aspect ratio of the device
 if (canvasWidth > canvasHeight) {
-	// Create a THREE JS Perspective Camera with 75ish FOV
-const camera = new THREE.PerspectiveCamera( 75 * cameraMultiplier, document.body.clientWidth / document.body.clientHeight, 0.1, 1000 );
+	// Adjust for larger devices like computers
+	camera.fov = 75 * cameraMultiplier
 } else {
-	// Create a THREE JS Perspective Camera with 75ish FOV
-const camera = new THREE.PerspectiveCamera( 75 * cameraMultiplier / 2, document.body.clientWidth / document.body.clientHeight, 0.1, 1000 );
+	// Adjust for smaller devices like phones
+	camera.fov = 75 * cameraMultiplier / 2
 }
 
 // Instantiate the Camera in the scene
