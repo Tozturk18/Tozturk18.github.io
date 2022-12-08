@@ -125,7 +125,17 @@ var aspectRatio = 1;
 //var aspectRatio =  ( 1440/821 ) / ( document.body.clientWidth / document.body.clientHeight );
 //alert( "clientWidth = " + document.body.clientWidth + "\nclientHeight = " + document.body.clientHeight );
 //var aspectRatio = 1;
-var cameraRadius = 5 * ( 1440/821 ) / ( document.body.clientWidth / document.body.clientHeight );
+
+const canvasWidth = document.body.clientWidth * aspectRatio;
+const canvasHeight = document.body.clientHeight * aspectRatio;
+
+if (canvasWidth > canvasHeight) {
+	var cameraRadius = 5 * ( ( 1440/821 ) / ( canvasWidth / canvasHeight ) );
+} else {
+	var cameraRadius = 5 * ( ( 1440/821 ) / ( canvasHeight / canvasWidth/2 ) );
+}
+
+
 
 /* --- End of Global Variables --- */
 
