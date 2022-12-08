@@ -132,51 +132,13 @@ class DomMesh extends Mesh {
     }
 
     /* MouseDown(func) Function
-     *  This function checks the current location of the mouse everytime it moves
-     *  and runs the function given through the parameters if the mouse is clicked above this DomMesh Object.
+     *  This function checks the current location of the mouse everytime it is clicked
+     *  and runs the function given through the parameters only if the mouse is clicked above this DomMesh Object.
      * Parameters:
      *  - func: a function to run when the conditions are met.
      * Return:
      *  - null
      */
-    /*MouseDown(func) {
-
-        // Create local instaces of the variables to be shared with the EventListener function
-        const camera = this._camera;
-        const raycaster = this._raycaster;
-        var target = this;
-        
-        function onPointerMove( event ) {
-
-            // calculate pointer position in normalized device coordinates
-            // (-1 to +1) for both components
-            const pointer = new Vector2( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1 );
-    
-            // update the picking ray with the camera and pointer position
-            raycaster.setFromCamera( pointer, camera );
-            
-    
-            // calculate objects intersecting the picking ray
-            var selected = raycaster.intersectObject( target )[0] || [];
-
-            // Check if the object under the mouse is this DomMesh object
-            if (selected.object == target) {
-                // Add a new event listener to the window using click to run the user given function
-                window.addEventListener('click', click);
-            } else {
-                // remove the event listener from the window that uses click to run the user given function
-                window.removeEventListener('click', click);
-            }
-        
-        }
-
-        // Shortcut to run the user given function and remove it when needed
-        function click() {
-            func(); // user given function
-        }
-        // Run the onPointerMove function everytime the mouse moves
-        window.addEventListener('pointermove', onPointerMove);
-    }*/
     MouseDown(func){
 
         // Create local instaces of the variables to be shared with the EventListener function
@@ -192,14 +154,9 @@ class DomMesh extends Mesh {
     
             // update the picking ray with the camera and pointer position
             raycaster.setFromCamera( pointer, camera );
-            
-            document.body.querySelector("#menuIcon").style.color = "white";
-            //document.body.querySelector("#menuIcon").innerHTML = "X: " + pointer.x + "\nY: " + pointer.y;
     
             // calculate objects intersecting the picking ray
             var selected = raycaster.intersectObject( target )[0] || [];
-
-            document.body.querySelector("#menuIcon").innerHTML = selected.object.name;
 
             // Check if the object under the mouse is this DomMesh object
             if (selected.object == target) {
@@ -336,52 +293,13 @@ class DomSprite extends Sprite {
     }
 
     /* MouseDown(func) Function
-     *  This function checks the current location of the mouse everytime it moves
-     *  and runs the function given through the parameters if the mouse is clicked above this DomMesh Object.
+     *  This function checks the current location of the mouse everytime it is clicked
+     *  and runs the function given through the parameters only if the mouse is clicked above this DomMesh Object.
      * Parameters:
      *  - func: a function to run when the conditions are met.
      * Return:
      *  - null
      */
-    /*MouseDown(func) {
-
-        // Create local instaces of the variables to be shared with the EventListener function
-        const camera = this._camera;
-        const raycaster = this._raycaster;
-        var target = this;
-        
-        function onPointerMove( event ) {
-
-            // calculate pointer position in normalized device coordinates
-            // (-1 to +1) for both components
-            const pointer = new Vector2( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1 );
-    
-            // update the picking ray with the camera and pointer position
-            raycaster.setFromCamera( pointer, camera );
-            
-    
-            // calculate objects intersecting the picking ray
-            var selected = raycaster.intersectObject( target )[0] || [];
-
-            // Check if the object under the mouse is this DomMesh object
-            if (selected.object == target) {
-                // Add a new event listener to the window using click to run the user given function
-                window.addEventListener('click', click);
-            } else {
-                // remove the event listener from the window that uses click to run the user given function
-                window.removeEventListener('click', click);
-            }
-        
-        }
-
-        // Shortcut to run the user given function and remove it when needed
-        function click() {
-            func(); // user given function
-        }
-        // Run the onPointerMove function everytime the mouse moves
-        window.addEventListener('pointermove', onPointerMove);
-    }*/
-
     MouseDown(func){
 
         // Create local instaces of the variables to be shared with the EventListener function
