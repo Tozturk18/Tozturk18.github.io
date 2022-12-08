@@ -8,91 +8,45 @@
 
 /* --- Imports --- */
 
-import * as THREE from 'https://unpkg.com/three@0.138.0/build/three.module.js';
-import { OrbitControls } from "./orbitControls.js";
-import { Lensflare, LensflareElement } from './lensflare.js';
-import { DomMesh, DomSprite } from './DomMesh.js';
+import * as THREE from 'https://unpkg.com/three@0.138.0/build/three.module.js';	// THREE JS Library
+import { OrbitControls } from "./orbitControls.js";								// Edited OrbitControls Library
+import { Lensflare, LensflareElement } from './lensflare.js';					// Edited Lensflare Library
+import { DomMesh, DomSprite } from './DomMesh.js';								// DomMesh Library
 
 /* --- End of Imports --- */
 
-/* --- Shaders --- */
+/* --- Import Shaders --- */
 
-// Create the Vertex Shader
-const EarthVertexShader = `
+import { EarthVertexShader_pars } from './shaders/earthVertexShaderExt_pars.glsl.js';		// MeshPhysicalMaterial Vertex Shader Parameter Extension
+import { EarthVertexShader } from './shaders/earthVertexShaderExt.glsl.js';					// MeshPhysicalMaterial Vertex Shader Extension
+import { EarthFragmentShader_pars } from './shaders/earthFragmentShaderExt_pars.glsl.js';	// MeshPhysicalMaterial Fragment Shader Parameter Extension
+import { EarthFragmentShader } from './shaders/earthFragmentShaderExt2.glsl.js';			// MeshPhysicalMaterial Fragment Shader Extension
 
-// Import the Position of the sun
-uniform vec3 sunDirection;
+/* --- End of Import Shaders --- */
 
-// Create global variables
-varying vec2 vUv; // Share the UV of the Earth
-varying vec3 lightNormal; // Share the Normal Vector of the Earth in relation to the Sun
+/* --- Loading Manager --- */
 
-void main() {
-  vUv = uv; // Share the UV
-  vec4 mvPosition = (modelViewMatrix) * vec4(position, 1.0); // get the ModelViewPosition
-  lightNormal = normalize(sunDirection * vec3(1,1,1)) * normal; // Get the ModelNormal with respect to Sun's Position
-  gl_Position = projectionMatrix * mvPosition  ; // The Global Position of each verticies
-}
-`;
-
-// Create Fragment Shader
-const EarthFragmentShader = `
-
-// The Day Time Texture of Earth
-uniform sampler2D dayTexture;
-// The Night Time Texture of Earth
-uniform sampler2D nightTexture;
-
-// Position of the Sun
-uniform vec3 sunDirection;
-
-// The UV of the Earth
-varying vec2 vUv;
-// The ModelNormal with respect to Sun's Position
-varying vec3 lightNormal;
-
-void main( void ) {
-  vec3 dayColor = texture2D( dayTexture, vUv ).rgb;
-  vec3 nightColor = texture2D( nightTexture, vUv ).rgb;
-
-  // compute cosine sun to normal so -1 is away from sun and +1 is toward sun.
-  float cosineAngleSunToNormal = dot(lightNormal, vec3(1,1,1));
-
-  // sharpen the edge beween the transition
-  cosineAngleSunToNormal = clamp( cosineAngleSunToNormal * 10.0, -1.0, 1.0);
-
-  // convert to 0 to 1 for mixing
-  float mixAmount = cosineAngleSunToNormal * 0.5 + 0.5 ;
-
-  // Select day or night texture based on mix.
-  vec3 color = mix( nightColor, dayColor, mixAmount );
-
-  // Map the Sphere with the Textures
-  gl_FragColor = vec4( color, 1.0 );
-}
-`;
-
-/* --- End of Shaders --- */
-
+// Create a manager that checks texture loading
 var manager = new THREE.LoadingManager();
 
+// When the Texture Loading starts
 manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
-
 	//console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
 };
 
+// When the Texture Loading finishes
 manager.onLoad = function ( ) {
-
 	//console.log( 'Loading complete!');
 	const loadingScreen = document.getElementById( 'loading-screen' );
 	loadingScreen.classList.add( 'fade-out' );
 };
 
-
+// When the Texture Loading is on progress
 manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
-
 	//console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
 };
+
+/* --- End of Loading Manager --- */
 
 /* --- ShortCuts --- */
 
@@ -109,6 +63,7 @@ const lensflareTexture = textureLoader.load( "./textures/lensflare.png" );		// L
 const skySphereTexture = textureLoader.load( "./textures/starfield.jpeg" );		// Sky Sphere Texture
 const earthDayTexture = textureLoader.load( "./textures/earth.jpeg" );			// Earth Day Texture
 const earthNightTexture = textureLoader.load( "./textures/earth_night.jpeg" );	// Earth Night Texture
+const earthBumpMapTexture = textureLoader.load("./textures/earth_elev.jpeg");	// Earth Elevation Texture
 const atmosphereTexture = textureLoader.load( "./textures/glow.png" );			// Atmosphere Texture
 const cloudTexture = textureLoader.load( "./textures/earth_clouds.jpeg" );		// Clouds Texture
 const moonTexture = textureLoader.load( "./textures/moon.jpeg" );				// Moon Texture
@@ -121,20 +76,23 @@ const node4Texture = textureLoader.load( "./signs/WheatonSign.svg" );			// Fab A
 
 /* --- Global Variables --- */
 
-var aspectRatio = 1;
-//var aspectRatio =  ( 1440/821 ) / ( document.body.clientWidth / document.body.clientHeight );
-//alert( "clientWidth = " + document.body.clientWidth + "\nclientHeight = " + document.body.clientHeight );
-//var aspectRatio = 1;
+var aspectRatio = 1;	// Aspect ratio of the screen relative to with menu ON/OFF
+var FOV = 75;			// Default FOV of the scene
 
-const canvasWidth = document.body.clientWidth * aspectRatio;
-const canvasHeight = document.body.clientHeight * aspectRatio;
+var canvasWidth = document.body.clientWidth * aspectRatio;		// Save default canvas width;
+var canvasHeight = document.body.clientHeight * aspectRatio;	// Save default canvas height
 
+// Define a variable to hold the multiplier that changes the FOV according to the canvasWidth and canvasHeihgt
+var cameraMultiplier = 0;
 if (canvasWidth > canvasHeight) {
-	var cameraMultiplier = ( ( 1440/821 ) / ( canvasWidth / canvasHeight ) );
+	// For larger devices like computers
+	cameraMultiplier = ( ( 1440/821 ) / ( canvasWidth / canvasHeight ) );
 } else {
-	var cameraMultiplier = ( ( 1440/821 ) / ( canvasHeight / canvasWidth/2 ) );
+	// For smaller devices like phones
+	cameraMultiplier = ( ( 1440/821 ) / ( canvasHeight / canvasWidth/2 ) );
 }
 
+// The radius of camera from the origin (0,0,0)
 var cameraRadius = 5 * cameraMultiplier
 
 /* --- End of Global Variables --- */
@@ -156,14 +114,14 @@ document.getElementById("main").appendChild( renderer.domElement ); // Instantia
 // Create a THREE JS Scene
 const scene = new THREE.Scene();
 // Create a THREE JS Perspective Camera
-const camera = new THREE.PerspectiveCamera( 75, document.body.clientWidth / document.body.clientHeight, 0.1, 1000 );
+const camera = new THREE.PerspectiveCamera( FOV, document.body.clientWidth / document.body.clientHeight, 0.1, 1000 );
 // Adjust the camera FOV according to the aspect ratio of the device
 if (canvasWidth > canvasHeight) {
 	// Adjust for larger devices like computers
-	camera.fov = 75 * cameraMultiplier
+	camera.fov = FOV * cameraMultiplier
 } else {
 	// Adjust for smaller devices like phones
-	camera.fov = 75 * cameraMultiplier / 2
+	camera.fov = FOV * cameraMultiplier / 2
 }
 
 // Instantiate the Camera in the scene
@@ -190,7 +148,7 @@ controls.enablePan = false;
 // Calculate the current day of the year
 const DOY = Math.ceil((dt - new Date(dt.getFullYear(),0,1)) / 86400000);
 // Create a new THREE.DirectionalLight object to imitate the Sun
-const sunLight = new THREE.DirectionalLight( 0xffffff, 1.5, 2000 );
+const sunLight = new THREE.DirectionalLight( 0xffffff, 0.8, 2000 );
 // Set the position of the sunLight Object with respect to Earth
 sunLight.position.set(100*Math.cos(Math.PI), -100*(Math.sin(0.4101524)*Math.cos((DOY/365)*Math.PI*2)), 100*Math.sin(Math.PI));
 // Instantiate the sunLight Object into the scene
@@ -207,7 +165,7 @@ sunLight.add(sunFlare);
 /* --- Atmospheric Lighting --- */
 
 // Create a THREE.AmbientLight object to imitate the Atmospherical Light Reflections
-const atmoLight = new THREE.AmbientLight( 0x404040 ); // soft white light
+const atmoLight = new THREE.AmbientLight( 0xF0F0F0 ); // soft white light
 // Instantiate the atmoLight
 scene.add( atmoLight );
 
@@ -227,19 +185,41 @@ scene.add(skySphere);
 /* --- Earth --- */
 
 // --- Earth Base ---
-// Create Uniforms for Earth's Shader Material
-const uniforms = {
-  sunDirection: {value: sunLight.position }, // The current position of the Sun with respect to Earth
-  dayTexture: { value: earthDayTexture }, // The day time texture of Earth
-  nightTexture: { value: earthNightTexture } // The night time texture of Earth
+// Create a new MeshPhysicalMaterial for Earth
+const earthMaterial = new THREE.MeshPhysicalMaterial( {
+	color: 0xffffff,                                   // Set Moon's Base Color White
+	transparent: false,   
+  	metalness: 0.0,                                    // 0.0% Metalness
+  	roughness: 1.0,                                    // 100% Roughness
+  	clearcoat: 1.0,                                    // 100% Clearcoat
+  	clearcoatRoughness: 1.0,                           // 100% ClearcoatRoughness
+  	reflectivity: 0.0,                                 // 0.0% Reflectivity
+	bumpMap: earthBumpMapTexture,					   // Earth Elevation Texture
+	bumpScale: 0.25,									   // Earth Elevation Scale
+} );
+
+// Before compiling the website add specifics to the MeshPhysicalMaterial of Earth
+earthMaterial.onBeforeCompile = function ( shader ) {
+	// Insert custom Uniforms
+	shader.uniforms.sunDirection = { value: sunLight.position };
+	shader.uniforms.dayTexture = { value: earthDayTexture };
+	shader.uniforms.nightTexture = { value: earthNightTexture };
+
+	// Insert the custom Vertex Shader Extensions
+	shader.vertexShader = EarthVertexShader_pars + shader.vertexShader; // Insert the uniforms into the vertex shader
+	shader.vertexShader = shader.vertexShader.replace('void main() {', EarthVertexShader); // Insert the vertex shader extension
+
+	// Insert the custom Fragment Shader Extensions
+	shader.fragmentShader = EarthFragmentShader_pars + shader.fragmentShader; // Insert the uniforms into the fragment shader
+	// Change the definition for diffuseColor to insert our custom day/night texture mix
+	shader.fragmentShader = shader.fragmentShader.replace('vec4 diffuseColor = vec4( diffuse, opacity );', EarthFragmentShader); // Insert the fragment shader extension
+
+	// Make sure to update the shader data
+	earthMaterial.userData.shader = shader;
+	shader.needsUpdate=true;
 };
-// Create a THREE.ShaderMaterial for Earth
-const earthMaterial = new THREE.ShaderMaterial({
-  uniforms: uniforms, // Include the Uniforms
-  vertexShader: EarthVertexShader, // Include the Vertex Shader
-  fragmentShader: EarthFragmentShader, // Include the Fragment Shader
-});
-// Create a THREE.Mesh object using the custom earthMaterial
+
+// Instantiate the Earth variable as a new THREE.Mesh using the custom MeshPhysicalMaterial
 const Earth = new THREE.Mesh( new THREE.SphereGeometry( 3, 50, 50 ), earthMaterial );
 
 // --- Atmosphere ---
@@ -267,7 +247,7 @@ var cloudMaterial = new THREE.MeshPhysicalMaterial({
   color: 0xffffff,                                           // White Clouds
   transparent: true,                                         // Must show the Earth Underneath
   blending: THREE.AdditiveBlending,                          // Blends with the environment behind using THREE.AdditiveBlending
-  metalness: 0.0,                                            // 0.0% Metalness
+  metalness: 0.75,                                            // 0.0% Metalness
   roughness: 1.0,                                            // 100% Roughness
   clearcoat: 1.0,                                            // 100% Clearcoat
   clearcoatRoughness: 1.0,                                   // 100% ClearcoatRoughness
@@ -531,9 +511,31 @@ window.addEventListener('resize', onWindowResize, false);
  *  - none but it rerenders the canvas and resets the camera according to the new page size.
  */
 function onWindowResize() {
-  camera.aspect = document.body.clientWidth / document.body.clientHeight
-  camera.updateProjectionMatrix()
+  // calculate the new aspect ratio for the camera
+  camera.aspect = document.body.clientWidth / document.body.clientHeight;
+
+  // calculate the new relative canvas width
+  canvasWidth = document.body.clientWidth * aspectRatio;
+  // calculate the new relative canvas height
+  canvasHeight = document.body.clientHeight * aspectRatio;
+
+  // Set the camera FOV
+  if (canvasWidth > canvasHeight) {
+	cameraMultiplier = ( ( 1440/821 ) / ( canvasWidth / canvasHeight ) );
+	// Adjust for larger devices like computers
+	camera.fov = FOV * cameraMultiplier
+  } else {
+	cameraMultiplier = ( ( 1440/821 ) / ( canvasHeight / canvasWidth/2 ) );
+	// Adjust for smaller devices like phones
+	camera.fov = FOV * cameraMultiplier / 2
+  }
+
+  // Update the camera properties
+  camera.updateProjectionMatrix();
+
+  // Readjust the renderer size
   renderer.setSize(document.body.clientWidth*aspectRatio, document.body.clientHeight*aspectRatio)
+  // rerun the renderer with the new size
   renderer.render(scene, camera);
 }
 
@@ -604,17 +606,18 @@ document.getElementById("menuIcon").addEventListener("click", () => {
 		// Activate the .canvasChange1 and deactivate the .canvasChange2 Elements
 		document.querySelector("canvas").classList.toggle("canvasChange1");
 		document.querySelector("canvas").classList.toggle("canvasChange2");
+		FOV = 100;
 		// Create an animation updating the FOV of the camera
 		if (canvasWidth > canvasHeight) {
 			fovAnim.to(camera, {
 				duration: 0.5,	// Set duration to 0.5s
-				fov: 100 * cameraMultiplier,		// Set FOV to 100ish
+				fov: FOV * cameraMultiplier,		// Set FOV to 100ish
 				onUpdate: function() {camera.updateProjectionMatrix();}	// Update the Camera
 			});
 		} else {
 			fovAnim.to(camera, {
 				duration: 0.5,	// Set duration to 0.5s
-				fov: 100 * cameraMultiplier / 2,		// Set FOV to 100ish
+				fov: FOV * cameraMultiplier / 2,		// Set FOV to 100ish
 				onUpdate: function() {camera.updateProjectionMatrix();}	// Update the Camera
 			});
 		}
@@ -626,17 +629,18 @@ document.getElementById("menuIcon").addEventListener("click", () => {
 		// Activate the .canvasChange2 and deactivate the .canvasChange1 Elements
 		document.querySelector("canvas").classList.toggle("canvasChange1");
 		document.querySelector("canvas").classList.toggle("canvasChange2");
+		FOV = 75;
 		// Create an animation updating the FOV of the camera
 		if (canvasWidth > canvasHeight) {
 			fovAnim.to(camera, {
 				duration: 0.5,	// Set duration to 0.5s
-				fov: 75 * cameraMultiplier,		// Set FOV to 75ish
+				fov: FOV * cameraMultiplier,		// Set FOV to 75ish
 				onUpdate: function() {camera.updateProjectionMatrix();}	// Update the Camera
 			});
 		} else {
 			fovAnim.to(camera, {
 				duration: 0.5,	// Set duration to 0.5s
-				fov: 75 * cameraMultiplier / 2,		// Set FOV to 75ish
+				fov: FOV * cameraMultiplier / 2,		// Set FOV to 75ish
 				onUpdate: function() {camera.updateProjectionMatrix();}	// Update the Camera
 			});
 		}
