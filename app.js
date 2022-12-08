@@ -174,8 +174,8 @@ camera.position.y = cameraRadius * Math.sin(Math.PI/6);
 // Create an Orbital Camera Controls
 const controls = new OrbitControls(camera, renderer.domElement);
 // Lock the Camera scroll at 5 units away from the center
-controls.maxDistance = cameraRadius; 
-controls.minDistance = cameraRadius;
+//controls.maxDistance = cameraRadius; 
+//controls.minDistance = cameraRadius;
 // Enable Automatic Rotation feature
 controls.autoRotate = true;
 // Set the Automatic Rotation Speed to 0.25 CounterClockWise
