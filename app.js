@@ -121,9 +121,9 @@ const node4Texture = textureLoader.load( "./signs/WheatonSign.svg" );			// Fab A
 
 /* --- Global Variables --- */
 
-//var aspectRatio =  () / ( document.body.clientWidth / document.body.clientHeight );
-alert( "clientWidth = " + document.body.clientWidth + "\nclientHeight = " + document.body.clientHeight );
-var aspectRatio = 1;
+var aspectRatio =  ( 1440/821 ) / ( document.body.clientWidth / document.body.clientHeight );
+//alert( "clientWidth = " + document.body.clientWidth + "\nclientHeight = " + document.body.clientHeight );
+//var aspectRatio = 1;
 var cameraRadius = 5 * aspectRatio;
 
 /* --- End of Global Variables --- */
