@@ -563,9 +563,13 @@ function animate() {
 animate();
 
 document.querySelector("#menuIcon").style.color = "white";
-window.addEventListener( 'touchmove', (event) => {
+/*window.addEventListener( 'touchmove', (event) => {
 	const pointer = new THREE.Vector2( ( event.touches[0].clientX / window.innerWidth ) * 2 - 1, - ( event.touches[0].clientY / window.innerHeight ) * 2 + 1 );
 	//console.log(pointer);
+	document.querySelector("#menuIcon").innerHTML = "X: " + pointer.x + "\nY: " + pointer.y;
+} );*/
+window.addEventListener( "pointermove", (event) => {
+	const pointer = new THREE.Vector2( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1 );
 	document.querySelector("#menuIcon").innerHTML = "X: " + pointer.x + "\nY: " + pointer.y;
 } );
 
