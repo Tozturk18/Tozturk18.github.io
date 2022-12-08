@@ -424,7 +424,7 @@ node1.MouseDown(() => {
 	if (!isSafari) {
 		window.open("https://www.linkedin.com/in/ozgur-tuna-ozturk/", "_blank");
 	} else if (window.confirm('If you click "ok" you would be redirected.')) {
-		window.open("https://www.linkedin.com/in/ozgur-tuna-ozturk/", "_blank");
+		window.open("https://www.linkedin.com/in/ozgur-tuna-ozturk/");
 	};
 });
 
@@ -443,7 +443,7 @@ node2.MouseDown(() => {
 	if (!isSafari) {
 		window.open("https://github.com/Tozturk18", "_blank");
 	} else if (window.confirm('If you click "ok" you would be redirected.')) {
-		window.open("https://github.com/Tozturk18", "_blank");
+		window.open("https://github.com/Tozturk18");
 	};
 });
 
@@ -462,7 +462,7 @@ node3.MouseDown(() => {
 	if (!isSafari) {
 		window.open("https://www.fablabs.io/labs/BhutanSFL", "_blank");
 	} else if (window.confirm('If you click "ok" you would be redirected.')) {
-		window.open("https://www.fablabs.io/labs/BhutanSFL", "_blank");
+		window.open("https://www.fablabs.io/labs/BhutanSFL");
 	};
 });
 
@@ -481,7 +481,7 @@ node4.MouseDown(() => {
 	if (!isSafari) {
 		window.open("http://fabacademy.org/2021/labs/wheaton/students/ozgur-tunaozturk/", "_blank");
 	} else if (window.confirm('If you click "ok" you would be redirected.')) {
-		window.open("http://fabacademy.org/2021/labs/wheaton/students/ozgur-tunaozturk/", "_blank");
+		window.open("http://fabacademy.org/2021/labs/wheaton/students/ozgur-tunaozturk/");
 	};
 });
 
