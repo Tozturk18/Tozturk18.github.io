@@ -194,10 +194,12 @@ class DomMesh extends Mesh {
             raycaster.setFromCamera( pointer, camera );
             
             document.body.querySelector("#menuIcon").style.color = "white";
-            document.body.querySelector("#menuIcon").innerHTML = "X: " + pointer.x + "\nY: " + pointer.y;
+            //document.body.querySelector("#menuIcon").innerHTML = "X: " + pointer.x + "\nY: " + pointer.y;
     
             // calculate objects intersecting the picking ray
             var selected = raycaster.intersectObject( target )[0] || [];
+
+            document.body.querySelector("#menuIcon").innerHTML = selected.object.name;
 
             // Check if the object under the mouse is this DomMesh object
             if (selected.object == target) {

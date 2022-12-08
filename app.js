@@ -329,6 +329,11 @@ SphereToEuclodCord(node4, node4Latitude, node4Longitude);
 // Add the Node Group to the Scene
 scene.add(node4);
 
+node1.name = "node1";
+node2.name = "node2";
+node3.name = "node3";
+node4.name = "node4";
+
 /* --- End of Nodes --- */
 
 /* --- Node Tags --- */
