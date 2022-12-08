@@ -193,6 +193,7 @@ class DomMesh extends Mesh {
             // update the picking ray with the camera and pointer position
             raycaster.setFromCamera( pointer, camera );
             
+            console.log(pointer);
     
             // calculate objects intersecting the picking ray
             var selected = raycaster.intersectObject( target )[0] || [];
@@ -393,6 +394,8 @@ class DomSprite extends Sprite {
     
             // update the picking ray with the camera and pointer position
             raycaster.setFromCamera( pointer, camera );
+
+            console.log(pointer);
             
     
             // calculate objects intersecting the picking ray
