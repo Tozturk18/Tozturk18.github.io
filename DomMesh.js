@@ -148,7 +148,7 @@ class DomMesh extends Mesh {
 
         window.addEventListener( 'touchstart', (event) => {
 
-            event.preventDefault();
+            //event.preventDefault();
 
             // calculate pointer position in normalized device coordinates
             // (-1 to +1) for both components
@@ -171,7 +171,7 @@ class DomMesh extends Mesh {
 
         window.addEventListener( 'click', (event) => {
 
-            event.preventDefault();
+            //event.preventDefault();
 
             // calculate pointer position in normalized device coordinates
             // (-1 to +1) for both components
