@@ -343,7 +343,7 @@ var node1TextMaterial = new THREE.SpriteMaterial({
 // Create a new THREE.Sprite using the node1TextMaterial
 var node1Text = new DomSprite( node1TextMaterial, camera );
 // Change the scale of the Sprite so that it shows behind the Earth and looks realistic
-node1Text.scale.set(1, 0.5, 1.0);
+node1Text.scale.set(1*cameraMultiplier, 0.5*cameraMultiplier, 1.0);
 // Set the anchor to the bottom left corner
 node1Text.center.set(0,0);
 // Add the node1Text to the node1 object
@@ -359,7 +359,7 @@ var node2TextMaterial = new THREE.SpriteMaterial({
 // Create a new THREE.Sprite using the node1TextMaterial
 var node2Text = new DomSprite( node2TextMaterial, camera );
 // Change the scale of the Sprite so that it shows behind the Earth and looks realistic
-node2Text.scale.set(1, 0.5, 1.0);
+node2Text.scale.set(1*cameraMultiplier, 0.5*cameraMultiplier, 1.0);
 // Set the anchor to the bottom left corner
 node2Text.center.set(0,0);
 // Add the node1Text to the node1 object
@@ -375,7 +375,7 @@ var node3TextMaterial = new THREE.SpriteMaterial({
 // Create a new THREE.Sprite using the node1TextMaterial
 var node3Text = new DomSprite( node3TextMaterial, camera );
 // Change the scale of the Sprite so that it shows behind the Earth and looks realistic
-node3Text.scale.set(1, 0.5, 1.0);
+node3Text.scale.set(1*cameraMultiplier, 0.5*cameraMultiplier, 1.0);
 // Set the anchor to the bottom left corner
 node3Text.center.set(0,0);
 // Add the node1Text to the node1 object
@@ -391,7 +391,7 @@ var node4TextMaterial = new THREE.SpriteMaterial({
 // Create a new THREE.Sprite using the node1TextMaterial
 var node4Text = new DomSprite( node4TextMaterial, camera );
 // Change the scale of the Sprite so that it shows behind the Earth and looks realistic
-node4Text.scale.set(1, 0.5, 1.0);
+node4Text.scale.set(1*cameraMultiplier, 0.5*cameraMultiplier, 1.0);
 // Set the anchor to the bottom left corner
 node4Text.center.set(0,0);
 // Add the node1Text to the node1 object
