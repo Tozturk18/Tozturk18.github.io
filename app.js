@@ -419,6 +419,7 @@ node1.MouseLeave(() => {
 });
 node1.MouseDown(() => {
 	window.open("https://www.linkedin.com/in/ozgur-tuna-ozturk/", "_blank");
+	alert("node1");
 });
 
 // Link node2 with a url white as default color and gray as highligh color
@@ -434,6 +435,7 @@ node2.MouseLeave(() => {
 });
 node2.MouseDown(() => {
 	window.open("https://github.com/Tozturk18", "_blank");
+	alert("node2");
 });
 
 // Link node3 with a url white as default color and gray as highligh color
@@ -449,6 +451,7 @@ node3.MouseLeave(() => {
 });
 node3.MouseDown(() => {
 	window.open("https://www.fablabs.io/labs/BhutanSFL", "_blank");
+	alert("node3");
 });
 
 // Link node4 with a url white as default color and gray as highligh color
@@ -464,6 +467,7 @@ node4.MouseLeave(() => {
 });
 node4.MouseDown(() => {
 	window.open("http://fabacademy.org/2021/labs/wheaton/students/ozgur-tunaozturk/", "_blank");
+	alert("node4");
 });
 
 /*if (canvasWidth < canvasHeight) {
