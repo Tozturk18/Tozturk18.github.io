@@ -559,6 +559,10 @@ function animate() {
 // Call the animate() function
 animate();
 
+window.addEventListener( 'touchmove', (event) => {
+	console.log("X: " + event.touches[0].clientX + "\nY: " + event.touches[0].clientY);
+} );
+
 /* --- Menu Controls --- */
 
 // Activate .canvasChange2 CSS Class on Canvas Element
