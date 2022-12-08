@@ -563,7 +563,8 @@ function animate() {
 animate();
 
 window.addEventListener( 'touchmove', (event) => {
-	console.log("X: " + event.touches[0].clientX + "\nY: " + event.touches[0].clientY);
+	const pointer = new Vector2( ( event.touches[0].clientX / window.innerWidth ) * 2 - 1, - ( event.touches[0].clientY / window.innerHeight ) * 2 + 1 );
+	console.log(pointer);
 } );
 
 /* --- Menu Controls --- */
