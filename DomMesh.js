@@ -183,8 +183,7 @@ class DomMesh extends Mesh {
         const camera = this._camera;
         const raycaster = this._raycaster;
         var target = this;
-        target.geometry.boundingBox.scale(2,2);
-        
+
         addEventListener( 'click', (event) => {
 
             // calculate pointer position in normalized device coordinates

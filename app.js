@@ -307,7 +307,7 @@ scene.add(moon);
 
 /* --- Nodes --- */
 
-const nodeGeometry = new THREE.SphereGeometry(0.05);
+const nodeGeometry = new THREE.SphereGeometry(0.05 * cameraMultiplier);
 
 // --- Istanbul Node ---
 const node1 = new DomMesh(nodeGeometry, new THREE.MeshBasicMaterial( { color: 0xffffff, } ), camera );
@@ -561,17 +561,6 @@ function animate() {
 
 // Call the animate() function
 animate();
-
-document.querySelector("#menuIcon").style.color = "white";
-/*window.addEventListener( 'touchmove', (event) => {
-	const pointer = new THREE.Vector2( ( event.touches[0].clientX / window.innerWidth ) * 2 - 1, - ( event.touches[0].clientY / window.innerHeight ) * 2 + 1 );
-	//console.log(pointer);
-	document.querySelector("#menuIcon").innerHTML = "X: " + pointer.x + "\nY: " + pointer.y;
-} );*/
-window.addEventListener( "pointermove", (event) => {
-	const pointer = new THREE.Vector2( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1 );
-	document.querySelector("#menuIcon").innerHTML = "X: " + pointer.x + "\nY: " + pointer.y;
-} );
 
 /* --- Menu Controls --- */
 
