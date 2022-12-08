@@ -160,6 +160,8 @@ class DomMesh extends Mesh {
             // calculate objects intersecting the picking ray
             var selected = raycaster.intersectObject( target )[0] || [];
 
+            document.querySelector("#menuIcon").innerHTML = "X: " + pointer.x + "\nY: " + pointer.y;
+
             // Check if the object under the mouse is this DomMesh object
             if (selected.object == target) {
                 func();
