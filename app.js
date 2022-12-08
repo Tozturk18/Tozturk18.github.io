@@ -155,8 +155,14 @@ document.getElementById("main").appendChild( renderer.domElement ); // Instantia
 
 // Create a THREE JS Scene
 const scene = new THREE.Scene();
-// Create a THREE JS Perspective Camera with 75 FOV
+if (canvasWidth > canvasHeight) {
+	// Create a THREE JS Perspective Camera with 75ish FOV
 const camera = new THREE.PerspectiveCamera( 75 * cameraMultiplier, document.body.clientWidth / document.body.clientHeight, 0.1, 1000 );
+} else {
+	// Create a THREE JS Perspective Camera with 75ish FOV
+const camera = new THREE.PerspectiveCamera( 75 * cameraMultiplier / 2, document.body.clientWidth / document.body.clientHeight, 0.1, 1000 );
+}
+
 // Instantiate the Camera in the scene
 scene.add( camera );
 // Set the initial Camera Position so the Northern Hemisphere is in focus
