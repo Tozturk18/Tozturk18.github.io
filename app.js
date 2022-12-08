@@ -581,11 +581,20 @@ document.getElementById("menuIcon").addEventListener("click", () => {
 		document.querySelector("canvas").classList.toggle("canvasChange1");
 		document.querySelector("canvas").classList.toggle("canvasChange2");
 		// Create an animation updating the FOV of the camera
-		fovAnim.to(camera, {
-			duration: 0.5,	// Set duration to 0.5s
-			fov: 100 * cameraMultiplier,		// Set FOV to 100
-			onUpdate: function() {camera.updateProjectionMatrix();}	// Update the Camera
-		});
+		if (canvasWidth > canvasHeight) {
+			fovAnim.to(camera, {
+				duration: 0.5,	// Set duration to 0.5s
+				fov: 100 * cameraMultiplier,		// Set FOV to 100ish
+				onUpdate: function() {camera.updateProjectionMatrix();}	// Update the Camera
+			});
+		} else {
+			fovAnim.to(camera, {
+				duration: 0.5,	// Set duration to 0.5s
+				fov: 100 * cameraMultiplier / 2,		// Set FOV to 100ish
+				onUpdate: function() {camera.updateProjectionMatrix();}	// Update the Camera
+			});
+		}
+		
 	} else {
 		aspectRatio = 1; // Change the Aspect Ratio
 		// rerender the canvas using the new aspect ratio
@@ -594,11 +603,19 @@ document.getElementById("menuIcon").addEventListener("click", () => {
 		document.querySelector("canvas").classList.toggle("canvasChange1");
 		document.querySelector("canvas").classList.toggle("canvasChange2");
 		// Create an animation updating the FOV of the camera
-		fovAnim.to(camera, {
-			duration: 0.5,	// Set duration to 0.5s
-			fov: 75 * cameraMultiplier,		// Set FOV to 100
-			onUpdate: function() {camera.updateProjectionMatrix();}	// Update the Camera
-		});
+		if (canvasWidth > canvasHeight) {
+			fovAnim.to(camera, {
+				duration: 0.5,	// Set duration to 0.5s
+				fov: 75 * cameraMultiplier,		// Set FOV to 75ish
+				onUpdate: function() {camera.updateProjectionMatrix();}	// Update the Camera
+			});
+		} else {
+			fovAnim.to(camera, {
+				duration: 0.5,	// Set duration to 0.5s
+				fov: 75 * cameraMultiplier / 2,		// Set FOV to 75ish
+				onUpdate: function() {camera.updateProjectionMatrix();}	// Update the Camera
+			});
+		}
 	}
 	
 });
