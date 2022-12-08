@@ -174,8 +174,8 @@ camera.position.y = cameraRadius * Math.sin(Math.PI/6);
 // Create an Orbital Camera Controls
 const controls = new OrbitControls(camera, renderer.domElement);
 // Lock the Camera scroll at 5 units away from the center
-//controls.maxDistance = cameraRadius; 
-//controls.minDistance = cameraRadius;
+controls.maxDistance = cameraRadius; 
+controls.minDistance = cameraRadius;
 // Enable Automatic Rotation feature
 controls.autoRotate = true;
 // Set the Automatic Rotation Speed to 0.25 CounterClockWise
@@ -480,6 +480,21 @@ node4.MouseLeave(() => {
 node4.MouseDown(() => {
 	window.open("http://fabacademy.org/2021/labs/wheaton/students/ozgur-tunaozturk/", "_blank");
 });
+
+if (canvasWidth < canvasHeight) {
+	node1Text.MouseDown( () => {
+		window.open("https://www.linkedin.com/in/ozgur-tuna-ozturk/", "_blank");
+	} );
+	node2Text.MouseDown( () => {
+		window.open("https://github.com/Tozturk18", "_blank");
+	} );
+	node3Text.MouseDown( () => {
+		window.open("https://www.fablabs.io/labs/BhutanSFL", "_blank");
+	} );
+	node4Text.MouseDown( () => {
+		window.open("http://fabacademy.org/2021/labs/wheaton/students/ozgur-tunaozturk/", "_blank");
+	} );
+}
 
 /* --- End of DOM Events --- */
 
