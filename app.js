@@ -121,10 +121,11 @@ const node4Texture = textureLoader.load( "./signs/WheatonSign.svg" );			// Fab A
 
 /* --- Global Variables --- */
 
-var aspectRatio =  ( 1440/821 ) / ( document.body.clientWidth / document.body.clientHeight );
+var aspectRatio = 1;
+//var aspectRatio =  ( 1440/821 ) / ( document.body.clientWidth / document.body.clientHeight );
 //alert( "clientWidth = " + document.body.clientWidth + "\nclientHeight = " + document.body.clientHeight );
 //var aspectRatio = 1;
-var cameraRadius = 5 * aspectRatio;
+var cameraRadius = 5 * ( 1440/821 ) / ( document.body.clientWidth / document.body.clientHeight );
 
 /* --- End of Global Variables --- */
 
@@ -133,7 +134,7 @@ var cameraRadius = 5 * aspectRatio;
 // Create a THREE JS WebGL Renderer
 const renderer = new THREE.WebGLRenderer({ antialias: true } );
 // Renderer Settings
-renderer.setSize( document.body.clientWidth*aspectRatio, document.body.clientHeight*aspectRatio ); // Renderer Aspect Ratio
+renderer.setSize( document.body.clientWidth * aspectRatio, document.body.clientHeight * aspectRatio ); // Renderer Aspect Ratio
 renderer.shadowMap.enabled = true; // Renderer Shadow options
 renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
 document.getElementById("main").appendChild( renderer.domElement ); // Instantiate the Renderer on the Webpage
@@ -145,7 +146,7 @@ document.getElementById("main").appendChild( renderer.domElement ); // Instantia
 // Create a THREE JS Scene
 const scene = new THREE.Scene();
 // Create a THREE JS Perspective Camera with 75 FOV
-const camera = new THREE.PerspectiveCamera( 75, document.body.clientWidth*aspectRatio / document.body.clientHeight*aspectRatio, 0.1, 1000 );
+const camera = new THREE.PerspectiveCamera( 75, document.body.clientWidth / document.body.clientHeight, 0.1, 1000 );
 // Instantiate the Camera in the scene
 scene.add( camera );
 // Set the initial Camera Position so the Northern Hemisphere is in focus
