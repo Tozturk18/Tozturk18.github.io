@@ -44,6 +44,7 @@ manager.onLoad = function ( ) {
 // When the Texture Loading is on progress
 manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
 	//console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+	document.getElementById( 'loading-screen' ).querySelector( 'h1' ).textContent = 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.';
 };
 
 /* --- End of Loading Manager --- */
@@ -59,7 +60,12 @@ const dt = new Date();
 
 /* --- Textures --- */
 
+// 
 const lensflareTexture = textureLoader.load( "./textures/lensflare.png" );		// LensFlare Texture
+
+/* Textures are created by Tom Patterson and can be found on Natural Earth III - Texture Maps at
+ * https://www.shadedrelief.com/natural3/pages/textures.html 
+ */
 const skySphereTexture = textureLoader.load( "./textures/starfield.jpeg" );		// Sky Sphere Texture
 const earthDayTexture = textureLoader.load( "./textures/earth.jpeg" );			// Earth Day Texture
 const earthNightTexture = textureLoader.load( "./textures/earth_night.jpeg" );	// Earth Night Texture
@@ -67,6 +73,8 @@ const earthBumpMapTexture = textureLoader.load("./textures/earth_elev.jpeg");	//
 const atmosphereTexture = textureLoader.load( "./textures/glow.png" );			// Atmosphere Texture
 const cloudTexture = textureLoader.load( "./textures/earth_clouds.jpeg" );		// Clouds Texture
 const moonTexture = textureLoader.load( "./textures/moon.jpeg" );				// Moon Texture
+
+// Node Textures are created by the author of this document, Ozgur Tuna Ozturk
 const node1Texture = textureLoader.load( "./signs/IstanbulSign.svg" );			// About Me Page Sign
 const node2Texture = textureLoader.load( "./signs/ChangshuSign.svg" );			// Github Page Sign
 const node3Texture = textureLoader.load( "./signs/ThimphuSign.svg" );			// Super Fablab Page Sign
