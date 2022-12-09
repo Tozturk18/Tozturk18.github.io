@@ -71,6 +71,7 @@ const node1Texture = textureLoader.load( "./signs/IstanbulSign.svg" );			// Abou
 const node2Texture = textureLoader.load( "./signs/ChangshuSign.svg" );			// Github Page Sign
 const node3Texture = textureLoader.load( "./signs/ThimphuSign.svg" );			// Super Fablab Page Sign
 const node4Texture = textureLoader.load( "./signs/WheatonSign.svg" );			// Fab Academy Page Sign
+const node5Texture = textureLoader.load( "./signs/FranceSign.svg" );			// WWI Pilgrimage Page Sign
 
 /* --- End of Textures --- */
 
@@ -329,10 +330,15 @@ SphereToEuclodCord(node4, node4Latitude, node4Longitude);
 // Add the Node Group to the Scene
 scene.add(node4);
 
-node1.name = "node1";
-node2.name = "node2";
-node3.name = "node3";
-node4.name = "node4";
+// --- France Node ---
+const node5 = new DomMesh( nodeGeometry, new THREE.MeshBasicMaterial( { color: 0xffffff, } ), camera );
+// Wheaton College, Norton, USA Coordinates: 41.9672° N 71.1840° W
+var node5Latitude = -48.8566;
+var node5Longitude = 2.3522;
+// Set Spherical Positions
+SphereToEuclodCord(node5, node5Latitude, node5Longitude);
+// Add the Node Group to the Scene
+scene.add(node5);
 
 /* --- End of Nodes --- */
 
@@ -401,6 +407,22 @@ node4Text.scale.set(1*cameraMultiplier, 0.5*cameraMultiplier, 1.0);
 node4Text.center.set(0,0);
 // Add the node1Text to the node1 object
 node4.add(node4Text); // this centers the glow at the mesh
+
+var node5TextMaterial = new THREE.SpriteMaterial({ 
+	map: node5Texture,  // Load the Page-City Texture
+	color: 0xffffff,                                   // The default color is white
+  	transparent: true,                                 // Does show behind
+  	blending: THREE.AdditiveBlending,                  // Blends with the environment behind using THREE.AdditiveBlending
+  	depthWrite: false,                                 // Lightblocking off
+});
+// Create a new THREE.Sprite using the node1TextMaterial
+var node5Text = new DomSprite( node5TextMaterial, camera );
+// Change the scale of the Sprite so that it shows behind the Earth and looks realistic
+node5Text.scale.set(1*cameraMultiplier, 0.5*cameraMultiplier, 1.0);
+// Set the anchor to the bottom left corner
+node5Text.center.set(0,0);
+// Add the node1Text to the node1 object
+node5.add(node5Text); // this centers the glow at the mesh
 
 /* --- End of Node Tags --- */
 
@@ -482,6 +504,25 @@ node4.MouseDown(() => {
 		window.open("http://fabacademy.org/2021/labs/wheaton/students/ozgur-tunaozturk/", "_blank");
 	} else if (window.confirm('If you click "ok" you would be redirected.')) {
 		window.location.href = "http://fabacademy.org/2021/labs/wheaton/students/ozgur-tunaozturk/";
+	};
+});
+
+// Link node5 with a url white as default color and gray as highligh color
+node5.MouseEnter(() => {
+	node5.material.color.set( 0x555555 );
+	node5Text.material.color.set( 0x555555 );
+	document.body.style.cursor	= 'pointer';
+});
+node5.MouseLeave(() => {
+	node5.material.color.set( 0xffffff );
+	node5Text.material.color.set( 0xffffff );
+	document.body.style.cursor	= 'default';
+});
+node5.MouseDown(() => {
+	if (!isSafari) {
+		window.open("https://tozturk18.github.io/wwi-virtual-pilgrimage/", "_blank");
+	} else if (window.confirm('If you click "ok" you would be redirected.')) {
+		window.location.href = "https://tozturk18.github.io/wwi-virtual-pilgrimage/";
 	};
 });
 

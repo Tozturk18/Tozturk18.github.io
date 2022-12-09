@@ -2,14 +2,15 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="485.08865mm"
-   height="154.6192mm"
-   viewBox="0 0 485.08866 154.6192"
+   width="485.08862mm"
+   height="154.61922mm"
+   viewBox="0 0 485.08863 154.61922"
    version="1.1"
    id="svg5"
    inkscape:export-filename="IstanbulSign.svg"
    inkscape:export-xdpi="600"
    inkscape:export-ydpi="600"
+   sodipodi:docname="IstanbulSign.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +44,7 @@
      transform="translate(200.51571,-10.175)">
     <g
        id="g4980"
-       transform="matrix(1.8231028,0,0,1.3818029,-0.63438082,18.741854)">
+       transform="matrix(1.8231028,0,0,1.3818029,36.029042,19.352911)">
       <text
          xml:space="preserve"
          style="font-size:25.4px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#444444;fill-opacity:1;stroke:none;stroke-width:0.750001;stroke-opacity:1;stop-color:#000000"
@@ -54,7 +55,7 @@
            x="-0.066799983"
            y="20.583399"
            style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25.4px;font-family:Orbitron;-inkscape-font-specification:'Orbitron Bold';fill:#444444;fill-opacity:1;stroke:none;stroke-width:0.75;stroke-opacity:1"
-           id="tspan8204">About Me</tspan></text>
+           id="tspan8204">Linkedin</tspan></text>
       <text
          xml:space="preserve"
          style="font-size:25.4px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.750001;stroke-opacity:1;stop-color:#000000"
@@ -65,11 +66,11 @@
            x="-1.0668"
            y="19.583399"
            style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25.4px;font-family:Orbitron;-inkscape-font-specification:'Orbitron Bold';fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.75;stroke-opacity:1"
-           id="tspan8202">About Me</tspan></text>
+           id="tspan8202">Linkedin</tspan></text>
     </g>
     <g
        id="g7005"
-       transform="matrix(1.7417821,0,0,1.2804759,-104.80899,-32.597169)">
+       transform="matrix(1.7953836,0,0,1.2804759,-116.71281,-32.597169)">
       <rect
          style="fill:#444444;fill-opacity:1;stroke:none;stroke-width:0.717643;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
          id="rect5177-8"
