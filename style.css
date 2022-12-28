@@ -181,6 +181,52 @@ body {
     margin: 10px;
 }
 
+#profileIcon {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    margin: 10px;
+}
+
+#profile {
+    position: absolute;
+    top: 0%;
+    left: -40vw;
+    color: white;
+    height: 100vh;
+    background-color: rgba(75,75,75,0.5);
+    width: 40vw;
+    transition: 0.5s;
+
+    overflow-x: hidden !important;
+    overflow-y: scroll !important;
+}
+
+.profileChange {
+    transform: translate(40vw, 0);
+}
+
+@media (pointer:none), (pointer:coarse) {
+
+    #profile {
+        left: -80vw !important;
+        width: 80vw !important;
+    }
+
+    .profileChange {
+        transform: translate(80vw, 0) !important;
+    }
+
+}
+
+#profile h1 {
+    text-align: center;
+}
+
+#profile p {
+    margin: 4px;
+}
+
 .menuChange {
     transform: translate(-321px, 0);
 }
@@ -233,12 +279,30 @@ body {
     cursor: pointer;
 }
   
-.bar1, .bar2, .bar3 {
+#menuIcon .bar1, #menuIcon .bar2, #menuIcon .bar3 {
     width: 35px;
     height: 5px;
     background-color: #ffffff;
     margin: 6px 0;
     transition: 0.4s;
+}
+
+#profileIcon .bar1, #profileIcon .bar2, #profileIcon .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #ffffff;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+#profileIcon .bar1 {
+    width: 20px;
+    transform: translate(20px, 17px) rotate(-45deg);
+}
+
+#profileIcon .bar3 {
+    width: 20px;
+    transform: translate(20px, -17px) rotate(45deg);
 }
   
 .change .bar1 {
@@ -251,4 +315,18 @@ body {
   
 .change .bar3 {
     transform: translate(0, -11px) rotate(45deg);
+}
+
+.changer .bar1 {
+    width: 35px !important;
+    transform: translate(0, 11px) rotate(-45deg) !important;
+}
+
+.changer .bar2 {
+    opacity: 0 !important;
+}
+  
+.changer .bar3 {
+    width: 35px !important;
+    transform: translate(0, -11px) rotate(45deg) !important;
 }

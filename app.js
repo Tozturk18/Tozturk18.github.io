@@ -649,6 +649,17 @@ let fovAnim = gsap.timeline({
     }
 });
 
+document.getElementById("profileIcon").addEventListener("click", () => {
+
+	// Activate the .change CSS Class on #profileIcon Element
+	document.getElementById("profileIcon").classList.toggle("changer");
+	// Activate the .menuChange CSS Class on #profile Element
+	document.getElementById("profile").classList.toggle("profileChange");
+
+
+
+})
+
 // Add Click EventListener on the Menu Icon
 document.getElementById("menuIcon").addEventListener("click", () => {
 	// Activate the .change CSS Class on #menuIcon Element
