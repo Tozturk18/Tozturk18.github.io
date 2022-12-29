@@ -194,7 +194,7 @@ body {
     left: -40vw;
     color: white;
     height: 100vh;
-    background-color: rgba(75,75,75,0.5);
+    background: linear-gradient(0.25turn, rgba(75,75,75,0.75), rgba(75,75,75,0));
     width: 40vw;
     transition: 0.5s;
 

@@ -656,9 +656,9 @@ document.getElementById("profileIcon").addEventListener("click", () => {
 	// Activate the .menuChange CSS Class on #profile Element
 	document.getElementById("profile").classList.toggle("profileChange");
 
-
-
 })
+
+document.getElementById("profileIcon").click();
 
 // Add Click EventListener on the Menu Icon
 document.getElementById("menuIcon").addEventListener("click", () => {
