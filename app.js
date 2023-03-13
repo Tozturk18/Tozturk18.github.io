@@ -102,7 +102,7 @@ if (canvasWidth > canvasHeight) {
 }
 
 // The radius of camera from the origin (0,0,0)
-var cameraRadius = 1.8 * cameraMultiplier
+var cameraRadius = 1.65 * cameraMultiplier
 
 /* --- End of Global Variables --- */
 
