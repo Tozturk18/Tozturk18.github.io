@@ -102,7 +102,7 @@ if (canvasWidth > canvasHeight) {
 }
 
 // The radius of camera from the origin (0,0,0)
-var cameraRadius = 5 * cameraMultiplier
+var cameraRadius = 1.8 * cameraMultiplier
 
 /* --- End of Global Variables --- */
 
@@ -229,7 +229,7 @@ earthMaterial.onBeforeCompile = function ( shader ) {
 };
 
 // Instantiate the Earth variable as a new THREE.Mesh using the custom MeshPhysicalMaterial
-const Earth = new THREE.Mesh( new THREE.SphereGeometry( 3, 50, 50 ), earthMaterial );
+const Earth = new THREE.Mesh( new THREE.SphereGeometry( 1, 30, 30 ), earthMaterial );
 
 // --- Atmosphere ---
 // Create a THREE.SpriteMaterial to represent the Atmosphere around the Earth
@@ -243,7 +243,7 @@ var atmosphereMaterial = new THREE.SpriteMaterial({
 // Create a new THREE.Sprite using the atmosphereMaterial
 var atmosphere = new THREE.Sprite( atmosphereMaterial );
 // Change the scale of the Sprite so that it shows behind the Earth and looks realistic
-atmosphere.scale.set(10, 10, 1.0);
+atmosphere.scale.set(3, 3, 1.0);
 // Add the Atmosphere to the Clouds object
 Earth.add(atmosphere); // this centers the glow at the mesh
 
@@ -264,7 +264,7 @@ var cloudMaterial = new THREE.MeshPhysicalMaterial({
   depthWrite: false,                                         // Lightblocking off
 });
 // Create a new THREE.Mesh object for the clouds using the cloudMaterial
-var clouds = new THREE.Mesh( new THREE.SphereGeometry(3.01, 50, 50), cloudMaterial );
+var clouds = new THREE.Mesh( new THREE.SphereGeometry(1.01, 50, 50), cloudMaterial );
 // Instantiate the clouds on the scene
 scene.add(clouds);
 
@@ -286,7 +286,7 @@ const moonMaterial = new THREE.MeshPhysicalMaterial({
   reflectivity: 0.0,                                 // 0.0% Reflectivity
 });
 // Create a THREE.Mesh Sphere object with moonmaterial
-const moon = new THREE.Mesh( new THREE.SphereGeometry(1), moonMaterial );
+const moon = new THREE.Mesh( new THREE.SphereGeometry(0.5), moonMaterial );
 // Set the moon's current position using the Day of the Year to find the exact spot on the Orbit
 moon.position.set(30*Math.cos((DOY/27)*Math.PI*2), 30*Math.sin(5.14*Math.PI/180)*Math.cos((DOY/27)*Math.PI*2), 30*Math.sin((DOY/27)*Math.PI*2));
 // Instantiate moon
@@ -296,7 +296,7 @@ scene.add(moon);
 
 /* --- Nodes --- */
 
-const nodeGeometry = new THREE.SphereGeometry(0.05 * cameraMultiplier);
+const nodeGeometry = new THREE.SphereGeometry(0.01 * cameraMultiplier);
 
 // --- Istanbul Node ---
 const node1 = new DomMesh(nodeGeometry, new THREE.MeshBasicMaterial( { color: 0xffffff, } ), camera );
@@ -362,7 +362,7 @@ var node1TextMaterial = new THREE.SpriteMaterial({
 // Create a new THREE.Sprite using the node1TextMaterial
 var node1Text = new DomSprite( node1TextMaterial, camera );
 // Change the scale of the Sprite so that it shows behind the Earth and looks realistic
-node1Text.scale.set(1*cameraMultiplier, 0.5*cameraMultiplier, 1.0);
+node1Text.scale.set(0.5*cameraMultiplier, 0.25*cameraMultiplier, 1.0);
 // Set the anchor to the bottom left corner
 node1Text.center.set(0,0);
 // Add the node1Text to the node1 object
@@ -378,7 +378,7 @@ var node2TextMaterial = new THREE.SpriteMaterial({
 // Create a new THREE.Sprite using the node1TextMaterial
 var node2Text = new DomSprite( node2TextMaterial, camera );
 // Change the scale of the Sprite so that it shows behind the Earth and looks realistic
-node2Text.scale.set(1*cameraMultiplier, 0.5*cameraMultiplier, 1.0);
+node2Text.scale.set(0.5*cameraMultiplier, 0.25*cameraMultiplier, 1.0);
 // Set the anchor to the bottom left corner
 node2Text.center.set(0,0);
 // Add the node1Text to the node1 object
@@ -394,7 +394,7 @@ var node3TextMaterial = new THREE.SpriteMaterial({
 // Create a new THREE.Sprite using the node1TextMaterial
 var node3Text = new DomSprite( node3TextMaterial, camera );
 // Change the scale of the Sprite so that it shows behind the Earth and looks realistic
-node3Text.scale.set(1*cameraMultiplier, 0.5*cameraMultiplier, 1.0);
+node3Text.scale.set(0.5*cameraMultiplier, 0.25*cameraMultiplier, 1.0);
 // Set the anchor to the bottom left corner
 node3Text.center.set(0,0);
 // Add the node1Text to the node1 object
@@ -410,7 +410,7 @@ var node4TextMaterial = new THREE.SpriteMaterial({
 // Create a new THREE.Sprite using the node1TextMaterial
 var node4Text = new DomSprite( node4TextMaterial, camera );
 // Change the scale of the Sprite so that it shows behind the Earth and looks realistic
-node4Text.scale.set(1*cameraMultiplier, 0.5*cameraMultiplier, 1.0);
+node4Text.scale.set(0.5*cameraMultiplier, 0.25*cameraMultiplier, 1.0);
 // Set the anchor to the bottom left corner
 node4Text.center.set(0,0);
 // Add the node1Text to the node1 object
@@ -426,7 +426,7 @@ var node5TextMaterial = new THREE.SpriteMaterial({
 // Create a new THREE.Sprite using the node1TextMaterial
 var node5Text = new DomSprite( node5TextMaterial, camera );
 // Change the scale of the Sprite so that it shows behind the Earth and looks realistic
-node5Text.scale.set(1*cameraMultiplier, 0.5*cameraMultiplier, 1.0);
+node5Text.scale.set(0.5*cameraMultiplier, 0.25*cameraMultiplier, 1.0);
 // Set the anchor to the bottom left corner
 node5Text.center.set(0,0);
 // Add the node1Text to the node1 object
@@ -552,9 +552,9 @@ function SphereToEuclodCord( node , latitude, longitude ) {
 
   // Uses + (Math.PI/2) to change the phase by 90 deg
   node.position.set( 
-    3 * Math.sin( longitude * (Math.PI/180) + (Math.PI/2) ) * Math.sin( latitude * (Math.PI/180) + (Math.PI/2) ), 
-    3 * Math.cos( latitude  * (Math.PI/180) + (Math.PI/2) ), 
-    3 * Math.cos( longitude * (Math.PI/180) + (Math.PI/2) ) * Math.sin( latitude * (Math.PI/180) + (Math.PI/2) ) 
+    1 * Math.sin( longitude * (Math.PI/180) + (Math.PI/2) ) * Math.sin( latitude * (Math.PI/180) + (Math.PI/2) ), 
+    1 * Math.cos( latitude  * (Math.PI/180) + (Math.PI/2) ), 
+    1 * Math.cos( longitude * (Math.PI/180) + (Math.PI/2) ) * Math.sin( latitude * (Math.PI/180) + (Math.PI/2) ) 
   );
 
 }
