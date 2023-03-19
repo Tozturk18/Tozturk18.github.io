@@ -86,7 +86,7 @@ const node5Texture = textureLoader.load( "./signs/FranceSign.svg" );			// WWI Pi
 /* --- Global Variables --- */
 
 var aspectRatio = 1;	// Aspect ratio of the screen relative to with menu ON/OFF
-var FOV = 75;			// Default FOV of the scene
+var FOV = 45;			// Default FOV of the scene
 
 var canvasWidth = document.body.clientWidth * aspectRatio;		// Save default canvas width;
 var canvasHeight = document.body.clientHeight * aspectRatio;	// Save default canvas height
@@ -102,7 +102,8 @@ if (canvasWidth > canvasHeight) {
 }
 
 // The radius of camera from the origin (0,0,0)
-var cameraRadius = 1.65 * cameraMultiplier
+//var cameraRadius = 1.65 * cameraMultiplier;
+var cameraRadius = 10 * cameraMultiplier;
 
 /* --- End of Global Variables --- */
 
@@ -157,7 +158,7 @@ controls.enablePan = false;
 // Calculate the current day of the year
 const DOY = Math.ceil((dt - new Date(dt.getFullYear(),0,1)) / 86400000);
 // Create a new THREE.DirectionalLight object to imitate the Sun
-const sunLight = new THREE.DirectionalLight( 0xffffff, 0.8, 2000 );
+const sunLight = new THREE.DirectionalLight( 0xffffff, 0.5, 2000 );
 // Set the position of the sunLight Object with respect to Earth
 sunLight.position.set(100*Math.cos(Math.PI), -100*(Math.sin(0.4101524)*Math.cos((DOY/365)*Math.PI*2)), 100*Math.sin(Math.PI));
 // Instantiate the sunLight Object into the scene
@@ -183,7 +184,7 @@ scene.add( atmoLight );
 /* --- SkySphere --- */
 
 // Create a new THREE.Mesh Sphere object and render a 360 image of the night sky
-const skySphere = new THREE.Mesh( new THREE.SphereGeometry(1000), new THREE.MeshBasicMaterial({ color: 0xffffff, map: skySphereTexture, }) );
+const skySphere = new THREE.Mesh( new THREE.SphereGeometry(105), new THREE.MeshBasicMaterial({ color: 0xffffff, map: skySphereTexture, }) );
 // Only render the texture in the inside of the Sphere
 skySphere.material.side = THREE.BackSide;
 // Instantiate the skySphere
@@ -229,7 +230,7 @@ earthMaterial.onBeforeCompile = function ( shader ) {
 };
 
 // Instantiate the Earth variable as a new THREE.Mesh using the custom MeshPhysicalMaterial
-const Earth = new THREE.Mesh( new THREE.SphereGeometry( 1, 30, 30 ), earthMaterial );
+const Earth = new THREE.Mesh( new THREE.SphereGeometry( 3, 50, 50 ), earthMaterial );
 
 // --- Atmosphere ---
 // Create a THREE.SpriteMaterial to represent the Atmosphere around the Earth
@@ -243,7 +244,7 @@ var atmosphereMaterial = new THREE.SpriteMaterial({
 // Create a new THREE.Sprite using the atmosphereMaterial
 var atmosphere = new THREE.Sprite( atmosphereMaterial );
 // Change the scale of the Sprite so that it shows behind the Earth and looks realistic
-atmosphere.scale.set(3, 3, 1.0);
+atmosphere.scale.set(9, 9, 1.0);
 // Add the Atmosphere to the Clouds object
 Earth.add(atmosphere); // this centers the glow at the mesh
 
@@ -264,7 +265,7 @@ var cloudMaterial = new THREE.MeshPhysicalMaterial({
   depthWrite: false,                                         // Lightblocking off
 });
 // Create a new THREE.Mesh object for the clouds using the cloudMaterial
-var clouds = new THREE.Mesh( new THREE.SphereGeometry(1.01, 50, 50), cloudMaterial );
+var clouds = new THREE.Mesh( new THREE.SphereGeometry(3.01, 50, 50), cloudMaterial );
 // Instantiate the clouds on the scene
 scene.add(clouds);
 
@@ -296,7 +297,7 @@ scene.add(moon);
 
 /* --- Nodes --- */
 
-const nodeGeometry = new THREE.SphereGeometry(0.01 * cameraMultiplier);
+const nodeGeometry = new THREE.SphereGeometry(0.05 * cameraMultiplier);
 
 // --- Istanbul Node ---
 const node1 = new DomMesh(nodeGeometry, new THREE.MeshBasicMaterial( { color: 0xffffff, } ), camera );
@@ -362,7 +363,7 @@ var node1TextMaterial = new THREE.SpriteMaterial({
 // Create a new THREE.Sprite using the node1TextMaterial
 var node1Text = new DomSprite( node1TextMaterial, camera );
 // Change the scale of the Sprite so that it shows behind the Earth and looks realistic
-node1Text.scale.set(0.5*cameraMultiplier, 0.25*cameraMultiplier, 1.0);
+node1Text.scale.set(1*cameraMultiplier, 0.5*cameraMultiplier, 1.0);
 // Set the anchor to the bottom left corner
 node1Text.center.set(0,0);
 // Add the node1Text to the node1 object
@@ -378,7 +379,7 @@ var node2TextMaterial = new THREE.SpriteMaterial({
 // Create a new THREE.Sprite using the node1TextMaterial
 var node2Text = new DomSprite( node2TextMaterial, camera );
 // Change the scale of the Sprite so that it shows behind the Earth and looks realistic
-node2Text.scale.set(0.5*cameraMultiplier, 0.25*cameraMultiplier, 1.0);
+node2Text.scale.set(1*cameraMultiplier, 0.5*cameraMultiplier, 1.0);
 // Set the anchor to the bottom left corner
 node2Text.center.set(0,0);
 // Add the node1Text to the node1 object
@@ -394,7 +395,7 @@ var node3TextMaterial = new THREE.SpriteMaterial({
 // Create a new THREE.Sprite using the node1TextMaterial
 var node3Text = new DomSprite( node3TextMaterial, camera );
 // Change the scale of the Sprite so that it shows behind the Earth and looks realistic
-node3Text.scale.set(0.5*cameraMultiplier, 0.25*cameraMultiplier, 1.0);
+node3Text.scale.set(1*cameraMultiplier, 0.5*cameraMultiplier, 1.0);
 // Set the anchor to the bottom left corner
 node3Text.center.set(0,0);
 // Add the node1Text to the node1 object
@@ -410,7 +411,7 @@ var node4TextMaterial = new THREE.SpriteMaterial({
 // Create a new THREE.Sprite using the node1TextMaterial
 var node4Text = new DomSprite( node4TextMaterial, camera );
 // Change the scale of the Sprite so that it shows behind the Earth and looks realistic
-node4Text.scale.set(0.5*cameraMultiplier, 0.25*cameraMultiplier, 1.0);
+node4Text.scale.set(1*cameraMultiplier, 0.5*cameraMultiplier, 1.0);
 // Set the anchor to the bottom left corner
 node4Text.center.set(0,0);
 // Add the node1Text to the node1 object
@@ -426,7 +427,7 @@ var node5TextMaterial = new THREE.SpriteMaterial({
 // Create a new THREE.Sprite using the node1TextMaterial
 var node5Text = new DomSprite( node5TextMaterial, camera );
 // Change the scale of the Sprite so that it shows behind the Earth and looks realistic
-node5Text.scale.set(0.5*cameraMultiplier, 0.25*cameraMultiplier, 1.0);
+node5Text.scale.set(1*cameraMultiplier, 0.5*cameraMultiplier, 1.0);
 // Set the anchor to the bottom left corner
 node5Text.center.set(0,0);
 // Add the node1Text to the node1 object
@@ -439,16 +440,19 @@ node5.add(node5Text); // this centers the glow at the mesh
 // Check if the current browser is Safari
 var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 && navigator.userAgent && navigator.userAgent.indexOf('CriOS') == -1 && navigator.userAgent.indexOf('FxiOS') == -1;
 
+// Get the center area of the cursor for dynamic filling when hovering a node
+const cursorFilled = document.querySelector('.filled');
+
 // Link node1 with a url with white as default color and gray as highligh color
 node1.MouseEnter(() => {
 	node1.material.color.set( 0x555555 );
 	node1Text.material.color.set( 0x555555 );
-	document.body.style.cursor	= 'pointer';
+	cursorFilled.children[0].classList.toggle("change");
 });
 node1.MouseLeave(() => {
 	node1.material.color.set( 0xffffff );
 	node1Text.material.color.set( 0xffffff );
-	document.body.style.cursor	= 'default';
+	cursorFilled.children[0].classList.toggle("change");
 });
 node1.MouseDown(() => {
 	if (!isSafari) {
@@ -462,12 +466,12 @@ node1.MouseDown(() => {
 node2.MouseEnter(() => {
 	node2.material.color.set( 0x555555 );
 	node2Text.material.color.set( 0x555555 );
-	document.body.style.cursor	= 'pointer';
+	cursorFilled.children[0].classList.toggle("change");
 });
 node2.MouseLeave(() => {
 	node2.material.color.set( 0xffffff );
 	node2Text.material.color.set( 0xffffff );
-	document.body.style.cursor	= 'default';
+	cursorFilled.children[0].classList.toggle("change");
 });
 node2.MouseDown(() => {
 	if (!isSafari) {
@@ -481,12 +485,12 @@ node2.MouseDown(() => {
 node3.MouseEnter(() => {
 	node3.material.color.set( 0x555555 );
 	node3Text.material.color.set( 0x555555 );
-	document.body.style.cursor	= 'pointer';
+	cursorFilled.children[0].classList.toggle("change");
 });
 node3.MouseLeave(() => {
 	node3.material.color.set( 0xffffff );
 	node3Text.material.color.set( 0xffffff );
-	document.body.style.cursor	= 'default';
+	cursorFilled.children[0].classList.toggle("change");
 });
 node3.MouseDown(() => {
 	if (!isSafari) {
@@ -500,12 +504,12 @@ node3.MouseDown(() => {
 node4.MouseEnter(() => {
 	node4.material.color.set( 0x555555 );
 	node4Text.material.color.set( 0x555555 );
-	document.body.style.cursor	= 'pointer';
+	cursorFilled.children[0].classList.toggle("change");
 });
 node4.MouseLeave(() => {
 	node4.material.color.set( 0xffffff );
 	node4Text.material.color.set( 0xffffff );
-	document.body.style.cursor	= 'default';
+	cursorFilled.children[0].classList.toggle("change");
 });
 node4.MouseDown(() => {
 	if (!isSafari) {
@@ -519,12 +523,12 @@ node4.MouseDown(() => {
 node5.MouseEnter(() => {
 	node5.material.color.set( 0x555555 );
 	node5Text.material.color.set( 0x555555 );
-	document.body.style.cursor	= 'pointer';
+	cursorFilled.children[0].classList.toggle("change");
 });
 node5.MouseLeave(() => {
 	node5.material.color.set( 0xffffff );
 	node5Text.material.color.set( 0xffffff );
-	document.body.style.cursor	= 'default';
+	cursorFilled.children[0].classList.toggle("change");
 });
 node5.MouseDown(() => {
 	if (!isSafari) {
@@ -552,9 +556,9 @@ function SphereToEuclodCord( node , latitude, longitude ) {
 
   // Uses + (Math.PI/2) to change the phase by 90 deg
   node.position.set( 
-    1 * Math.sin( longitude * (Math.PI/180) + (Math.PI/2) ) * Math.sin( latitude * (Math.PI/180) + (Math.PI/2) ), 
-    1 * Math.cos( latitude  * (Math.PI/180) + (Math.PI/2) ), 
-    1 * Math.cos( longitude * (Math.PI/180) + (Math.PI/2) ) * Math.sin( latitude * (Math.PI/180) + (Math.PI/2) ) 
+    3 * Math.sin( longitude * (Math.PI/180) + (Math.PI/2) ) * Math.sin( latitude * (Math.PI/180) + (Math.PI/2) ), 
+    3 * Math.cos( latitude  * (Math.PI/180) + (Math.PI/2) ), 
+    3 * Math.cos( longitude * (Math.PI/180) + (Math.PI/2) ) * Math.sin( latitude * (Math.PI/180) + (Math.PI/2) ) 
   );
 
 }
@@ -597,6 +601,22 @@ function onWindowResize() {
   renderer.render(scene, camera);
 }
 
+// Get the cursor elements
+const cursorRounded = document.querySelector('.rounded');
+const cursorPointed = document.querySelector('.pointed');
+
+// Store the Cursor Pos
+var mouseY = 0;
+var mouseX = 0;
+
+// When the cursor moves update the Position variables
+const moveCursor = (e) => {
+	mouseY = e.clientY;
+	mouseX = e.clientX;
+}
+window.addEventListener('mousemove', moveCursor);
+// Store the current mouse angle 
+var mouseAngle = 0;
 
 /* animate() Function
  * Parameters:
@@ -606,6 +626,11 @@ function onWindowResize() {
  */
 function animate() {
   requestAnimationFrame( animate );
+
+  // Fail safe for the mouseangle
+  if (mouseAngle > 360) {
+	mouseAngle = 0;
+  }
 
   // Calculate the current second of the day.
   const seconds = (dt.getUTCHours()*60 + dt.getUTCMinutes())*60 + dt.getUTCSeconds();
@@ -625,173 +650,22 @@ function animate() {
   // Create a realistic cloud effect by moving the clouds at 15/kmph and use the Day of the Year
   clouds.rotation.y = (( (DOY-1)*24 + dt.getUTCHours())/(40075/15))*Math.PI*2
 
+  // Calculate the positions of the mouse span
+  cursorFilled.style.transform = `translate3d(${mouseX - 10}px, ${mouseY - 10}px, 0)`;
+  cursorRounded.style.transform = `translate3d(${mouseX - 17}px, ${mouseY - 37}px, 0)`;
+  cursorPointed.style.transform = `translate3d(${(mouseX - 4) + 25*Math.cos( mouseAngle * (Math.PI/180) ) }px, ${(mouseY - 55) + 25*Math.sin( mouseAngle * (Math.PI/180) )}px, 0)`;
+
   // Update the controls for the Orbital Camera to rotate automatically
   controls.update();
 
   // Rerender the scene
   renderer.render(scene, camera);
+
+  // Increment the angle
+  mouseAngle++;
 }
 
 /* --- End of Functions --- */
 
 // Call the animate() function
 animate();
-
-/* --- Menu Controls --- */
-
-// Activate .canvasChange2 CSS Class on Canvas Element
-document.querySelector("canvas").classList.toggle("canvasChange2");
-
-// Instantiate a GSAP animation with easeout settings
-let fovAnim = gsap.timeline({
-    defaults: {
-      ease: "easeout"
-    }
-});
-
-document.getElementById("profileIcon").addEventListener("click", () => {
-
-	// Activate the .change CSS Class on #profileIcon Element
-	document.getElementById("profileIcon").classList.toggle("changer");
-	// Activate the .menuChange CSS Class on #profile Element
-	document.getElementById("profile").classList.toggle("profileChange");
-
-})
-
-document.getElementById("profileIcon").click();
-
-// Add Click EventListener on the Menu Icon
-document.getElementById("menuIcon").addEventListener("click", () => {
-	// Activate the .change CSS Class on #menuIcon Element
-	document.getElementById("menuIcon").classList.toggle("change");
-	// Activate the .menuChange CSS Class on #menu Element
-	document.getElementById("menu").classList.toggle("menuChange");
-
-	// Check id the menu is activated or not
-	if (document.getElementsByClassName("change")[0]) {
-		aspectRatio = 1.5 // Change the Aspect Ratio
-		// rerender the canvas using the new aspect ratio
-		renderer.setSize(document.body.clientWidth*aspectRatio, document.body.clientHeight*aspectRatio);
-		// Activate the .canvasChange1 and deactivate the .canvasChange2 Elements
-		document.querySelector("canvas").classList.toggle("canvasChange1");
-		document.querySelector("canvas").classList.toggle("canvasChange2");
-		FOV = 100;
-		// Create an animation updating the FOV of the camera
-		if (canvasWidth > canvasHeight) {
-			fovAnim.to(camera, {
-				duration: 0.5,	// Set duration to 0.5s
-				fov: FOV * cameraMultiplier,		// Set FOV to 100ish
-				onUpdate: function() {camera.updateProjectionMatrix();}	// Update the Camera
-			});
-		} else {
-			fovAnim.to(camera, {
-				duration: 0.5,	// Set duration to 0.5s
-				fov: FOV * cameraMultiplier / 2,		// Set FOV to 100ish
-				onUpdate: function() {camera.updateProjectionMatrix();}	// Update the Camera
-			});
-		}
-		
-	} else {
-		aspectRatio = 1; // Change the Aspect Ratio
-		// rerender the canvas using the new aspect ratio
-		renderer.setSize(document.body.clientWidth*aspectRatio, document.body.clientHeight*aspectRatio);
-		// Activate the .canvasChange2 and deactivate the .canvasChange1 Elements
-		document.querySelector("canvas").classList.toggle("canvasChange1");
-		document.querySelector("canvas").classList.toggle("canvasChange2");
-		FOV = 75;
-		// Create an animation updating the FOV of the camera
-		if (canvasWidth > canvasHeight) {
-			fovAnim.to(camera, {
-				duration: 0.5,	// Set duration to 0.5s
-				fov: FOV * cameraMultiplier,		// Set FOV to 75ish
-				onUpdate: function() {camera.updateProjectionMatrix();}	// Update the Camera
-			});
-		} else {
-			fovAnim.to(camera, {
-				duration: 0.5,	// Set duration to 0.5s
-				fov: FOV * cameraMultiplier / 2,		// Set FOV to 75ish
-				onUpdate: function() {camera.updateProjectionMatrix();}	// Update the Camera
-			});
-		}
-	}
-	
-});
-
-/* --- End of Menu Controls --- */
-
-/* --- Menu Item Hover Controls --- */
-
-// Iterate through all elements with .row CSS Class
-document.querySelectorAll('.row').forEach( item => {
-	// Add mouseover EventListener to all elements
-	item.addEventListener('mouseover', event => {
-
-		// Store the Element name
-		const itemName = item.childNodes[1].innerHTML;
-
-		// Check which element
-		if (itemName == "About Me") {
-			// Move the camera to the associated node
-			gsap.to(camera.position, {
-				duration: 0.5,
-				x: node1.position.x * (5/3),
-				y: node1.position.y * (5/3),
-				z: node1.position.z * (5/3),
-				onUpdate: function() {camera.lookAt(node1.position)}
-			} );
-		} else if (itemName == "Github") {
-			// Move the camera to the associated node
-			gsap.to(camera.position, {
-				duration: 0.5,
-				x: node2.position.x * (5/3),
-				y: node2.position.y * (5/3),
-				z: node2.position.z * (5/3),
-				onUpdate: function() {camera.lookAt(node2.position)}
-			} );
-		} else if (itemName == "Super Fab Lab") {
-			// Move the camera to the associated node
-			gsap.to(camera.position, {
-				duration: 0.5,
-				x: node3.position.x * (5/3),
-				y: node3.position.y * (5/3),
-				z: node3.position.z * (5/3),
-				onUpdate: function() {camera.lookAt(node3.position)}
-			} );
-		} else if (itemName == "Fab Academy") {
-			// Move the camera to the associated node
-			gsap.to(camera.position, {
-				duration: 0.5,
-				x: node4.position.x * (5/3),
-				y: node4.position.y * (5/3),
-				z: node4.position.z * (5/3),
-				onUpdate: function() {camera.lookAt(node4.position)}
-			} );
-		}
-	});
-});
-
-/* --- End of Menu Item Hover Controls --- */
-
-/* --- Menu Item Click Controls --- */
-
-document.querySelectorAll('.row').forEach( item => {
-	// Add mouseover EventListener to all elements
-	item.addEventListener('click', event => {
-
-		// Store the Element name
-		const itemName = item.childNodes[1].innerHTML;
-
-		// Check which element
-		if (itemName == "About Me") {
-			window.open("https://www.linkedin.com/in/ozgur-tuna-ozturk/", "_blank");
-		} else if (itemName == "Github") {
-			window.open("https://github.com/Tozturk18", "_blank");
-		} else if (itemName == "Super Fab Lab") {
-			window.open("https://www.fablabs.io/labs/BhutanSFL", "_blank");
-		} else if (itemName == "Fab Academy") {
-			window.open("http://fabacademy.org/2021/labs/wheaton/students/ozgur-tunaozturk/", "_blank");
-		}
-	});
-});
-
-/* --- End of Menu Item Click Controls --- */
