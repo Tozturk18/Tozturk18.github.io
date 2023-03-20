@@ -669,3 +669,173 @@ function animate() {
 
 // Call the animate() function
 animate();
+
+/* --- On Screen Button Controls --- */
+
+// Get the on screen buttons
+const nav = document.getElementById('nav')
+const about = document.getElementById('about');
+const expertise = document.getElementById('expertise');
+const work = document.getElementById('work');
+const experience = document.getElementById('experience');
+const contact = document.getElementById('contact');
+
+about.onmouseenter = function(){
+	cursorFilled.children[0].classList.toggle("change");
+
+	
+
+	nav.children[0].classList.toggle("navChange");
+	nav.children[2].classList.toggle("navChange");
+	nav.children[3].classList.toggle("navChange");
+	nav.children[4].classList.toggle("navChange");
+	nav.children[5].classList.toggle("navChange");
+	nav.children[6].classList.toggle("navChange");
+	nav.children[7].classList.toggle("navChange");
+	nav.children[8].classList.toggle("navChange");
+	nav.children[9].classList.toggle("navChange");
+	nav.children[10].classList.toggle("navChange");
+};
+
+about.onmouseleave = function(){
+	cursorFilled.children[0].classList.toggle("change");
+
+	nav.children[0].classList.toggle("navChange");
+	nav.children[2].classList.toggle("navChange");
+	nav.children[3].classList.toggle("navChange");
+	nav.children[4].classList.toggle("navChange");
+	nav.children[5].classList.toggle("navChange");
+	nav.children[6].classList.toggle("navChange");
+	nav.children[7].classList.toggle("navChange");
+	nav.children[8].classList.toggle("navChange");
+	nav.children[9].classList.toggle("navChange");
+	nav.children[10].classList.toggle("navChange");
+};
+
+expertise.onmouseenter = function(){
+	cursorFilled.children[0].classList.toggle("change");
+
+	
+
+	nav.children[0].classList.toggle("navChange");
+	nav.children[1].classList.toggle("navChange");
+	nav.children[2].classList.toggle("navChange");
+	nav.children[4].classList.toggle("navChange");
+	nav.children[5].classList.toggle("navChange");
+	nav.children[6].classList.toggle("navChange");
+	nav.children[7].classList.toggle("navChange");
+	nav.children[8].classList.toggle("navChange");
+	nav.children[9].classList.toggle("navChange");
+	nav.children[10].classList.toggle("navChange");
+};
+
+expertise.onmouseleave = function(){
+	cursorFilled.children[0].classList.toggle("change");
+
+	nav.children[0].classList.toggle("navChange");
+	nav.children[1].classList.toggle("navChange");
+	nav.children[2].classList.toggle("navChange");
+	nav.children[4].classList.toggle("navChange");
+	nav.children[5].classList.toggle("navChange");
+	nav.children[6].classList.toggle("navChange");
+	nav.children[7].classList.toggle("navChange");
+	nav.children[8].classList.toggle("navChange");
+	nav.children[9].classList.toggle("navChange");
+	nav.children[10].classList.toggle("navChange");
+};
+
+work.onmouseenter = function(){
+	cursorFilled.children[0].classList.toggle("change");
+
+	
+
+	nav.children[0].classList.toggle("navChange");
+	nav.children[1].classList.toggle("navChange");
+	nav.children[2].classList.toggle("navChange");
+	nav.children[3].classList.toggle("navChange");
+	nav.children[4].classList.toggle("navChange");
+	nav.children[6].classList.toggle("navChange");
+	nav.children[7].classList.toggle("navChange");
+	nav.children[8].classList.toggle("navChange");
+	nav.children[9].classList.toggle("navChange");
+	nav.children[10].classList.toggle("navChange");
+};
+
+work.onmouseleave = function(){
+	cursorFilled.children[0].classList.toggle("change");
+
+	nav.children[0].classList.toggle("navChange");
+	nav.children[1].classList.toggle("navChange");
+	nav.children[2].classList.toggle("navChange");
+	nav.children[3].classList.toggle("navChange");
+	nav.children[4].classList.toggle("navChange");
+	nav.children[6].classList.toggle("navChange");
+	nav.children[7].classList.toggle("navChange");
+	nav.children[8].classList.toggle("navChange");
+	nav.children[9].classList.toggle("navChange");
+	nav.children[10].classList.toggle("navChange");
+};
+
+experience.onmouseenter = function(){
+	cursorFilled.children[0].classList.toggle("change");
+
+	
+
+	nav.children[0].classList.toggle("navChange");
+	nav.children[1].classList.toggle("navChange");
+	nav.children[2].classList.toggle("navChange");
+	nav.children[3].classList.toggle("navChange");
+	nav.children[4].classList.toggle("navChange");
+	nav.children[5].classList.toggle("navChange");
+	nav.children[6].classList.toggle("navChange");
+	nav.children[8].classList.toggle("navChange");
+	nav.children[9].classList.toggle("navChange");
+	nav.children[10].classList.toggle("navChange");
+};
+
+experience.onmouseleave = function(){
+	cursorFilled.children[0].classList.toggle("change");
+
+	nav.children[0].classList.toggle("navChange");
+	nav.children[1].classList.toggle("navChange");
+	nav.children[2].classList.toggle("navChange");
+	nav.children[3].classList.toggle("navChange");
+	nav.children[4].classList.toggle("navChange");
+	nav.children[5].classList.toggle("navChange");
+	nav.children[6].classList.toggle("navChange");
+	nav.children[8].classList.toggle("navChange");
+	nav.children[9].classList.toggle("navChange");
+	nav.children[10].classList.toggle("navChange");
+};
+
+contact.onmouseenter = function(){
+	cursorFilled.children[0].classList.toggle("change");
+
+	
+
+	nav.children[0].classList.toggle("navChange");
+	nav.children[1].classList.toggle("navChange");
+	nav.children[2].classList.toggle("navChange");
+	nav.children[3].classList.toggle("navChange");
+	nav.children[4].classList.toggle("navChange");
+	nav.children[5].classList.toggle("navChange");
+	nav.children[6].classList.toggle("navChange");
+	nav.children[7].classList.toggle("navChange");
+	nav.children[8].classList.toggle("navChange");
+	nav.children[10].classList.toggle("navChange");
+};
+
+contact.onmouseleave = function(){
+	cursorFilled.children[0].classList.toggle("change");
+
+	nav.children[0].classList.toggle("navChange");
+	nav.children[1].classList.toggle("navChange");
+	nav.children[2].classList.toggle("navChange");
+	nav.children[3].classList.toggle("navChange");
+	nav.children[4].classList.toggle("navChange");
+	nav.children[5].classList.toggle("navChange");
+	nav.children[6].classList.toggle("navChange");
+	nav.children[7].classList.toggle("navChange");
+	nav.children[8].classList.toggle("navChange");
+	nav.children[10].classList.toggle("navChange");
+};
