@@ -73,6 +73,7 @@ const earthBumpMapTexture = textureLoader.load("./textures/earth_elev.jpeg");	//
 const atmosphereTexture = textureLoader.load( "./textures/glow.png" );			// Atmosphere Texture
 const cloudTexture = textureLoader.load( "./textures/earth_clouds.jpeg" );		// Clouds Texture
 const moonTexture = textureLoader.load( "./textures/moon.jpeg" );				// Moon Texture
+const moonDarkTexture = textureLoader.load( "./textures/moon_dark.jpeg" );				// Moon Dark Texture
 
 // Node Textures are created by the author of this document, Ozgur Tuna Ozturk
 const node1Texture = textureLoader.load( "./signs/IstanbulSign.svg" );			// About Me Page Sign
@@ -142,8 +143,9 @@ camera.position.y = cameraRadius * Math.sin(Math.PI/6);
 // Create an Orbital Camera Controls
 const controls = new OrbitControls(camera, renderer.domElement);
 // Lock the Camera scroll at 5 units away from the center
-controls.maxDistance = cameraRadius; 
-controls.minDistance = cameraRadius;
+/*controls.maxDistance = cameraRadius; 
+controls.minDistance = cameraRadius;*/
+controls.enableZoom = false;
 // Enable Automatic Rotation feature
 controls.autoRotate = true;
 // Set the Automatic Rotation Speed to 0.25 CounterClockWise
@@ -230,7 +232,7 @@ earthMaterial.onBeforeCompile = function ( shader ) {
 };
 
 // Instantiate the Earth variable as a new THREE.Mesh using the custom MeshPhysicalMaterial
-const Earth = new THREE.Mesh( new THREE.SphereGeometry( 3, 50, 50 ), earthMaterial );
+const Earth = new DomMesh( new THREE.SphereGeometry( 3, 50, 50 ), earthMaterial, camera );
 
 // --- Atmosphere ---
 // Create a THREE.SpriteMaterial to represent the Atmosphere around the Earth
@@ -268,9 +270,47 @@ var cloudMaterial = new THREE.MeshPhysicalMaterial({
 var clouds = new THREE.Mesh( new THREE.SphereGeometry(3.01, 50, 50), cloudMaterial );
 // Instantiate the clouds on the scene
 scene.add(clouds);
-
 // Instantiate the Earth on the scene
 scene.add( Earth );
+
+var onEarth = true;
+
+// --- Earth Scripts ---
+// Create a clickable moon
+Earth.MouseEnter(() => {
+	if (!onEarth)
+	cursorFilled.children[0].classList.toggle("change");
+});
+Earth.MouseLeave(() => {
+	if (!onEarth)
+	cursorFilled.children[0].classList.toggle("change");
+});
+
+const homePage = document.querySelector('#home');
+const aboutPage = document.querySelector('#about');
+
+function earthScript() {
+	if (!onEarth) {
+		gsap.to(camera.position, {
+			z: Earth.position.z + cameraRadius * Math.cos(Math.PI/6),
+			y: Earth.position.y + cameraRadius * Math.sin(Math.PI/6),
+			x: Earth.position.x,
+			duration: 1.7
+		});
+		
+		controls.target.set(Earth.position.x, Earth.position.y, Earth.position.z);
+
+		cursorFilled.children[0].classList.toggle("change");
+
+		homePage.classList.toggle("activePage");
+		aboutPage.classList.toggle("activePage");
+
+
+		onEarth = true;
+	}
+}
+Earth.MouseDown(earthScript);
+// --- End of Moon Scripts ---
 
 /* --- End of Earth --- */
 
@@ -279,19 +319,71 @@ scene.add( Earth );
 // Create a THREE.MeshPhysicalMaterial for moon to have moon cycles due to Shadow Casting
 const moonMaterial = new THREE.MeshPhysicalMaterial({
   color: 0xffffff,                                   // Set Moon's Base Color White
-  map: moonTexture, // Load the Moon texture
+  //map: moonTexture, 								 // Load the Moon texture
+  transparent: false,   							 // Set transparancy to false
   metalness: 0.0,                                    // 0.0% Metalness
   roughness: 1.0,                                    // 100% Roughness
   clearcoat: 1.0,                                    // 100% Clearcoat
   clearcoatRoughness: 1.0,                           // 100% ClearcoatRoughness
   reflectivity: 0.0,                                 // 0.0% Reflectivity
 });
+moonMaterial.onBeforeCompile = function ( shader ) {
+	// Insert custom Uniforms
+	shader.uniforms.sunDirection = { value: sunLight.position };
+	shader.uniforms.dayTexture = { value: moonTexture };
+	shader.uniforms.nightTexture = { value: moonDarkTexture };
+
+	// Insert the custom Vertex Shader Extensions
+	shader.vertexShader = EarthVertexShader_pars + shader.vertexShader; // Insert the uniforms into the vertex shader
+	shader.vertexShader = shader.vertexShader.replace('void main() {', EarthVertexShader); // Insert the vertex shader extension
+
+	// Insert the custom Fragment Shader Extensions
+	shader.fragmentShader = EarthFragmentShader_pars + shader.fragmentShader; // Insert the uniforms into the fragment shader
+	// Change the definition for diffuseColor to insert our custom day/night texture mix
+	shader.fragmentShader = shader.fragmentShader.replace('vec4 diffuseColor = vec4( diffuse, opacity );', EarthFragmentShader); // Insert the fragment shader extension
+
+	// Make sure to update the shader data
+	moonMaterial.userData.shader = shader;
+	shader.needsUpdate=true;
+};
 // Create a THREE.Mesh Sphere object with moonmaterial
-const moon = new THREE.Mesh( new THREE.SphereGeometry(0.5), moonMaterial );
+const moon = new DomMesh( new THREE.SphereGeometry(0.5), moonMaterial, camera );
 // Set the moon's current position using the Day of the Year to find the exact spot on the Orbit
 moon.position.set(30*Math.cos((DOY/27)*Math.PI*2), 30*Math.sin(5.14*Math.PI/180)*Math.cos((DOY/27)*Math.PI*2), 30*Math.sin((DOY/27)*Math.PI*2));
 // Instantiate moon
 scene.add(moon);
+
+// --- Moon Scripts ---
+// Create a clickable moon
+moon.MouseEnter(() => {
+	if (onEarth)
+	cursorFilled.children[0].classList.toggle("change");
+});
+moon.MouseLeave(() => {
+	if (onEarth)
+	cursorFilled.children[0].classList.toggle("change");
+});
+function moonScript() {
+	if (onEarth) {
+		gsap.to(camera.position, {
+			z: moon.position.z + 1,
+			y: moon.position.y + 1,
+			x: moon.position.x + 1,
+			duration: 1.7
+		});
+		
+		controls.target.set(moon.position.x, moon.position.y, moon.position.z);
+
+		cursorFilled.children[0].classList.toggle("change");
+
+		homePage.classList.toggle("activePage");
+		aboutPage.classList.toggle("activePage");
+
+		onEarth = false;
+	}
+}
+moon.MouseDown(moonScript);
+// --- End of Moon Scripts ---
 
 /* --- End of Moon --- */
 
@@ -674,20 +766,55 @@ animate();
 
 // Get the on screen buttons
 const nav = document.getElementById('nav')
-const about = document.getElementById('about');
-const expertise = document.getElementById('expertise');
-const work = document.getElementById('work');
-const experience = document.getElementById('experience');
-const contact = document.getElementById('contact');
+const home = document.getElementById('homeTag');
+const about = document.getElementById('aboutTag');
+const expertise = document.getElementById('expertiseTag');
+const experience = document.getElementById('experienceTag');
+const contact = document.getElementById('contactTag');
 
-about.onmouseenter = function(){
+home.onmouseenter = function(){
 	cursorFilled.children[0].classList.toggle("change");
-
-	
 
 	nav.children[0].classList.toggle("navChange");
 	nav.children[2].classList.toggle("navChange");
 	nav.children[3].classList.toggle("navChange");
+	nav.children[4].classList.toggle("navChange");
+	nav.children[5].classList.toggle("navChange");
+	nav.children[6].classList.toggle("navChange");
+	nav.children[7].classList.toggle("navChange");
+	nav.children[8].classList.toggle("navChange");
+	nav.children[9].classList.toggle("navChange");
+	nav.children[10].classList.toggle("navChange");
+};
+
+home.onmouseleave = function(){
+	cursorFilled.children[0].classList.toggle("change");
+
+	nav.children[0].classList.toggle("navChange");
+	nav.children[2].classList.toggle("navChange");
+	nav.children[3].classList.toggle("navChange");
+	nav.children[4].classList.toggle("navChange");
+	nav.children[5].classList.toggle("navChange");
+	nav.children[6].classList.toggle("navChange");
+	nav.children[7].classList.toggle("navChange");
+	nav.children[8].classList.toggle("navChange");
+	nav.children[9].classList.toggle("navChange");
+	nav.children[10].classList.toggle("navChange");
+};
+
+home.onmousedown = function() {
+	if (!onEarth) {
+		earthScript();
+		cursorFilled.children[0].classList.toggle("change");
+	}
+}
+
+about.onmouseenter = function(){
+	cursorFilled.children[0].classList.toggle("change");
+
+	nav.children[0].classList.toggle("navChange");
+	nav.children[1].classList.toggle("navChange");
+	nav.children[2].classList.toggle("navChange");
 	nav.children[4].classList.toggle("navChange");
 	nav.children[5].classList.toggle("navChange");
 	nav.children[6].classList.toggle("navChange");
@@ -701,8 +828,8 @@ about.onmouseleave = function(){
 	cursorFilled.children[0].classList.toggle("change");
 
 	nav.children[0].classList.toggle("navChange");
+	nav.children[1].classList.toggle("navChange");
 	nav.children[2].classList.toggle("navChange");
-	nav.children[3].classList.toggle("navChange");
 	nav.children[4].classList.toggle("navChange");
 	nav.children[5].classList.toggle("navChange");
 	nav.children[6].classList.toggle("navChange");
@@ -712,16 +839,21 @@ about.onmouseleave = function(){
 	nav.children[10].classList.toggle("navChange");
 };
 
+about.onmousedown = function() {
+	if (onEarth) {
+		moonScript();
+		cursorFilled.children[0].classList.toggle("change");
+	}
+}
+
 expertise.onmouseenter = function(){
 	cursorFilled.children[0].classList.toggle("change");
-
-	
 
 	nav.children[0].classList.toggle("navChange");
 	nav.children[1].classList.toggle("navChange");
 	nav.children[2].classList.toggle("navChange");
+	nav.children[3].classList.toggle("navChange");
 	nav.children[4].classList.toggle("navChange");
-	nav.children[5].classList.toggle("navChange");
 	nav.children[6].classList.toggle("navChange");
 	nav.children[7].classList.toggle("navChange");
 	nav.children[8].classList.toggle("navChange");
@@ -735,23 +867,6 @@ expertise.onmouseleave = function(){
 	nav.children[0].classList.toggle("navChange");
 	nav.children[1].classList.toggle("navChange");
 	nav.children[2].classList.toggle("navChange");
-	nav.children[4].classList.toggle("navChange");
-	nav.children[5].classList.toggle("navChange");
-	nav.children[6].classList.toggle("navChange");
-	nav.children[7].classList.toggle("navChange");
-	nav.children[8].classList.toggle("navChange");
-	nav.children[9].classList.toggle("navChange");
-	nav.children[10].classList.toggle("navChange");
-};
-
-work.onmouseenter = function(){
-	cursorFilled.children[0].classList.toggle("change");
-
-	
-
-	nav.children[0].classList.toggle("navChange");
-	nav.children[1].classList.toggle("navChange");
-	nav.children[2].classList.toggle("navChange");
 	nav.children[3].classList.toggle("navChange");
 	nav.children[4].classList.toggle("navChange");
 	nav.children[6].classList.toggle("navChange");
@@ -761,25 +876,13 @@ work.onmouseenter = function(){
 	nav.children[10].classList.toggle("navChange");
 };
 
-work.onmouseleave = function(){
-	cursorFilled.children[0].classList.toggle("change");
-
-	nav.children[0].classList.toggle("navChange");
-	nav.children[1].classList.toggle("navChange");
-	nav.children[2].classList.toggle("navChange");
-	nav.children[3].classList.toggle("navChange");
-	nav.children[4].classList.toggle("navChange");
-	nav.children[6].classList.toggle("navChange");
-	nav.children[7].classList.toggle("navChange");
-	nav.children[8].classList.toggle("navChange");
-	nav.children[9].classList.toggle("navChange");
-	nav.children[10].classList.toggle("navChange");
+expertise.onmousedown = function() {
+	console.log(camera.position);
+	console.log(moon.position);
 };
 
 experience.onmouseenter = function(){
 	cursorFilled.children[0].classList.toggle("change");
-
-	
 
 	nav.children[0].classList.toggle("navChange");
 	nav.children[1].classList.toggle("navChange");
@@ -811,8 +914,6 @@ experience.onmouseleave = function(){
 contact.onmouseenter = function(){
 	cursorFilled.children[0].classList.toggle("change");
 
-	
-
 	nav.children[0].classList.toggle("navChange");
 	nav.children[1].classList.toggle("navChange");
 	nav.children[2].classList.toggle("navChange");
@@ -839,3 +940,14 @@ contact.onmouseleave = function(){
 	nav.children[8].classList.toggle("navChange");
 	nav.children[10].classList.toggle("navChange");
 };
+
+window.onscroll = function(event) {
+	gsap.to(camera.position, {
+		z: moon.position.z * (window.scrollY/window.innerHeight) + 1,
+		y: moon.position.y * (window.scrollY/window.innerHeight) + 1,
+		x: moon.position.x * (window.scrollY/window.innerHeight) + 1,
+		duration: 1.7
+	});
+	controls.target.set(moon.position.x, moon.position.y, moon.position.z);
+};
+

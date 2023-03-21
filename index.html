@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>-->
 </head>
 <body>
 
@@ -18,86 +19,114 @@
         <h1 id="loading-text"></h1>
     </section>
 
+    <section class="wtf s1">
+
+    </section>
+
+    <section class="wtf s2">
+
+    </section>
+
     <section id="main">
         <div id="nav">
             <div class="container">
                 <h2>//</h2>
             </div>
-            <div id="about" class="container">
+            <div id="homeTag" class="container">
+                <h2>HOME</h2>
+            </div>
+            <div class="container">
+                <h2>//</h2>
+            </div>
+            <div id="aboutTag" class="container">
                 <h2>ABOUT</h2>
             </div>
             <div class="container">
                 <h2>//</h2>
             </div>
-            <div id="expertise" class="container">
+            <div id="expertiseTag" class="container">
                 <h2>EXPERTISE</h2>
             </div>
             <div class="container">
                 <h2>//</h2>
             </div>
-            <div id="work" class="container">
-                <h2>WORK</h2>
-            </div>
-            <div class="container">
-                <h2>//</h2>
-            </div>
-            <div id="experience" class="container">
+            <div id="experienceTag" class="container">
                 <h2>EXPERIENCE</h2>
             </div>
             <div class="container">
                 <h2>//</h2>
             </div>
-            <div id="contact" class="container">
+            <div id="contactTag" class="container">
                 <h2>CONTACT</h2>
             </div>
             <div class="container">
                 <h2>//</h2>
             </div>
         </div>
-        <div id="intro">
-            <h1>OZGUR TUNA OZTURK</h1>
-            <div id="tags">
-                <div class="tag">
-                    <h2>//</h2>
-                </div>
-                <div class="tag">
-                    <h2>AEROSPACE ENGINEER</h2>
-                </div>
-                <div class="tag">
-                    <h2>//</h2>
-                </div>
-                <div class="tag">
-                    <h2>EMBEDDED SYSTEMS ENGINEER</h2>
-                </div>
-                <div class="tag">
-                    <h2>//</h2>
-                </div>
-                <div class="tag">
-                    <h2>MAKER</h2>
-                </div>
-                <div class="tag">
-                    <h2>//</h2>
+        <section id="home" class="page activePage">
+            <div id="intro">
+                <h1>OZGUR TUNA OZTURK</h1>
+                <div id="tags">
+                    <div class="tag">
+                        <h2>//</h2>
+                    </div>
+                    <div class="tag">
+                        <h2>AEROSPACE ENGINEER</h2>
+                    </div>
+                    <div class="tag">
+                        <h2>//</h2>
+                    </div>
+                    <div class="tag">
+                        <h2>EMBEDDED SYSTEMS ENGINEER</h2>
+                    </div>
+                    <div class="tag">
+                        <h2>//</h2>
+                    </div>
+                    <div class="tag">
+                        <h2>MAKER</h2>
+                    </div>
+                    <div class="tag">
+                        <h2>//</h2>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div id="next">
-            <svg class="arrows">
-                <path class="a1" d="M0 0 L30 32 L60 0"></path>
-                <path class="a2" d="M0 20 L30 52 L60 20"></path>
-                <path class="a3" d="M0 40 L30 72 L60 40"></path>
-            </svg>
-        </div>
+            <div id="next">
+                <svg class="arrows">
+                    <path class="a1" d="M0 0 L30 32 L60 0"></path>
+                    <path class="a2" d="M0 20 L30 52 L60 20"></path>
+                    <path class="a3" d="M0 40 L30 72 L60 40"></path>
+                </svg>
+            </div>
+        </section>
+        
+        <section id="about" class="page">
+            <div id="aboutContent">
+                <img src="./textures/astronaut.png" alt="Tuna Astronaut PNG">
+                <div>
+                    <h1>Who am I?</h1>
+                    <p>
+                        Hello there!<br>
+                        My name is Tuna. I am an internaitonal student from Istanbul, Turkey.
+                        I am currently studying at Dartmouth College and Wheaton College MA.
+                        I major in Mechanical Engineering at Dartmouth College and double major in Physics and Computer Science at Wheaton College MA.
+                        <br> <br>
+                        I created many projects from Biomedical devices to a reprogrammable Handheld Gaming Device.
+                        Currently, I am working on creating a CPU focused Object Oriented HTML5 Canvas Renderer Library in Javascript.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="mouse">
+            <div class="filled">
+                <div class="cursor dot"></div>
+            </div>
+            <div class="cursor rounded"></div>
+            <div class="cursor pointed"></div>
+        </section>
     </section>
 
-
-
-    <section id="mouse">
-        <div class="filled">
-            <div class="cursor dot"></div>
-        </div>
-        <div class="cursor rounded"></div>
-        <div class="cursor pointed"></div>
-    </section>
+    
     
     <script src="app.js" type="module"></script>
 </body>
