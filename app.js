@@ -433,7 +433,7 @@ const node1 = new DomMesh(nodeGeometry, new THREE.MeshBasicMaterial( { color: 0x
 var node1Latitude = -41.0082;
 var node1Longitude = 28.9784;
 // Set Spherical Positions
-SphereToEuclodCord(node1, node1Latitude, node1Longitude);
+SphereToEuclodCord(node1, node1Latitude, node1Longitude, Earth.rotation.y);
 // Add the Node Group to the Scene
 scene.add(node1);
 
@@ -443,7 +443,7 @@ const node2 = new DomMesh( nodeGeometry, new THREE.MeshBasicMaterial( { color: 0
 var node2Latitude = -31.6538;
 var node2Longitude = 120.7522;
 // Set Spherical Positions
-SphereToEuclodCord(node2, node2Latitude, node2Longitude);
+SphereToEuclodCord(node2, node2Latitude, node2Longitude, Earth.rotation.y);
 // Add the Node Group to the Scene
 scene.add(node2);
 
@@ -453,7 +453,7 @@ const node3 = new DomMesh( nodeGeometry, new THREE.MeshBasicMaterial( { color: 0
 var node3Latitude = -27.4716;
 var node3Longitude = 89.6386;
 // Set Spherical Positions
-SphereToEuclodCord(node3, node3Latitude, node3Longitude);
+SphereToEuclodCord(node3, node3Latitude, node3Longitude, Earth.rotation.y);
 // Add the Node Group to the Scene
 scene.add(node3);
 
@@ -463,7 +463,7 @@ const node4 = new DomMesh( nodeGeometry, new THREE.MeshBasicMaterial( { color: 0
 var node4Latitude = -41.9672;
 var node4Longitude = -71.1840;
 // Set Spherical Positions
-SphereToEuclodCord(node4, node4Latitude, node4Longitude);
+SphereToEuclodCord(node4, node4Latitude, node4Longitude, Earth.rotation.y);
 // Add the Node Group to the Scene
 scene.add(node4);
 
@@ -473,10 +473,9 @@ const node5 = new DomMesh( nodeGeometry, new THREE.MeshBasicMaterial( { color: 0
 var node5Latitude = -48.8566;
 var node5Longitude = 2.3522;
 // Set Spherical Positions
-SphereToEuclodCord(node5, node5Latitude, node5Longitude);
+SphereToEuclodCord(node5, node5Latitude, node5Longitude, Earth.rotation.y);
 // Add the Node Group to the Scene
 scene.add(node5);
-
 /* --- End of Nodes --- */
 
 /* --- Node Tags --- */
@@ -680,16 +679,14 @@ node5.MouseDown(() => {
  *  converting the paramters given (latitude & longitude) into
  *  Euclodian coordinates to place it on the globe.
  */
-function SphereToEuclodCord( node , latitude, longitude ) {
+function SphereToEuclodCord( node , latitude, longitude, earthRotation ) {
 
   // Uses + (Math.PI/2) to change the phase by 90 deg
   node.position.set( 
-	3/3.45 * Math.sin( longitude * (Math.PI/180) + (Math.PI/2) ) * Math.sin( latitude * (Math.PI/180) + (Math.PI/2) ), 
-    3/3.45 * Math.cos( latitude  * (Math.PI/180) + (Math.PI/2) ), 
-    3/3.45 * Math.cos( longitude * (Math.PI/180) + (Math.PI/2) ) * Math.sin( latitude * (Math.PI/180) + (Math.PI/2) )
+	(3 * Math.sin( longitude * (Math.PI/180) + earthRotation + (Math.PI/2) ) * Math.sin( latitude * (Math.PI/180) + (Math.PI/2) )),
+    3 * Math.cos( latitude  * (Math.PI/180) + (Math.PI/2) ), 
+    (3 * Math.cos( longitude * (Math.PI/180) + earthRotation + (Math.PI/2) ) * Math.sin( latitude * (Math.PI/180) + (Math.PI/2) ))
   );
-
-  node.position.applyQuaternion( new THREE.Quaternion( 0, 1, 0, Earth.rotation.y/2 - Math.PI/2) );
 
   node.position.set(
 	Earth.position.x + node.position.x,
@@ -785,6 +782,12 @@ function animate() {
   earthPos.normalize();
   sunPos.normalize();
   Earth.rotation.y = Math.acos( earthPos.dot(sunPos) ) - Math.PI;
+
+  SphereToEuclodCord(node1, node1Latitude, node1Longitude, Earth.rotation.y);
+  SphereToEuclodCord(node2, node2Latitude, node2Longitude, Earth.rotation.y);
+  SphereToEuclodCord(node3, node3Latitude, node3Longitude, Earth.rotation.y);
+  SphereToEuclodCord(node4, node4Latitude, node4Longitude, Earth.rotation.y);
+  SphereToEuclodCord(node5, node5Latitude, node5Longitude, Earth.rotation.y);
 
   // Set the position of the moon's orbit using the Day of the Year
   moon.position.x = Earth.position.x + 25*Math.sin((DOY/27)*Math.PI*2 - Math.PI/2);
