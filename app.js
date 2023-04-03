@@ -58,6 +58,8 @@ const dt = new Date();
 
 /* --- End of ShortCuts --- */
 
+window.scrollY = 0;
+
 /* --- Textures --- */
 
 // 
@@ -162,7 +164,8 @@ const DOY = Math.ceil((dt - new Date(dt.getFullYear(),0,1)) / 86400000);
 // Create a new THREE.DirectionalLight object to imitate the Sun
 const sunLight = new THREE.DirectionalLight( 0xffffff, 0.5, 2000 );
 // Set the position of the sunLight Object with respect to Earth
-sunLight.position.set(100*Math.cos(Math.PI), -100*(Math.sin(0.4101524)*Math.cos((DOY/365)*Math.PI*2)), 100*Math.sin(Math.PI));
+//sunLight.position.set(100*Math.cos(Math.PI), -100*(Math.sin(0.4101524)*Math.cos((DOY/365)*Math.PI*2)), 100*Math.sin(Math.PI));
+
 // Instantiate the sunLight Object into the scene
 scene.add(sunLight);
 // Create a THREE JS LensFlare Object to create a lensflare effect when looked at the sun
@@ -171,6 +174,8 @@ const sunFlare = new Lensflare();
 sunFlare.addElement( new LensflareElement( lensflareTexture, 700, 0 ) );
 // Instantiate the LensFlare
 sunLight.add(sunFlare);
+
+sunLight.position.set(0,0,0);
 
 /* --- End of Sun --- */
 
@@ -186,7 +191,7 @@ scene.add( atmoLight );
 /* --- SkySphere --- */
 
 // Create a new THREE.Mesh Sphere object and render a 360 image of the night sky
-const skySphere = new THREE.Mesh( new THREE.SphereGeometry(105), new THREE.MeshBasicMaterial({ color: 0xffffff, map: skySphereTexture, }) );
+const skySphere = new THREE.Mesh( new THREE.SphereGeometry(305), new THREE.MeshBasicMaterial({ color: 0xffffff, map: skySphereTexture, }) );
 // Only render the texture in the inside of the Sphere
 skySphere.material.side = THREE.BackSide;
 // Instantiate the skySphere
@@ -210,10 +215,12 @@ const earthMaterial = new THREE.MeshPhysicalMaterial( {
 	bumpScale: 0.25,									   // Earth Elevation Scale
 } );
 
+var sunPos = new THREE.Vector3(Math.cos(Math.PI), -(Math.sin(0.4101524)*Math.cos((DOY/365)*Math.PI*2)), Math.sin(Math.PI));
+
 // Before compiling the website add specifics to the MeshPhysicalMaterial of Earth
 earthMaterial.onBeforeCompile = function ( shader ) {
 	// Insert custom Uniforms
-	shader.uniforms.sunDirection = { value: sunLight.position };
+	shader.uniforms.sunDirection = { value: sunPos };
 	shader.uniforms.dayTexture = { value: earthDayTexture };
 	shader.uniforms.nightTexture = { value: earthNightTexture };
 
@@ -272,6 +279,16 @@ var clouds = new THREE.Mesh( new THREE.SphereGeometry(3.01, 50, 50), cloudMateri
 scene.add(clouds);
 // Instantiate the Earth on the scene
 scene.add( Earth );
+Earth.position.set(100*Math.cos(((DOY)/365)*Math.PI*2 - Math.PI/2), 0, 100*Math.sin((DOY/365)*Math.PI*2 - Math.PI/2));
+clouds.position.set( Earth.position.x, Earth.position.y, Earth.position.z );
+
+gsap.to(camera.position, {
+	z: Earth.position.z + cameraRadius * Math.cos(Math.PI/6),
+	y: Earth.position.y + cameraRadius * Math.sin(Math.PI/6),
+	x: Earth.position.x,
+	duration: 1.7
+});
+controls.target.set(Earth.position.x, Earth.position.y, Earth.position.z);
 
 var onEarth = true;
 
@@ -302,11 +319,20 @@ function earthScript() {
 
 		cursorFilled.children[0].classList.toggle("change");
 
-		homePage.classList.toggle("activePage");
-		aboutPage.classList.toggle("activePage");
-
+		gsap.to( "#home", {
+			opacity: 1,
+			y: window.innerHeight,
+			duration: 1.7
+		});
+		gsap.to( "#about", {
+			opacity: 0,
+			y: window.innerHeight,
+			duration: 1.7
+		});
 
 		onEarth = true;
+
+		//window.pageYOffset = 0;
 	}
 }
 Earth.MouseDown(earthScript);
@@ -329,7 +355,7 @@ const moonMaterial = new THREE.MeshPhysicalMaterial({
 });
 moonMaterial.onBeforeCompile = function ( shader ) {
 	// Insert custom Uniforms
-	shader.uniforms.sunDirection = { value: sunLight.position };
+	shader.uniforms.sunDirection = { value: sunPos };
 	shader.uniforms.dayTexture = { value: moonTexture };
 	shader.uniforms.nightTexture = { value: moonDarkTexture };
 
@@ -349,7 +375,7 @@ moonMaterial.onBeforeCompile = function ( shader ) {
 // Create a THREE.Mesh Sphere object with moonmaterial
 const moon = new DomMesh( new THREE.SphereGeometry(0.5), moonMaterial, camera );
 // Set the moon's current position using the Day of the Year to find the exact spot on the Orbit
-moon.position.set(30*Math.cos((DOY/27)*Math.PI*2), 30*Math.sin(5.14*Math.PI/180)*Math.cos((DOY/27)*Math.PI*2), 30*Math.sin((DOY/27)*Math.PI*2));
+moon.position.set(Earth.position.x + 30*Math.cos((DOY/27)*Math.PI*2), Earth.position.y + 30*Math.sin(5.14*Math.PI/180)*Math.cos((DOY/27)*Math.PI*2), Earth.position.z + 30*Math.sin((DOY/27)*Math.PI*2));
 // Instantiate moon
 scene.add(moon);
 
@@ -376,10 +402,20 @@ function moonScript() {
 
 		cursorFilled.children[0].classList.toggle("change");
 
-		homePage.classList.toggle("activePage");
-		aboutPage.classList.toggle("activePage");
+		gsap.to( "#home", {
+			opacity: 0,
+			y: 0,
+			duration: 1.7
+		});
+		gsap.to( "#about", {
+			opacity: 1,
+			y: 0,
+			duration: 1.7
+		});
 
 		onEarth = false;
+
+		//window.pageYOffset = window.innerHeight;
 	}
 }
 moon.MouseDown(moonScript);
@@ -648,12 +684,20 @@ function SphereToEuclodCord( node , latitude, longitude ) {
 
   // Uses + (Math.PI/2) to change the phase by 90 deg
   node.position.set( 
-    3 * Math.sin( longitude * (Math.PI/180) + (Math.PI/2) ) * Math.sin( latitude * (Math.PI/180) + (Math.PI/2) ), 
-    3 * Math.cos( latitude  * (Math.PI/180) + (Math.PI/2) ), 
-    3 * Math.cos( longitude * (Math.PI/180) + (Math.PI/2) ) * Math.sin( latitude * (Math.PI/180) + (Math.PI/2) ) 
+	3/3.45 * Math.sin( longitude * (Math.PI/180) + (Math.PI/2) ) * Math.sin( latitude * (Math.PI/180) + (Math.PI/2) ), 
+    3/3.45 * Math.cos( latitude  * (Math.PI/180) + (Math.PI/2) ), 
+    3/3.45 * Math.cos( longitude * (Math.PI/180) + (Math.PI/2) ) * Math.sin( latitude * (Math.PI/180) + (Math.PI/2) )
   );
 
-}
+  node.position.applyQuaternion( new THREE.Quaternion( 0, 1, 0, Earth.rotation.y/2 - Math.PI/2) );
+
+  node.position.set(
+	Earth.position.x + node.position.x,
+	Earth.position.y + node.position.y,
+	Earth.position.z + node.position.z
+  );
+
+} /* --- End of SphereToEuclodCord --- */
 
 // Add event listener to the current webpage to run onWindowResize() function when the page is resized
 window.addEventListener('resize', onWindowResize, false);
@@ -683,6 +727,8 @@ function onWindowResize() {
 	// Adjust for smaller devices like phones
 	camera.fov = FOV * cameraMultiplier / 2
   }
+
+  cameraRadius = 10 * cameraMultiplier;
 
   // Update the camera properties
   camera.updateProjectionMatrix();
@@ -729,15 +775,27 @@ function animate() {
 
   // Set the current position of the sun with respect to earth using the second of the day.
   // (in other works set the rotation of the earth) 
-  sunLight.position.x = 100*(Math.cos((seconds/86400)*(2*Math.PI) + (Math.PI)));
-  sunLight.position.z = 100*(Math.sin((seconds/86400)*(2*Math.PI) + (Math.PI)));
+  //sunLight.position.x = 100*(Math.cos((seconds/86400)*(2*Math.PI) + (Math.PI)));
+  //sunLight.position.z = 100*(Math.sin((seconds/86400)*(2*Math.PI) + (Math.PI)));
+
+  sunPos.x =  (Math.cos((seconds/86400)*(2*Math.PI) + (Math.PI)));
+  sunPos.z = (Math.sin((seconds/86400)*(2*Math.PI) + (Math.PI)));
+
+  const earthPos = Earth.position.clone();
+  earthPos.normalize();
+  sunPos.normalize();
+  Earth.rotation.y = Math.acos( earthPos.dot(sunPos) ) - Math.PI;
 
   // Set the position of the moon's orbit using the Day of the Year
-  moon.position.x = 30*Math.sin((DOY/27)*Math.PI*2 - Math.PI/2);
-  moon.position.z = 30*Math.cos((DOY/27)*Math.PI*2 - Math.PI/2);
+  moon.position.x = Earth.position.x + 25*Math.sin((DOY/27)*Math.PI*2 - Math.PI/2);
+  moon.position.z = Earth.position.y + 25*Math.cos((DOY/27)*Math.PI*2 - Math.PI/2);
+
+  const moonPos = moon.position.clone();
+  moonPos.normalize();
 
   // Set the moon's current rotation
-  moon.rotation.y = (DOY/27)*Math.PI*2;
+  //moon.rotation.y = (DOY/27)*Math.PI*2;
+  moon.rotation.y = Math.acos( moonPos.dot(sunPos) ) - Math.PI
 
   // Create a realistic cloud effect by moving the clouds at 15/kmph and use the Day of the Year
   clouds.rotation.y = (( (DOY-1)*24 + dt.getUTCHours())/(40075/15))*Math.PI*2
@@ -877,8 +935,7 @@ expertise.onmouseleave = function(){
 };
 
 expertise.onmousedown = function() {
-	console.log(camera.position);
-	console.log(moon.position);
+
 };
 
 experience.onmouseenter = function(){
@@ -941,13 +998,53 @@ contact.onmouseleave = function(){
 	nav.children[10].classList.toggle("navChange");
 };
 
+var temp = 0;
+
 window.onscroll = function(event) {
+
 	gsap.to(camera.position, {
-		z: moon.position.z * (window.scrollY/window.innerHeight) + 1,
-		y: moon.position.y * (window.scrollY/window.innerHeight) + 1,
-		x: moon.position.x * (window.scrollY/window.innerHeight) + 1,
-		duration: 1.7
+		z: Earth.position.z + cameraRadius * Math.cos(Math.PI/6),
+		y: Earth.position.y + cameraRadius * Math.sin(Math.PI/6),
+		x: Earth.position.x,
+		duration: 0
 	});
-	controls.target.set(moon.position.x, moon.position.y, moon.position.z);
+	camera.position.lerp( new THREE.Vector3( moon.position.x + 1, moon.position.y + 1, moon.position.z + 1 ), window.pageYOffset/window.innerHeight );
+
+	if (window.pageYOffset > temp) {
+
+		
+		controls.target.set(moon.position.x, moon.position.y, moon.position.z);
+
+		gsap.to( "#home", {
+			opacity: 0,
+			duration: 2
+		});
+		gsap.to( "#about", {
+			opacity: 1,
+			duration: 2
+		});
+
+		onEarth = false;
+
+	} else if (window.pageYOffset < temp) {
+
+
+		controls.target.set(Earth.position.x, Earth.position.y, Earth.position.z);
+
+		gsap.to( "#home", {
+			opacity: 1,
+			duration: 2
+		});
+		gsap.to( "#about", {
+			opacity: 0,
+			duration: 2
+		});
+
+		onEarth = true;
+	}
+
+	
+
+	temp = window.pageYOffset;
 };
 
