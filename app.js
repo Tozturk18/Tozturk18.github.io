@@ -24,6 +24,8 @@ import { EarthFragmentShader } from './shaders/earthFragmentShaderExt2.glsl.js';
 
 /* --- End of Import Shaders --- */
 
+gsap.registerPlugin(ScrollToPlugin);
+
 /* --- Loading Manager --- */
 
 // Create a manager that checks texture loading
@@ -319,20 +321,21 @@ function earthScript() {
 
 		cursorFilled.children[0].classList.toggle("change");
 
+		gsap.to(window, {
+			scrollTo:"#home",
+			duration: 1.7
+		});
+
 		gsap.to( "#home", {
 			opacity: 1,
-			y: window.innerHeight,
 			duration: 1.7
 		});
 		gsap.to( "#about", {
 			opacity: 0,
-			y: window.innerHeight,
 			duration: 1.7
 		});
 
 		onEarth = true;
-
-		//window.pageYOffset = 0;
 	}
 }
 Earth.MouseDown(earthScript);
@@ -402,20 +405,21 @@ function moonScript() {
 
 		cursorFilled.children[0].classList.toggle("change");
 
+		gsap.to(window, {
+			scrollTo:"#about",
+			duration: 1.7
+		});
+
 		gsap.to( "#home", {
 			opacity: 0,
-			y: 0,
 			duration: 1.7
 		});
 		gsap.to( "#about", {
 			opacity: 1,
-			y: 0,
 			duration: 1.7
 		});
 
 		onEarth = false;
-
-		//window.pageYOffset = window.innerHeight;
 	}
 }
 moon.MouseDown(moonScript);
@@ -1020,11 +1024,11 @@ window.onscroll = function(event) {
 
 		gsap.to( "#home", {
 			opacity: 0,
-			duration: 2
+			duration: 1.7
 		});
 		gsap.to( "#about", {
 			opacity: 1,
-			duration: 2
+			duration: 1.7
 		});
 
 		onEarth = false;
@@ -1036,11 +1040,11 @@ window.onscroll = function(event) {
 
 		gsap.to( "#home", {
 			opacity: 1,
-			duration: 2
+			duration: 1.7
 		});
 		gsap.to( "#about", {
 			opacity: 0,
-			duration: 2
+			duration: 1.7
 		});
 
 		onEarth = true;
