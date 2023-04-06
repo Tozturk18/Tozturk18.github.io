@@ -319,8 +319,6 @@ function earthScript() {
 		
 		controls.target.set(Earth.position.x, Earth.position.y, Earth.position.z);
 
-		cursorFilled.children[0].classList.toggle("change");
-
 		gsap.to(window, {
 			scrollTo:"#home",
 			duration: 1.7
@@ -402,8 +400,6 @@ function moonScript() {
 		});
 		
 		controls.target.set(moon.position.x, moon.position.y, moon.position.z);
-
-		cursorFilled.children[0].classList.toggle("change");
 
 		gsap.to(window, {
 			scrollTo:"#about",
@@ -1006,7 +1002,7 @@ contact.onmouseleave = function(){
 };
 
 var temp = 0;
-
+var directionControl = 0;
 window.onscroll = function(event) {
 
 	gsap.to(camera.position, {
@@ -1018,6 +1014,11 @@ window.onscroll = function(event) {
 	camera.position.lerp( new THREE.Vector3( moon.position.x + 1, moon.position.y + 1, moon.position.z + 1 ), window.pageYOffset/window.innerHeight );
 
 	if (window.pageYOffset > temp) {
+
+		if (directionControl == 0) {
+			directionControl = 1;
+			cursorFilled.children[0].classList.toggle("change");
+		}
 
 		
 		controls.target.set(moon.position.x, moon.position.y, moon.position.z);
@@ -1035,6 +1036,11 @@ window.onscroll = function(event) {
 
 	} else if (window.pageYOffset < temp) {
 
+		if (directionControl == 1) {
+			directionControl = 0;
+			cursorFilled.children[0].classList.toggle("change");
+		}
+
 
 		controls.target.set(Earth.position.x, Earth.position.y, Earth.position.z);
 
@@ -1049,8 +1055,6 @@ window.onscroll = function(event) {
 
 		onEarth = true;
 	}
-
-	
 
 	temp = window.pageYOffset;
 };
