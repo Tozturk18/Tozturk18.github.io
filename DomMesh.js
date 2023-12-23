@@ -39,6 +39,8 @@ class DomMesh extends Mesh {
         this._camera = camera || null;      // Create a variable to share the camera
         this._raycaster = new Raycaster();  // Instantiate a new Raycaster to find the objects under the mouse
 
+        this._canvas = document.querySelector("canvas");
+
     }
 
     /* --- End of Constructor --- */
@@ -58,6 +60,7 @@ class DomMesh extends Mesh {
         // Create local instaces of the variables to be shared with the EventListener function
         const camera = this._camera;
         const raycaster = this._raycaster;
+        const canvas =  this._canvas;
         var target = this;
         // Keep check on whether the mouse is already in the object or just entered
         var entered = false; // This variable is used to make sure that the func only run once
@@ -67,13 +70,15 @@ class DomMesh extends Mesh {
 
             // calculate pointer position in normalized device coordinates
             // (-1 to +1) for both components
-            const pointer = new Vector2( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1 );
-    
+            const pointer = new Vector2( -(( (canvas.getBoundingClientRect().left + canvas.width/2 + scrollX) + ( -(event.clientX + scrollX) ) ) / (canvas.width/2)), ( (canvas.getBoundingClientRect().top + canvas.height/2 + scrollY) + ( -(event.clientY + scrollY) ) ) / (canvas.height/2) );
+
             // update the picking ray with the camera and pointer position
             raycaster.setFromCamera( pointer, camera );
 
             // calculate objects intersecting the picking ray
             var selected = raycaster.intersectObject( target )[0] || [];
+
+            //console.log(target);
 
             // Check if the object under the mouse is this DomMesh object and if this is the first time entering
             if (selected.object == target && !entered) {
@@ -101,6 +106,7 @@ class DomMesh extends Mesh {
         // Create local instaces of the variables to be shared with the EventListener function
         const camera = this._camera;
         const raycaster = this._raycaster;
+        const canvas =  this._canvas;
         var target = this;
         // Keep check on whether the mouse is already left the object or just left
         var left = false;
@@ -110,8 +116,8 @@ class DomMesh extends Mesh {
 
             // calculate pointer position in normalized device coordinates
             // (-1 to +1) for both components
-            const pointer = new Vector2( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1 );
-    
+            const pointer = new Vector2( -(( (canvas.getBoundingClientRect().left + canvas.width/2 + scrollX) + ( -(event.clientX + scrollX) ) ) / (canvas.width/2)), ( (canvas.getBoundingClientRect().top + canvas.height/2 + scrollY) + ( -(event.clientY + scrollY) ) ) / (canvas.height/2) );
+
             // update the picking ray with the camera and pointer position
             raycaster.setFromCamera( pointer, camera );
 
@@ -144,14 +150,37 @@ class DomMesh extends Mesh {
         // Create local instaces of the variables to be shared with the EventListener function
         const camera = this._camera;
         const raycaster = this._raycaster;
+        const canvas = this._canvas;
         var target = this;
 
         window.addEventListener( 'touchstart', (event) => {
 
             // calculate pointer position in normalized device coordinates
             // (-1 to +1) for both components
-            const pointer = new Vector2( Math.round( ( ( event.touches[0].clientX / document.querySelector("canvas").width ) * 2 - 1 )*1000 )/1000, Math.round(( - ( event.touches[0].clientY / document.querySelector("canvas").height ) * 2 + 1 )*1000)/1000 );
+            //const pointer = new Vector2( Math.round( ( ( event.touches[0].clientX / document.querySelector("canvas").width ) * 2 - 1 )*1000 )/1000, Math.round(( - ( event.touches[0].clientY / document.querySelector("canvas").height ) * 2 + 1 )*1000)/1000 );
+            //const pointer = new Vector2( Math.round((( event.clientX / document.body.clientWidth ) * 2 - 1)*1000 )/1000, Math.round((- ( (event.clientY - canvas.offsetTop + scrollY) / (document.body.clientHeight) ) * 2 + 1 )*1000)/1000 );
+            const pointer = new Vector2( -Math.round((( (canvas.getBoundingClientRect().left + canvas.width/2 + scrollX) + ( -(event.clientX + scrollX) ) ) / (canvas.width/2))*1000 )/1000 , Math.round((( (canvas.getBoundingClientRect().top + canvas.height/2 + scrollY) + ( -(event.clientY + scrollY) ) ) / (canvas.height/2))*1000)/1000 );
+
+            // update the picking ray with the camera and pointer position
+            raycaster.setFromCamera( pointer, camera );
     
+            // calculate objects intersecting the picking ray
+            var selected = raycaster.intersectObject( target )[0] || [];
+
+            // Check if the object under the mouse is this DomMesh object
+            if (selected.object == target) {
+                console.log("Hello!");
+                func();
+            }
+
+        } );
+
+        window.addEventListener( 'click', (event) => {
+
+            // calculate pointer position in normalized device coordinates
+            // (-1 to +1) for both components
+            const pointer = new Vector2( -Math.round((( (canvas.getBoundingClientRect().left + canvas.width/2 + scrollX) + ( -(event.clientX + scrollX) ) ) / (canvas.width/2))*1000 )/1000 , Math.round((( (canvas.getBoundingClientRect().top + canvas.height/2 + scrollY) + ( -(event.clientY + scrollY) ) ) / (canvas.height/2))*1000)/1000 );
+
             // update the picking ray with the camera and pointer position
             raycaster.setFromCamera( pointer, camera );
     
@@ -163,23 +192,70 @@ class DomMesh extends Mesh {
                 func();
             }
 
+        });
+    }
+
+    /* MouseDown(func) Function
+     *  This function checks the current location of the mouse everytime it is clicked
+     *  and runs the function given through the parameters only if the mouse is clicked above this DomMesh Object.
+     * Parameters:
+     *  - func: a function to run when the conditions are met.
+     * Return:
+     *  - null
+     */
+    RightMouseDown(func){
+
+        // Create local instaces of the variables to be shared with the EventListener function
+        const camera = this._camera;
+        const raycaster = this._raycaster;
+        const canvas = this._canvas;
+        var target = this;
+
+        var pressTimer = 0;
+
+        window.addEventListener( 'touchstart', (event) => {
+
+            pressTimer = window.setTimeout(function() {
+
+                // calculate pointer position in normalized device coordinates
+                const pointer = new Vector2( -Math.round((( (canvas.getBoundingClientRect().left + canvas.width/2 + scrollX) + ( -(event.clientX + scrollX) ) ) / (canvas.width/2))*1000 )/1000 , Math.round((( (canvas.getBoundingClientRect().top + canvas.height/2 + scrollY) + ( -(event.clientY + scrollY) ) ) / (canvas.height/2))*1000)/1000 );
+
+                // update the picking ray with the camera and pointer position
+                raycaster.setFromCamera( pointer, camera );
+        
+                // calculate objects intersecting the picking ray
+                var selected = raycaster.intersectObject( target )[0] || [];
+
+                // Check if the object under the mouse is this DomMesh object
+                if (selected.object == target) {
+                    func(selected);
+                }
+
+            },1000);
+
         } );
 
-        window.addEventListener( 'click', (event) => {
+        window.addEventListener( 'touchend', (event) => {
+
+            clearTimeout(pressTimer);
+
+        } );
+
+        window.addEventListener( 'contextmenu', (event) => {
 
             // calculate pointer position in normalized device coordinates
             // (-1 to +1) for both components
-            const pointer = new Vector2( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1 );
-    
+            const pointer = new Vector2( -Math.round((( (canvas.getBoundingClientRect().left + canvas.width/2 + scrollX) + ( -(event.clientX + scrollX) ) ) / (canvas.width/2))*1000 )/1000 , Math.round((( (canvas.getBoundingClientRect().top + canvas.height/2 + scrollY) + ( -(event.clientY + scrollY) ) ) / (canvas.height/2))*1000)/1000 );
+
             // update the picking ray with the camera and pointer position
-            raycaster.setFromCamera( pointer, camera );
+            raycaster.setFromCamera( pointer, camera );            
     
             // calculate objects intersecting the picking ray
             var selected = raycaster.intersectObject( target )[0] || [];
 
             // Check if the object under the mouse is this DomMesh object
             if (selected.object == target) {
-                func();
+                func(selected);
             }
 
         });
@@ -346,6 +422,60 @@ class DomSprite extends Sprite {
         } );
 
         window.addEventListener( 'click', (event) => {
+
+            // calculate pointer position in normalized device coordinates
+            // (-1 to +1) for both components
+            const pointer = new Vector2( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1 );
+    
+            // update the picking ray with the camera and pointer position
+            raycaster.setFromCamera( pointer, camera );            
+    
+            // calculate objects intersecting the picking ray
+            var selected = raycaster.intersectObject( target )[0] || [];
+
+            // Check if the object under the mouse is this DomMesh object
+            if (selected.object == target) {
+                func();
+            }
+
+        });
+    }
+
+    /* MouseDown(func) Function
+     *  This function checks the current location of the mouse everytime it is clicked
+     *  and runs the function given through the parameters only if the mouse is clicked above this DomMesh Object.
+     * Parameters:
+     *  - func: a function to run when the conditions are met.
+     * Return:
+     *  - null
+     */
+    RightMouseDown(func){
+
+        // Create local instaces of the variables to be shared with the EventListener function
+        const camera = this._camera;
+        const raycaster = this._raycaster;
+        var target = this;
+
+        window.addEventListener( 'touchstart', (event) => {
+
+            // calculate pointer position in normalized device coordinates
+            // (-1 to +1) for both components
+            const pointer = new Vector2( Math.round( ( ( event.touches[0].clientX / document.querySelector("canvas").width ) * 2 - 1 )*1000 )/1000, Math.round(( - ( event.touches[0].clientY / document.querySelector("canvas").height ) * 2 + 1 )*1000)/1000 );
+    
+            // update the picking ray with the camera and pointer position
+            raycaster.setFromCamera( pointer, camera );
+    
+            // calculate objects intersecting the picking ray
+            var selected = raycaster.intersectObject( target )[0] || [];
+
+            // Check if the object under the mouse is this DomMesh object
+            if (selected.object == target) {
+                func();
+            }
+
+        } );
+
+        window.addEventListener( 'contextmenu', (event) => {
 
             // calculate pointer position in normalized device coordinates
             // (-1 to +1) for both components

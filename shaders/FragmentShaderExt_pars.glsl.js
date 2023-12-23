@@ -1,4 +1,4 @@
-export const EarthFragmentShader_pars = /* glsl */`
+export const FragmentShader_pars = /* glsl */`
 // The Day Texture of Earth
 uniform sampler2D dayTexture;
 // The Night Texture of Earth

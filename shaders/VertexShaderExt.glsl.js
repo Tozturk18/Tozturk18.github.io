@@ -1,4 +1,4 @@
-export const EarthVertexShader = /* glsl */`
+export const VertexShader = /* glsl */`
 varying vec2 dUv;
 varying vec3 lightNormal;
 void main() {

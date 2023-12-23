@@ -1,131 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tuna Index</title>
-    <link rel="icon" href="./icon/TunaIndexIcon.svg" type="image/icon type">
 
-    <link rel="stylesheet" href="style.css">
+    <!--
+        This website is created by Ozgur Tuna Ozturk on October 10th, 2023.
+        This website acts as my personal portfolio and includes most of the
+        projects and events I have done.
+    -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuna Ozturk Portfolio</title>
+
+    <link rel="stylesheet" href="index.css">
+
+    <script src="navbar.js"></script>
+    <script src="contact.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollToPlugin.min.js"></script>
 </head>
 <body>
+    
+    <nav>
+        <header>
+            <name>
+                <a href="">
+                    <span>
+                        Ozgur Tuna Ozturk
+                    </span>
+                </a>
+            </name>
+            <menuButton>
+                <bar1></bar1>
+                <bar2></bar2>
+                <bar3></bar3>
+            </menuButton>
+        </header>
+        <menuItems class="menuItems_inactive">
+            <item>
+                <a href="">
+                    <span>Projects</span>
+                </a>
+            </item>
+            <item>
+                <a href="">
+                    <span>Experiences</span>
+                </a>
+            </item>
+            <item>
+                <a href="">
+                    <span>Hobbies</span>
+                </a>
+            </item>
+            <item>
+                <a href="https://tozturk18.github.io">
+                    <span>Go Cool!</span>
+                </a>
+            </item>
+        </menuItems>
+    </nav>
 
-    <section id="loading-screen">
-        <!--<div id="loader"></div>-->
-        <div class="water"></div>
-        <h1 id="loading-text"></h1>
-    </section>
+    <main>
+        <figure>
+            <img id="captionImg" src="./img/tuna_bhutan.png" alt="Tuna at Bhutan, Tuna Portfolio home page image">
+            <figcaption>
+                <div>
+                    <div id="nameCaption">
+                        <span>Hi, I'm Tuna</span>
+                    </div>
+                    <div id="consizeIntro">
+                        <span>I love creating things.</span>
+                    </div>
+                </div>
+            </figcaption>
+        </figure>
 
-    <section id="main">
-        <div id="nav">
-            <div class="container">
-                <h2>//</h2>
-            </div>
-            <div id="homeTag" class="container">
-                <h2>HOME</h2>
-            </div>
-            <div class="container">
-                <h2>//</h2>
-            </div>
-            <div id="aboutTag" class="container">
-                <h2>ABOUT</h2>
-            </div>
-            <div class="container">
-                <h2>//</h2>
-            </div>
-            <div id="expertiseTag" class="container">
-                <h2>EXPERTISE</h2>
-            </div>
-            <div class="container">
-                <h2>//</h2>
-            </div>
-            <div id="experienceTag" class="container">
-                <h2>EXPERIENCE</h2>
-            </div>
-            <div class="container">
-                <h2>//</h2>
-            </div>
-            <div id="contactTag" class="container">
-                <h2>CONTACT</h2>
-            </div>
-            <div class="container">
-                <h2>//</h2>
+        <div id="threeJS_intro">
+            <div id="canvas"></div>
+            <div class="intro">
+                <div id="tabs" >
+                    <span class="tab">About Me</span>
+                    <span class="tab inactive">Skills</span>
+                    <span class="tab inactive">Projects</span>
+                    <span class="tab inactive">Experiences</span>
+                    <span class="tab inactive">Hobbies</span>
+                </div>
+                <div id="texts">
+                    <div id="aboutText">
+                        <p>
+                            Hello! I'm Ozgur Tuna Ozturk, a Mechanical Engineering Student with a Passion for the intersection of embedded and mechanical systems, coupled with a fascination for aerospace engineering.
+                            <br><br>
+                            My journey in engineering is all about finding the simplest solutions for all magnitudes of problems. In pursuit of this, I am dedicated to learn “how to make almost everything.” While learning, I created a variety of systems from a handheld 8-bit gaming device to a wearable biomedical device to enhance life, making it more advantageous. My childhood curiosity, inspired by family stories, led me to break apart, and reverse engineer things, fostering a love for learning and invention. 
+                            <br><br>
+                            I hail from Istanbul, Turkey, and I'm currently pursuing a Bachelor's in Mechanical Engineering at Dartmouth College, alongside a Bachelor's in Physics and Computer Science at Wheaton College, MA.
+                            <br><br>
+                            I've been fortunate to travel widely, fostering a desire to experience diverse cultures, religions, and cuisines. My global perspective expanded even more while doing the International Baccalaureate at United World College (UWC), Changshu, China. These journeys instilled in me a deep appreciation for cultural understanding and global citizenship.
+                            <br><br>
+                            Believing in teamwork, I've seen diverse teams turn dreams into reality. I'm eager to blend my technical skills with a global perspective to make a meaningful impact on the world—together, we can change the world, one step at a time.
+                            <br><br>
+                            Curious about my projects and experiences? Dive into the 'Experiences' section to explore my engineering endeavors.
+                        </p>
+                    </div>
+                    <div id="skillText" class="inactive">
+                        <p>
+                            <b>Manual & CNC Manufacturing</b> (Fusion 360, Solidworks, Lathe, Mill, Router, Laser Cutter, FDM & SLA printing, Viynl)
+                            <br><br>
+                            <b>Embedded Systems</b> (PCB Design & Manufacturing, KiCAD, THT & SMD Soldering, 8-Bit Assembly, C & Arduino)
+                            <br><br>
+                            <b>Full Stack Engineering</b> (C, C++, C#, Python, Javascript, SQL, NOSQL, Assembly, Lua, Matlab)
+                            <br><br>
+                            <b>Building & Repair</b> (Woodworking, Metalworking, Electronics, Makerspace head technician)
+                            <br><br>
+                            <b>Languages</b> (Turkish: native, English: fluent, French: conversational, Chinese: beginner, Arabic: beginner)
+                        </p>
+                    </div>
+                    <div id="projText" class="inactive">
+                        <p>
+                            Driven by a persistent curiosity for "How to make almost everything," I've immersed myself in practical learning, expanding my knowledge through diverse projects.
+                            <br><br>
+                            In my latest projects, I engineered a Telehealth device connecting individuals in remote areas, the elderly, and those with disabilities to their families and healthcare providers. This user-friendly device, paired with my IOS app, enables accurate vital sign measurements and sharing. Notably, its single clickable body with display design with +360° rotation prioritizes accessibility, emphasizing the intersection of mechanical, electrical, and software engineering.
+                            <br><br>
+                            In one of my embedded electronic projects, I designed a handheld gaming device. This device uses an AVR microcontroller that can be reprogrammed using an SD card, optimizing memory usage, and allowing for the execution of expansive programs (games) directly from the card. This project enhanced my skills in datasheet examination and 8-bit assembly.
+                            <br><br>
+                            Currently, I'm constructing a DC Magnetron Sputtering deposition Device for my Senior Thesis, probing the correlation between medium pressure (argon) and deposition thickness. This endeavor aims to analyze plasma properties at increasing pressures. After completion, this project will also allow me to fabricate optical instruments and bring me one step closer to semiconductor fabrication.
+                            <br><br>
+                            Simultaneously, I'm developing a feature-rich handheld lamp with adjustable color and brightness controls, boasting mechanics like +360° rotation, magnetic attachment, and wireless charging.
+                            <br><br>
+                            Explore my engineering endeavors in the 'Projects' section on the navigation bar above.
+                        </p>
+                    </div>
+                    <div id="expText" class="inactive">
+                        <p>
+                            As an Electrical Engineering and Embedded Systems instructor at Boston College's Makerspace Summer Camp, I led 20+ students in foundational electronics, PCB design, Arduino programming, and soldering. This showcased my pedagogical skills and ability to convey complex engineering concepts effectively.
+                            <br><br>
+                            At Dartmouth College, I excelled as a teaching assistant for courses like ENGS 21 and ENGS 22, also contributing as a Solidworks tutor at the Dartmouth Machine Shop. These roles allowed me to assist students in mastering engineering principles and refining practical skills.
+                            <br><br>
+                            Invited by the King of Bhutan, I collaborated on sharing Digital Fabrication methods with Bhutanese educators, covering diverse areas from 2D/3D design to PCB fabrication. This included lectures and hands-on workshops, culminating in educators creating final projects. We played a pivotal role in launching Bhutan's Super Fablab, ensuring machine functionality and facilitating local training. Effective teamwork enabled us to surpass goals, leaving enduring impacts as trained educators returned to disseminate knowledge, and students showcased their skills.
+                            <br><br>
+                            Since January 2022, I've served as the Head Makerspace Technician at Wheaton College, MA Innovation Spaces, overseeing technical operations and fostering an environment conducive to innovation and collaboration.
+                            <br><br>
+                            These experiences highlight my commitment to advancing engineering education and facilitating hands-on learning. Eager to apply my multifaceted skills and passion for engineering, I look forward to embracing new challenges and endeavors.
+                        </p>
+                    </div>
+                    <div id="hobText" class="inactive">
+                        <p>
+                            In addition to my engineering passion, my diverse hobbies exemplify a multifaceted approach to life and learning. With a keen interest in Aerospace Engineering, I stay abreast of the latest developments, evident in my current project developing a DC Magnetron Sputtering Deposition Device to explore plasma characteristics at higher pressures, mirroring conditions experienced by ion engines—from space to atmospheric conditions.
+                            <br><br>
+                            Creatively, I find solace in drawing buildings, and some of my architectural pieces have been presented as gifts to Wheaton College, MA donors and Diana Davis Spencer.
+                            <br><br>
+                            Physically, I engage in kickboxing, badminton, and swimming, complemented by past experiences in horseback riding and skeet shooting.
+                            <br><br>
+                            Musically, I play the piano and guitar and indulge in a diverse musical palette, including Gorillaz, Daft Punk, and Tame Impala. Cinematically, favorites like "Iron Man 1," "Avatar: The Last Airbender," and "Spirited Away" hold a special place in my heart.
+                            <br><br>
+                            Fueling my wanderlust, I've explored 18 countries, reveling in natural wonders, diverse cultures, and culinary delights. Notably, my immersive journey to Bhutan left a lasting impact, revealing a nation dedicated to preserving its rich history, culture, and traditions.
+                            <br><br>
+                            These varied pursuits contribute to my holistic perspective, fostering a passion for continuous learning beyond the confines of engineering.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
-        
-
-        <section id="mouse">
-            <div class="filled">
-                <div class="cursor dot"></div>
-            </div>
-            <div class="cursor rounded"></div>
-            <div class="cursor pointed"></div>
-        </section>
-    </section>
-
-    <section id="contents">
-
-        <section id="home" class="page activePage">
-            <div id="intro">
-                <h1>OZGUR TUNA OZTURK</h1>
-                <div id="tags">
-                    <div class="tag">
-                        <h2>//</h2>
-                    </div>
-                    <div class="tag">
-                        <h2>AEROSPACE ENGINEER</h2>
-                    </div>
-                    <div class="tag">
-                        <h2>//</h2>
-                    </div>
-                    <div class="tag">
-                        <h2>EMBEDDED SYSTEMS ENGINEER</h2>
-                    </div>
-                    <div class="tag">
-                        <h2>//</h2>
-                    </div>
-                    <div class="tag">
-                        <h2>MAKER</h2>
-                    </div>
-                    <div class="tag">
-                        <h2>//</h2>
-                    </div>
-                </div>
-            </div>
-            <div id="next">
-                <svg class="arrows">
-                    <path class="a1" d="M0 0 L30 32 L60 0"></path>
-                    <path class="a2" d="M0 20 L30 52 L60 20"></path>
-                    <path class="a3" d="M0 40 L30 72 L60 40"></path>
-                </svg>
-            </div>
-        </section>
-        
-        <section id="about" class="page">
-            <div id="aboutContent">
-                <img src="./textures/astronaut.png" alt="Tuna Astronaut PNG">
+        <contact>
+            <h3>Enough about me, How are you?</h3>
+            <form action="https://formspree.io/f/xpzvaked" method="POST">
                 <div>
-                    <h1>Who am I?</h1>
-                    <p>
-                        Hello there!<br>
-                        My name is Tuna. I am an internaitonal student from Istanbul, Turkey.
-                        I am currently studying at Dartmouth College and Wheaton College MA.
-                        I major in Mechanical Engineering at Dartmouth College and double major in Physics and Computer Science at Wheaton College MA.
-                        <br> <br>
-                        I created many projects from Biomedical devices to a reprogrammable Handheld Gaming Device.
-                        Currently, I am working on creating a CPU focused Object Oriented HTML5 Canvas Renderer Library in Javascript.
-                    </p>
+                    <strong id="success">Thank you for contacting me!</strong>
                 </div>
-            </div>
-        </section>
+                <label for="email">Email </label><span>(Required)</span><br>
+                <input type="email" id="email" name="email" required><br>
+                <label for="location">Location </label><span>(Right-click anywhere on the globe above!)</span><br>
+                <input type="checkbox" name="location" id="location" value="0">
+                <div id="extra">
+                    
+                    <box>
+                        <inner></inner>
+                        <kick></kick>
+                    </box>
+                    <span id="loc">Lat: 41.161006°, Long: 29.042299°</span><br>
+                </div>
+                <label for="message">Message: </label><span>(Required)</span><br>
+                <textarea name="message" id="message" cols="30" rows="10" required></textarea>
+                <div>
+                    <input type="submit" id="submit" name="submit" value="Submit!">
+                </div>
+            </form>
+        </contact>
+    </main>
 
-    </section>
 
-    
-    
-    <script src="app.js" type="module"></script>
+
+
+    <script src="./app.js" type="module"></script>
 </body>
 </html>

@@ -114,6 +114,16 @@ class OrbitControls extends EventDispatcher {
 
 		};
 
+    this.setPolarAngle = function (phi) {
+
+      spherical.phi = phi;
+    }
+
+    this.setAzimuthalAngle = function (theta) {
+
+      spherical.theta = theta;
+    }
+
 		this.getDistance = function () {
 
 			return this.object.position.distanceTo( this.target );
@@ -221,6 +231,8 @@ class OrbitControls extends EventDispatcher {
 
 				// restrict phi to be between desired limits
 				spherical.phi = Math.max( scope.minPolarAngle, Math.min( scope.maxPolarAngle, spherical.phi ) );
+
+        
 
 				spherical.makeSafe();
 

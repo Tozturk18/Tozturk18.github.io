@@ -1,4 +1,4 @@
-export const EarthFragmentShader = /* glsl */`
+export const FragmentShader = /* glsl */`
 vec3 dayColor = texture2D( dayTexture, dUv ).rgb;
 vec3 nightColor = texture2D( nightTexture, dUv ).rgb;
 
