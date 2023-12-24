@@ -73,10 +73,10 @@ var canvasHeight = div.clientHeight;	// Save default canvas height
 var cameraMultiplier = 0;
 if (canvasWidth > canvasHeight) {
 	// For larger devices like computers
-	cameraMultiplier = ( ( 1440/821 ) / ( canvasWidth / canvasHeight ) );
+	cameraMultiplier = ( ( 1440/821 ) / ( canvasWiadth / canvasHeight ) );
 } else {
 	// For smaller devices like phones
-	cameraMultiplier = ( ( 1440/821 ) / ( canvasHeight / canvasWidth/2 ) );
+	cameraMultiplier = (canvasHeight/window.innerHeight / 3.85 + canvasWidth/window.innerWidth / 1.95);
 }
 
 // The radius of camera from the origin (0,0,0)
@@ -243,6 +243,8 @@ scene.add(point);
 var locSet = false;
 var box = document.getElementsByTagName("box")[0]
 
+var coords;
+
 Earth.RightMouseDown((selected) => {
 
 	point.position.set(
@@ -251,7 +253,7 @@ Earth.RightMouseDown((selected) => {
 		selected.point.z
 	);
 
-	var coords = EuclodcordToSphere(selected.point);
+	coords = EuclodcordToSphere(selected.point);
 
 	var NS = 'S';
 	var WE = 'E';
@@ -838,7 +840,7 @@ function animate() {
   const seconds = (dt.getUTCHours()*60 + dt.getUTCMinutes())*60 + dt.getUTCSeconds();
 
   // Set the current position of the sun with respect to earth using the second of the day.
-  // (in other works set the rotation of the earth)
+  // (in other words set the rotation of the earth)
 
   sunPos.x =  (Math.cos((seconds/86400)*(2*Math.PI) + (Math.PI)));
   sunPos.y = -(Math.sin(0.6)*Math.cos((DOY/365)*Math.PI*2));
@@ -870,8 +872,6 @@ function animate() {
 
   // Update the controls for the Orbital Camera to rotate automatically
   controls.update();
-
-  //console.log(controls.getPolarAngle());
 
   // Rerender the scene
   renderer.render(scene, camera);
