@@ -95,7 +95,7 @@ function adjustNavBar() {
     const navbar = document.querySelector("nav");
     const header = document.querySelector("header");
 
-    if (window.innerWidth >= 700) {
+    if (window.innerWidth >= window.innerHeight) {
         if (prevScrollPos > currentScrollPos) {
             navbar.classList.add("nav_style");
             navbar.classList.remove("nav_push");
