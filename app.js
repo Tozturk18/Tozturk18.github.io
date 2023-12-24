@@ -388,7 +388,7 @@ moonMaterial.onBeforeCompile = function ( shader ) {
 // Create a THREE.Mesh Sphere object with moonmaterial
 const moon = new THREE.Mesh( new THREE.SphereGeometry(0.52), moonMaterial);
 // Set the moon's current position using the Day of the Year to find the exact spot on the Orbit
-moon.position.set(Earth.position.x + 30*Math.cos((DOY/27)*Math.PI*2), Earth.position.y + 30*Math.sin(5.14*Math.PI/180)*Math.cos((DOY/27)*Math.PI*2), Earth.position.z + 30*Math.sin((DOY/27)*Math.PI*2));
+moon.position.set(Earth.position.x + 30*Math.cos((DOY/27)*Math.PI*2 + Math.PI), Earth.position.y + 30*Math.sin(5.14*Math.PI/180)*Math.cos((DOY/27)*Math.PI*2 + Math.PI), Earth.position.z + 30*Math.sin((DOY/27)*Math.PI*2 + Math.PI));
 // Instantiate moon
 scene.add(moon);
 
