@@ -45,7 +45,7 @@ function loader() {
     document.querySelector("figcaption").style.top = "calc(-" + document.getElementById("captionImg").clientWidth + "px / 2 + 10vw)";
     document.querySelector("menuButton").addEventListener('click', menuButton);
 
-    if (window.innerWidth < 700) {
+    if (window.innerWidth < window.innerHeight) {
         //document.querySelector("header").classList.add("header_style");
     } else {
         //document.querySelector("nav").classList.add("nav_style");

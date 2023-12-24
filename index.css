@@ -527,7 +527,7 @@ contact label {
 contact textarea {
 
     padding: 5px;
-    width: 100%;
+    width: calc(92vw - 10px);;
     height: 100px;
     border: none;
     background: #88888826;
@@ -544,7 +544,7 @@ contact textarea {
 contact #email {
 
     padding: 5px;
-    width: 100%;
+    width: calc(92vw - 10px);
     border: none;
     background: #88888826;
     margin: 15px 0 15px 0;
