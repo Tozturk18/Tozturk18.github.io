@@ -35,6 +35,8 @@ body {
     overflow-x: hidden;
 
     font-family: 'din-condensed-web';
+
+    user-select: none;
 }
 
 body::selection {
@@ -394,7 +396,6 @@ figcaption #consizeIntro {
 
 #threeJS_intro {
     display: flex;
-    user-select: none;
 }
 
 #threeJS_intro p {
