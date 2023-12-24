@@ -73,7 +73,7 @@ var canvasHeight = div.clientHeight;	// Save default canvas height
 var cameraMultiplier = 0;
 if (canvasWidth > canvasHeight) {
 	// For larger devices like computers
-	cameraMultiplier = ( ( 1440/821 ) / ( canvasWiadth / canvasHeight ) );
+	cameraMultiplier = ( ( 1440/821 ) / ( canvasWidth / canvasHeight ) );
 } else {
 	// For smaller devices like phones
 	cameraMultiplier = (canvasHeight/window.innerHeight / 3.85 + canvasWidth/window.innerWidth / 1.95);

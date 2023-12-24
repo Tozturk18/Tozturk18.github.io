@@ -527,7 +527,7 @@ contact label {
 contact textarea {
 
     padding: 5px;
-    width: calc(92vw - 10px);;
+    width: calc( (92vw / 2) - 10px);
     height: 100px;
     border: none;
     background: #88888826;
@@ -544,7 +544,7 @@ contact textarea {
 contact #email {
 
     padding: 5px;
-    width: calc(92vw - 10px);
+    width: calc( (92vw / 2) - 10px);
     border: none;
     background: #88888826;
     margin: 15px 0 15px 0;
@@ -711,7 +711,7 @@ contact #submit:hover {
 
 }
 
-@media screen and (width < 700px) {
+@media screen and (max-width: 100vh) {
 
     figure {
         height: auto;
@@ -732,5 +732,14 @@ contact #submit:hover {
  
     form {
         width: 100%;
+    }
+
+    contact textarea {
+        width: calc( 92vw - 10px);
+    }
+    
+    
+    contact #email {
+        width: calc( 92vw - 10px);
     }
 }
